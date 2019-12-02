@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import { $color, $grid_breakpoints, $heading_sizes } from './GlobalVariables'
+import { $grid_breakpoints, $heading_sizes } from './GlobalVariables'
 
 const GlobalStyles = createGlobalStyle`
   body{

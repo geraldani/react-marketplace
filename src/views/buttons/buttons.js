@@ -32,6 +32,16 @@ const Buttons = () => {
             </div>
 
             <div>
+              <Title>Buttons radius</Title>
+              <StyledContainer>
+                <Button className='mr-4' no-radius>No radius</Button>
+                <Button className='mr-4' radius-xs>Radius xs</Button>
+                <Button className='mr-4' radius-sm>Radius sm</Button>
+                <Button className='mr-4' radius-lg>Radius lg</Button>
+              </StyledContainer>
+            </div>
+
+            <div>
               <Title>Buttons blocks</Title>
               <StyledContainer>
                 <Button className='mr-4' block>Block button</Button>
@@ -46,6 +56,31 @@ const Buttons = () => {
                 <Button block-md secondary className='mt-3 mt-md-0'>Responsive button on md</Button>
               </StyledContainer>
             </div>
+
+            <div>
+              <Title>Simple buttons</Title>
+              <StyledContainer>
+                <Button className='mr-4' simple-primary>Simple primary button</Button>
+                <Button className='mr-4' simple-secondary>Simple secondary button</Button>
+              </StyledContainer>
+            </div>
+
+            <div>
+              <Title>Disable button</Title>
+              <StyledContainer>
+                <Button className='mr-4' block disabled onClick={()=>alert('haz algo')}>Disabled button block</Button>
+                <Button block-md disabled className='mt-3'>Disabled button</Button>
+              </StyledContainer>
+            </div>
+
+            <div>
+              <Title>Links</Title>
+              <StyledContainer>
+                <Button className='mr-4' primary link='/otra-pag'>Styled link like a button</Button>
+                <Button className='mr-4' link='/otra-pag' disabled>Styled disabled link like a button</Button>
+              </StyledContainer>
+            </div>
+
 
 
           </div>
