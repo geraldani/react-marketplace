@@ -1,15 +1,13 @@
 import React from 'react'
-import {GlobalStyles} from '../styles/GlobalStyles'
-import Header from './Header'
-import Heading from './Heading'
+import { GlobalStyles } from '../styles/GlobalStyles'
+import Buttons from '../views/buttons/buttons'
 
 const App = () => {
   return (
     <>
-      <GlobalStyles/>
-     <Header/>
-     <Heading/>
-    </>
+      <GlobalStyles />
+      <Buttons/>
+      </>
   )
 }
 
