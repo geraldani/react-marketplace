@@ -10,7 +10,7 @@ const Radio = () => {
         <div className="col-12">
           <div>
             <Title>Radio inputs</Title>
-            <StyledContainer>
+            <StyledContainer className='d-flex flex-column align-items-start'>
               <RadioButtton name='radio' value='1' label='Option one is this and that—be sure to include why its great' />
               <RadioButtton name='radio' value='2' label='Option two can be something else and selecting it will deselect option one'/>
               <RadioButtton name='radio' value='3' label='Option three is disabled' disabled/>
@@ -19,7 +19,7 @@ const Radio = () => {
 
           <div>
             <Title>Radio inputs sizes</Title>
-            <StyledContainer>
+            <StyledContainer className='d-flex flex-column align-items-start'>
               <RadioButtton name='radio-sizes' value='1' label='Small radio - 15px' size-sm/>
               <RadioButtton name='radio-sizes' value='2' label='Normal radio - 22px'/>
               <RadioButtton name='radio-sizes' value='3' label='Large radio - 30px' size-lg/>

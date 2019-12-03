@@ -15,8 +15,9 @@ const StyledLabel = styled.label`
   color: ${$color.text};
   ${({ disabled }) => disabled && css`color: ${$color.gray}`};
   font-weight: bold;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  //flex-direction: column;
 `
 
 const radio_size = (size) => css`

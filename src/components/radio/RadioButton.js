@@ -14,6 +14,7 @@ const RadioButtton = (props) => {
         value={props.value}
         name={props.name}
         disabled={props.disabled}
+        onChange={props.onChange}
       />
       <StyledCircleIcon {...commosProps} />
       {props.label}
@@ -26,6 +27,7 @@ RadioButtton.propTypes = {
   value: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
+  onChange: PropTypes.func,
   'size-sm': PropTypes.bool,
   'size-lg': PropTypes.bool
 }

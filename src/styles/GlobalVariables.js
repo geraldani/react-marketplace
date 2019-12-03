@@ -10,13 +10,13 @@ const $color = {
   gray: '#555555',
   grayLight: '#999999',
   grayLighter: '#CCCCCC',
-  grayLightest: '#EEEEEE',
+  grayLightest: '#ddd',
   grayXlightest: '#F8F8F8',
   txtColor: '#68768C',
   text: '#19233C',
   primary: '#0062cc',
-  secondary: '#7610a0',
   brandHover: '#0062ccd9',
+  secondary: '#7610a0',
   brandHoverSecondary: '#7610a0d9',
   white: '#fff'
 }
