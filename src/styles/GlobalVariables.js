@@ -13,10 +13,11 @@ const $color = {
   grayLightest: '#EEEEEE',
   grayXlightest: '#F8F8F8',
   txtColor: '#68768C',
-  primary: '#1ce2ad',
-  secondary: '#dc30c6',
-  brandHover: '#62fdd3',
-  brandHoverSecondary: '#e26cd3',
+  text: '#19233C',
+  primary: '#0062cc',
+  secondary: '#7610a0',
+  brandHover: '#0062ccd9',
+  brandHoverSecondary: '#7610a0d9',
   white: '#fff'
 }
 
@@ -57,17 +58,24 @@ const $border_radius = {
   normal: '25' + px,
   lg: '50' + px,
   sm: '10' + px,
-  block: '5' + px
+  block: '5' + px,
+  circle: '50' + por
 }
 
 
-
+//sizes of radio and check buttons
+const $radio_check_size = {
+  sm: 15,
+  md: 22,
+  lg: 30
+}
 
 export {
   $color,
   $grid_breakpoints,
   $heading_sizes,
   $font_size,
-  $border_radius
+  $border_radius,
+  $radio_check_size
 }
 

@@ -11,7 +11,7 @@ const Buttons = () => {
             <div>
               <Title>Buttons</Title>
               <StyledContainer>
-                <Button primary className='mr-4'>Primary</Button>
+                <Button className='mr-4' primary>Primary</Button>
                 <Button secondary>Secondary</Button>
               </StyledContainer>
             </div>

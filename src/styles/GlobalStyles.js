@@ -3,7 +3,6 @@ import { $grid_breakpoints, $heading_sizes } from './GlobalVariables'
 
 const GlobalStyles = createGlobalStyle`
   body{
-    width: ${$grid_breakpoints.md};
     margin: 20px;
   }
     

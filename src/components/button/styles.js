@@ -24,7 +24,6 @@ const ButtonStylesTypes = {
     background-color: ${$color.primary};
     color: ${$color.white};
     border-color: ${$color.primary};
-    transition: all 0.5s ease;
     &:hover{
       color: ${$color.white};
       background-color: ${$color.brandHover};
@@ -104,7 +103,7 @@ const buttonDisable = css`
 const commosStyles = css`
   border: 1px solid;
   font-weight: ${$btn_font_weight};
-  transition: all 250ms;
+  transition: background-color 250ms, transform 100ms linear;
   line-height: ${$btn_line_height};
   text-transform: inherit;
   text-align: center;
@@ -136,7 +135,7 @@ const commosStyles = css`
   ${props => props.disabled && buttonDisable};
  
   &:active {
-    box-shadow: none;
+    transform: scale(0.9);
   }
   &:focus { 
     box-shadow: none;
