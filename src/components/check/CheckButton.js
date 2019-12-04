@@ -16,10 +16,11 @@ export const CheckButtonSimple = (props) => {
 }
 
 const CheckButton = (props) => {
+  const commonProps = {sm: props.sm, lg: props.lg}
   return (
-    <StyledLabel>
-      <StyledInput type="checkbox" name={props.name} onChange={props.onChange} />
-      <StyledIconContainer>
+    <StyledLabel disabled={props.disabled}>
+      <StyledInput type="checkbox" name={props.name} onChange={props.onChange} disabled={props.disabled} />
+      <StyledIconContainer {...commonProps}>
         <CheckIcon />
       </StyledIconContainer>
       {props.label}
@@ -30,7 +31,10 @@ const CheckButton = (props) => {
 CheckButton.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool,
+  lg: PropTypes.bool,
+  sm: PropTypes.bool
 }
 
 export default CheckButton

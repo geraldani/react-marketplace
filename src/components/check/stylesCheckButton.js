@@ -1,30 +1,46 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes , css} from 'styled-components'
 import { $color } from '../../styles/GlobalVariables'
 
+const size_sm = 15
+const size_md = 21
+const size_lg = 28
+const border_width = 2
+const padding_check_sm = 2
+const padding_check_md = 3
+const padding_check_lg = 4
 
 const wave = keyframes` 
   50% { transform: scale(0.9); }
 `
+const checkSize = (sizeSquare, checkSize) =>  css`
+  top: ${-border_width + checkSize}px;
+  left: ${-border_width + checkSize}px;
+  width: ${sizeSquare - (checkSize*2)}px;
+  height: ${sizeSquare - (checkSize*2)}px;
+`
+
+const squareSize = (size) =>  css`
+    width: ${size}px;
+    height: ${size}px;
+`
 
 const StyledIconContainer = styled.span`
-  display: inline-block;
-  vertical-align: middle;
-  transform: translate3d(0, 0, 0);
-  margin-right: 10px;
-  &:nth-child(2) {
+    ${squareSize(size_md)};
+    ${props => props.sm && squareSize(size_sm)};
+    ${props => props.lg && squareSize(size_lg)};
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
     position: relative;
-    width: 18px;
-    height: 18px;
     border-radius: 3px;
     transform: scale(1);
-    vertical-align: middle;
-    border: 1px solid ${$color.gray};
+    border: ${border_width}px solid ${$color.gray};
     transition: all 0.2s ease;
-    padding-left: 8px;
-    svg {
+    svg {//check
       position: absolute;
-      top: 3px;
-      left: 2px;
+      ${checkSize(size_md,padding_check_md)};
+      ${props => props.sm && checkSize(size_sm, padding_check_sm)}
+      ${props => props.lg && checkSize(size_lg, padding_check_lg)}
       fill: none;
       stroke: ${$color.white};
       stroke-width: 2;
@@ -36,20 +52,20 @@ const StyledIconContainer = styled.span`
       transition-delay: 0.1s;
       transform: translate3d(0, 0, 0);
     }
-    &:before{
+    &:before{//bola de efecto
       content: '';
-      width: 18px;
-      height: 18px;
+      ${squareSize(size_md)};
+      ${props => props.sm && squareSize(size_sm)};
+      ${props => props.lg && squareSize(size_lg)};
       background: ${$color.primary};
       display: block;
       position: absolute;
-      top:-1px;
-      left: -1px;
+      top: ${-border_width}px;
+      left: ${-border_width}px;
       transform: scale(0);
       opacity: 1;
       border-radius: 50%;
     }
-  }
 `
 
 const StyledLabel = styled.label`
@@ -63,9 +79,11 @@ const StyledLabel = styled.label`
   display: inline-flex;
   align-items: center;
   transition: all 200ms linear;
+  ${props => props.disabled && css`color: ${$color.disabledText}`};
    &:hover{
     color: ${$color.gray};
-    ${StyledIconContainer}:nth-child(2) {
+    ${props => props.disabled && css`color: ${$color.disabledText}; cursor: initial`};
+    ${StyledIconContainer} {
       border-color: ${$color.primary};
     }
   }
@@ -73,7 +91,7 @@ const StyledLabel = styled.label`
 
 const StyledInput = styled.input`
   display: none;
-  &:checked + ${StyledIconContainer}:nth-child(2) {
+  &:checked + ${StyledIconContainer}{
     background: ${$color.primary};
     border-color: ${$color.primary};
     animation: ${wave} 0.4s ease;
@@ -84,6 +102,12 @@ const StyledInput = styled.input`
       transform: scale(3.5);
       opacity: 0;
       transition: all 0.6s ease;
+    }
+  }
+  &[disabled]+${StyledIconContainer}{
+    border-color: ${$color.grayLight};
+    &:hover{
+      cursor: initial;
     }
   }
 `

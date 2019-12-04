@@ -9,6 +9,8 @@ const $color = {
   grayDark: '#444444',
   gray: '#555555',
   grayLight: '#999999',
+  disabledText: '#999',
+  disabledBackground: '#555',
   grayLighter: '#CCCCCC',
   grayLightest: '#ddd',
   grayXlightest: '#F8F8F8',

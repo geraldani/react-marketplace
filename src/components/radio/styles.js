@@ -9,17 +9,6 @@ const border_sm = 2
 const border_md = 2
 const border_lg = 3
 
-const StyledLabel = styled.label`
-  position: relative;
-  margin-bottom: .5rem;
-  color: ${$color.text};
-  ${({ disabled }) => disabled && css`color: ${$color.gray}`};
-  font-weight: bold;
-  display: inline-flex;
-  align-items: center;
-  //flex-direction: column;
-`
-
 const radio_size = (size) => css`
   height: ${size}px;
   width: ${size}px;
@@ -31,7 +20,7 @@ const StyledCircleIcon = styled.span`
   left: -14px;
   margin-right: -5px;
   cursor: pointer;
-  border: solid 2px ${$color.primary};
+  border: solid 2px ${$color.gray};
   ${radio_size($radio_check_size.md, border_md)};
   ${props => props['size-sm'] && radio_size($radio_check_size.sm, border_sm)}
   ${props => props['size-lg'] && css`
@@ -40,7 +29,7 @@ const StyledCircleIcon = styled.span`
     `}
   border-radius: ${$border_radius.circle};
   &:after{
-    display: none;
+    transform: scale(0);
     content: '';
     position: absolute;
     ${radio_size(circle_md)};
@@ -53,6 +42,7 @@ const StyledCircleIcon = styled.span`
     margin: auto;
     border-radius: ${$border_radius.circle};
     background-color: ${$color.primary};
+    transition: all 150ms;
   }
 `
 
@@ -60,11 +50,38 @@ const StyledRadio = styled.input`
   cursor: pointer;
   opacity: 0;
   height: 0;
-  &:checked+${StyledCircleIcon}:after{
-    display: block;
+  &:checked+${StyledCircleIcon}{
+    border-color: ${$color.primary};
+    &:after{
+      transform: scale(1);
+    }
   }
   &[disabled]+${StyledCircleIcon}{
     border-color: ${$color.grayLight};
+  }
+`
+
+const StyledLabel = styled.label`
+  position: relative;
+  margin-bottom: .5rem;
+  color: ${$color.text};
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  ${({ disabled }) => disabled && css` color: ${$color.disabledText}`};
+  &:hover{
+    color: ${$color.gray};
+    ${ props  => props.disabled && css`//cursor on disable radio
+      cursor: initial;
+      color: ${$color.disabledText}
+    `};
+    ${StyledCircleIcon}{
+      border-color: ${$color.primary};
+    }
+    ${StyledRadio}[disabled]+${StyledCircleIcon}{//el borde del color cuando esta desabilitado
+      border-color: ${$color.disabledText};
+    }
   }
 `
 
