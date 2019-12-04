@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { $color } from '../../styles/GlobalVariables'
+import { $color } from '../../../styles/GlobalVariables'
 
 const StyledLabel = styled.label`
   position: relative;

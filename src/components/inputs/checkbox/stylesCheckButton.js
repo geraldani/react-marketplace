@@ -1,5 +1,5 @@
 import styled, { keyframes , css} from 'styled-components'
-import { $color } from '../../styles/GlobalVariables'
+import { $color } from '../../../styles/GlobalVariables'
 
 const size_sm = 15
 const size_md = 21

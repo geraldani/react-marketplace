@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledContainer, Title } from '../styles'
-import RadioButtton from '../../components/radio/RadioButton'
+import RadioButtton from '../../components/inputs/radio/RadioButton'
 
 const Radio = () => {
   return (

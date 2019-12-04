@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { $border_radius, $color, $radio_check_size } from '../../styles/GlobalVariables'
+import { $border_radius, $color, $radio_check_size } from '../../../styles/GlobalVariables'
 
 const circle_sm = 7
 const circle_md = 12
