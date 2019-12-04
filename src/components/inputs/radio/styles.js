@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import Label from '../../Form/label/Label'
 import { $border_radius, $color, $radio_check_size } from '../../../styles/GlobalVariables'
 
 const circle_sm = 7
@@ -22,8 +23,8 @@ const StyledCircleIcon = styled.span`
   cursor: pointer;
   border: solid 2px ${$color.gray};
   ${radio_size($radio_check_size.md, border_md)};
-  ${props => props['size-sm'] && radio_size($radio_check_size.sm, border_sm)}
-  ${props => props['size-lg'] && css`
+  ${props => props.sm && radio_size($radio_check_size.sm, border_sm)}
+  ${props => props.lg && css`
         border-width: 3px; 
         ${radio_size($radio_check_size.lg, border_lg)}
     `}
@@ -33,8 +34,8 @@ const StyledCircleIcon = styled.span`
     content: '';
     position: absolute;
     ${radio_size(circle_md)};
-    ${props => props['size-sm'] && radio_size(circle_sm)}
-    ${props => props['size-lg'] && radio_size(circle_lg)}
+    ${props => props.sm && radio_size(circle_sm)}
+    ${props => props.lg && radio_size(circle_lg)}
     top: -2px;
     left: -2px;
     bottom: -2px;
@@ -61,21 +62,9 @@ const StyledRadio = styled.input`
   }
 `
 
-const StyledLabel = styled.label`
-  position: relative;
+const StyledLabel = styled(Label)`
   margin-bottom: .5rem;
-  color: ${$color.text};
-  font-weight: bold;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  ${({ disabled }) => disabled && css` color: ${$color.disabledText}`};
   &:hover{
-    color: ${$color.gray};
-    ${ props  => props.disabled && css`//cursor on disable radio
-      cursor: initial;
-      color: ${$color.disabledText}
-    `};
     ${StyledCircleIcon}{
       border-color: ${$color.primary};
     }

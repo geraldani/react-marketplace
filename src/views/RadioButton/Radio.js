@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledContainer, Title } from '../styles'
-import RadioButtton from '../../components/inputs/radio/RadioButton'
+import RadioInput from '../../components/inputs/radio/RadioInput'
 
 const Radio = () => {
   return (
@@ -11,18 +11,18 @@ const Radio = () => {
           <div>
             <Title>Radio inputs</Title>
             <StyledContainer className='d-flex flex-column align-items-start'>
-              <RadioButtton name='radio' value='1' label='Option one is this and that—be sure to include why its great' />
-              <RadioButtton name='radio' value='2' label='Option two can be something else and selecting it will deselect option one'/>
-              <RadioButtton name='radio' value='3' label='Option three is disabled' disabled/>
+              <RadioInput name='radio' value='1' label='Option one is this and that—be sure to include why its great' />
+              <RadioInput name='radio' value='2' label='Option two can be something else and selecting it will deselect option one'/>
+              <RadioInput name='radio' value='3' label='Option three is disabled' disabled/>
             </StyledContainer>
           </div>
 
           <div>
             <Title>Radio inputs sizes</Title>
             <StyledContainer className='d-flex flex-column align-items-start'>
-              <RadioButtton name='radio-sizes' value='1' label='Small radio - 15px' size-sm/>
-              <RadioButtton name='radio-sizes' value='2' label='Normal radio - 22px'/>
-              <RadioButtton name='radio-sizes' value='3' label='Large radio - 30px' size-lg/>
+              <RadioInput name='radio-sizes' value='1' label='Small radio - 15px' sm/>
+              <RadioInput name='radio-sizes' value='2' label='Normal radio - 22px'/>
+              <RadioInput name='radio-sizes' value='3' label='Large radio - 30px' lg/>
             </StyledContainer>
           </div>
         </div>

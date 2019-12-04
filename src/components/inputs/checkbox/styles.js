@@ -1,5 +1,6 @@
-import styled, { keyframes , css} from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 import { $color } from '../../../styles/GlobalVariables'
+import Label from '../../Form/label/Label'
 
 const size_sm = 15
 const size_md = 21
@@ -12,14 +13,14 @@ const padding_check_lg = 4
 const wave = keyframes` 
   50% { transform: scale(0.9); }
 `
-const checkSize = (sizeSquare, checkSize) =>  css`
+const checkSize = (sizeSquare, checkSize) => css`
   top: ${-border_width + checkSize}px;
   left: ${-border_width + checkSize}px;
-  width: ${sizeSquare - (checkSize*2)}px;
-  height: ${sizeSquare - (checkSize*2)}px;
+  width: ${sizeSquare - (checkSize * 2)}px;
+  height: ${sizeSquare - (checkSize * 2)}px;
 `
 
-const squareSize = (size) =>  css`
+const squareSize = (size) => css`
     width: ${size}px;
     height: ${size}px;
 `
@@ -38,7 +39,7 @@ const StyledIconContainer = styled.span`
     transition: all 0.2s ease;
     svg {//check
       position: absolute;
-      ${checkSize(size_md,padding_check_md)};
+      ${checkSize(size_md, padding_check_md)};
       ${props => props.sm && checkSize(size_sm, padding_check_sm)}
       ${props => props.lg && checkSize(size_lg, padding_check_lg)}
       fill: none;
@@ -68,25 +69,8 @@ const StyledIconContainer = styled.span`
     }
 `
 
-const StyledLabel = styled.label`
-  -webkit-user-select: none;
-  user-select: none;
-  cursor: pointer;
-  position: relative;
+const StyledLabel = styled(Label)`
   margin-bottom: .5rem;
-  color: ${$color.text};
-  font-weight: bold;
-  display: inline-flex;
-  align-items: center;
-  transition: all 200ms linear;
-  ${props => props.disabled && css`color: ${$color.disabledText}`};
-   &:hover{
-    color: ${$color.gray};
-    ${props => props.disabled && css`color: ${$color.disabledText}; cursor: initial`};
-    ${StyledIconContainer} {
-      border-color: ${$color.primary};
-    }
-  }
 `
 
 const StyledInput = styled.input`
@@ -112,4 +96,68 @@ const StyledInput = styled.input`
   }
 `
 
-export { StyledIconContainer, StyledInput, StyledLabel }
+const StyledLabelSimple = styled.label`
+  position: relative;
+  margin-bottom: .5rem;
+  color: ${$color.text};
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  transition: all 200ms linear;
+  cursor: pointer;
+  &:hover{
+    color: ${$color.gray};
+  }
+`
+
+const StyledCheckboxIcon = styled.span`
+  position: absolute;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: ${$color.gray};
+  border-radius: 2px;
+  transition: all 0.4s;
+  &:after{
+    content: '';
+    position: absolute;
+    display: none;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+`
+
+const StyledCheckbox = styled.input`
+  //position: absolute;
+  cursor: pointer;
+  margin-right: 8px;
+  opacity: 0;
+  height: 0;
+  &:hover + ${StyledCheckboxIcon}{
+    background-color: ${$color.grayLighter};
+  }
+  &:checked + ${StyledCheckboxIcon} {
+    background-color: ${$color.primary};
+    border-color: ${$color.primary}
+  }
+   &:checked + ${StyledCheckboxIcon}:after{
+    display: block;
+  }
+`
+
+export {
+  StyledIconContainer, StyledInput, StyledLabel,
+  StyledCheckbox, StyledCheckboxIcon, StyledLabelSimple
+}

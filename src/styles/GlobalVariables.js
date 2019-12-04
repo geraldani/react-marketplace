@@ -12,7 +12,7 @@ const $color = {
   disabledText: '#999',
   disabledBackground: '#555',
   grayLighter: '#CCCCCC',
-  grayLightest: '#ddd',
+  grayLightest: '#DDDDDD',
   grayXlightest: '#F8F8F8',
   txtColor: '#68768C',
   text: '#19233C',
@@ -51,7 +51,7 @@ const $font_size = {
   base: '1' + rem,
   lg: '1.2' + rem,
   md: '1' + rem,
-  sm: '0.8' + rem,
+  sm: '0.9' + rem,
   xs: '0.6' + rem
 }
 

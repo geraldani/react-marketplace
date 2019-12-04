@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import { $grid_breakpoints, $heading_sizes } from './GlobalVariables'
+import {  $heading_sizes } from './GlobalVariables'
 
 const GlobalStyles = createGlobalStyle`
   body{
@@ -14,5 +14,6 @@ const GlobalStyles = createGlobalStyle`
   h6 { font-size: ${$heading_sizes.h6}; }
   p { color: #68768C; }
 `
+
 
 export { GlobalStyles }

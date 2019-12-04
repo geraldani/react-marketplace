@@ -1,34 +1,33 @@
 import React from 'react'
-import { StyledLabel as Label, StyledCheckbox, StyledCheckboxIcon } from './stylesCheckSimple'
-import { StyledIconContainer, StyledInput, StyledLabel } from './stylesCheckButton'
+import { StyledIconContainer, StyledInput, StyledLabel, StyledLabelSimple, StyledCheckbox, StyledCheckboxIcon } from './styles'
 
 import PropTypes from 'prop-types'
 import CheckIcon from './CheckIcon'
 
-export const CheckButtonSimple = (props) => {
+export const CheckInputSimple = (props) => {
   return (
-    <Label>
+    <StyledLabelSimple>
       <StyledCheckbox type='checkbox' name={props.name} onChange={props.onChange} />
       <StyledCheckboxIcon />
       {props.label}
-    </Label>
+    </StyledLabelSimple>
   )
 }
 
-const CheckButton = (props) => {
-  const commonProps = {sm: props.sm, lg: props.lg}
+const CheckInput = ({name, label, onChange, disabled, lg, sm}) => {
+  const commonProps = { sm, lg }
   return (
-    <StyledLabel disabled={props.disabled}>
-      <StyledInput type="checkbox" name={props.name} onChange={props.onChange} disabled={props.disabled} />
+    <StyledLabel disabled={disabled} {...commonProps}>
+      <StyledInput type="checkbox" name={name} onChange={onChange} disabled={disabled} />
       <StyledIconContainer {...commonProps}>
         <CheckIcon />
       </StyledIconContainer>
-      {props.label}
+      {label}
     </StyledLabel>
   )
 }
 
-CheckButton.propTypes = {
+CheckInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func,
@@ -37,4 +36,4 @@ CheckButton.propTypes = {
   sm: PropTypes.bool
 }
 
-export default CheckButton
+export default CheckInput
