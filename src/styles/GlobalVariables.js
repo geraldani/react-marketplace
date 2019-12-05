@@ -5,7 +5,7 @@ const por = '%'
 
 // Colors
 // Grayscale and brand colors for use across Bootstrap.
-const $color = {
+const COLOR = {
   grayDark: '#444444',
   gray: '#555555',
   grayLight: '#999999',
@@ -27,16 +27,16 @@ const $color = {
 // Define the minimum dimensions at which your layout will change,
 // adapting to different screen sizes, for use in media queries.
 
-const $grid_breakpoints = {
-  xs: '0',
-  sm: '544' + px,
-  md: '768' + px,
-  lg: '992' + px,
-  xl: '1200' + px
+const GRID_BREAKPOINTS = {
+  xs: 0,
+  sm: 544 + px,
+  md: 768 + px,
+  lg: 992 + px,
+  xl: 1200 + px
 }
 
 // Headins sizes
-const $heading_sizes = {
+const HEADING_SIZES = {
   h1: '3.067' + rem,
   h2: '2.4' + rem,
   h3: '1.733' + rem,
@@ -46,7 +46,7 @@ const $heading_sizes = {
 }
 
 // Pixel value used to responsively scale all typography. Applied to the `<html>` element.
-const $font_size = {
+const FONT_SIZE = {
   root: '15' + px,
   base: '1' + rem,
   lg: '1.2' + rem,
@@ -56,28 +56,24 @@ const $font_size = {
 }
 
 //border radius
-const $border_radius = {
+const BORDER_RADIUS = {
   normal: '25' + px,
   lg: '50' + px,
   sm: '10' + px,
   block: '5' + px,
   circle: '50' + por
 }
-
-
-//sizes of radio and check buttons
-const $radio_check_size = {
-  sm: 15,
-  md: 22,
-  lg: 30
-}
-
+const GLOBAL_SIZES = [
+  'sm',
+  'md',
+  'lg'
+]
 export {
-  $color,
-  $grid_breakpoints,
-  $heading_sizes,
-  $font_size,
-  $border_radius,
-  $radio_check_size
+  COLOR,
+  GRID_BREAKPOINTS,
+  HEADING_SIZES,
+  FONT_SIZE,
+  GLOBAL_SIZES,
+  BORDER_RADIUS,
 }
 

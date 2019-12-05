@@ -1,14 +1,20 @@
 import styled, { keyframes, css } from 'styled-components'
-import { $color } from '../../../styles/GlobalVariables'
+import { COLOR } from '../../../styles/GlobalVariables'
+import { findSize } from '../../utils'
 import Label from '../../Form/label/Label'
 
-const size_sm = 15
-const size_md = 21
-const size_lg = 28
+const size_check = {
+  sm: 15,
+  md: 21,
+  lg: 28
+}
+const padding_check = {
+  sm: 2,
+  md: 3,
+  lg: 4
+}
+
 const border_width = 2
-const padding_check_sm = 2
-const padding_check_md = 3
-const padding_check_lg = 4
 
 const wave = keyframes` 
   50% { transform: scale(0.9); }
@@ -24,26 +30,21 @@ const squareSize = (size) => css`
     width: ${size}px;
     height: ${size}px;
 `
-
 const StyledIconContainer = styled.span`
-    ${squareSize(size_md)};
-    ${props => props.sm && squareSize(size_sm)};
-    ${props => props.lg && squareSize(size_lg)};
+    ${props => squareSize(size_check[findSize(props.size)])};//para determinar el tamano del recuadro segun las props
     display: inline-block;
     vertical-align: middle;
     margin-right: 10px;
     position: relative;
     border-radius: 3px;
     transform: scale(1);
-    border: ${border_width}px solid ${$color.gray};
+    border: ${border_width}px solid ${COLOR.gray};
     transition: all 0.2s ease;
     svg {//check
       position: absolute;
-      ${checkSize(size_md, padding_check_md)};
-      ${props => props.sm && checkSize(size_sm, padding_check_sm)}
-      ${props => props.lg && checkSize(size_lg, padding_check_lg)}
+       ${props => checkSize(size_check[findSize(props.size)], padding_check[findSize(props.size)])};//para determinar el tamano del check segun las props
       fill: none;
-      stroke: ${$color.white};
+      stroke: ${COLOR.white};
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
@@ -55,10 +56,8 @@ const StyledIconContainer = styled.span`
     }
     &:before{//bola de efecto
       content: '';
-      ${squareSize(size_md)};
-      ${props => props.sm && squareSize(size_sm)};
-      ${props => props.lg && squareSize(size_lg)};
-      background: ${$color.primary};
+      ${props => squareSize(size_check[findSize(props.size)])};//para determinar el tamano de la bola del efecto segun las props
+      background: ${COLOR.primary};
       display: block;
       position: absolute;
       top: ${-border_width}px;
@@ -76,8 +75,8 @@ const StyledLabel = styled(Label)`
 const StyledInput = styled.input`
   display: none;
   &:checked + ${StyledIconContainer}{
-    background: ${$color.primary};
-    border-color: ${$color.primary};
+    background: ${COLOR.primary};
+    border-color: ${COLOR.primary};
     animation: ${wave} 0.4s ease;
     svg{
       stroke-dashoffset: 0;
@@ -89,7 +88,7 @@ const StyledInput = styled.input`
     }
   }
   &[disabled]+${StyledIconContainer}{
-    border-color: ${$color.grayLight};
+    border-color: ${COLOR.grayLight};
     &:hover{
       cursor: initial;
     }
@@ -99,14 +98,14 @@ const StyledInput = styled.input`
 const StyledLabelSimple = styled.label`
   position: relative;
   margin-bottom: .5rem;
-  color: ${$color.text};
+  color: ${COLOR.text};
   font-weight: bold;
   display: inline-flex;
   align-items: center;
   transition: all 200ms linear;
   cursor: pointer;
   &:hover{
-    color: ${$color.gray};
+    color: ${COLOR.gray};
   }
 `
 
@@ -117,7 +116,7 @@ const StyledCheckboxIcon = styled.span`
   width: 15px;
   border-style: solid;
   border-width: 2px;
-  border-color: ${$color.gray};
+  border-color: ${COLOR.gray};
   border-radius: 2px;
   transition: all 0.4s;
   &:after{
@@ -146,11 +145,11 @@ const StyledCheckbox = styled.input`
   opacity: 0;
   height: 0;
   &:hover + ${StyledCheckboxIcon}{
-    background-color: ${$color.grayLighter};
+    background-color: ${COLOR.grayLighter};
   }
   &:checked + ${StyledCheckboxIcon} {
-    background-color: ${$color.primary};
-    border-color: ${$color.primary}
+    background-color: ${COLOR.primary};
+    border-color: ${COLOR.primary}
   }
    &:checked + ${StyledCheckboxIcon}:after{
     display: block;

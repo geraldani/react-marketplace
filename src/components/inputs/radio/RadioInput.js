@@ -1,12 +1,12 @@
 import React from 'react'
 import { StyledRadio, StyledCircleIcon, StyledLabel } from './styles'
 import PropTypes from 'prop-types'
+import { GLOBAL_SIZES } from '../../../styles/GlobalVariables'
 
-const RadioInput = ({value, name, label, onChange, disabled, sm, lg}) => {
-  const commonProps = { sm, lg }
+const RadioInput = ({value, name, label, onChange, disabled, size='md'}) => {
 
   return (
-    <StyledLabel disabled={disabled} {...commonProps}>
+    <StyledLabel disabled={disabled} size={size}>
       <StyledRadio
         type='radio'
         value={value}
@@ -14,7 +14,7 @@ const RadioInput = ({value, name, label, onChange, disabled, sm, lg}) => {
         disabled={disabled}
         onChange={onChange}
       />
-      <StyledCircleIcon {...commonProps} />
+      <StyledCircleIcon size={size} />
       {label}
     </StyledLabel>
   )
@@ -26,8 +26,7 @@ RadioInput.propTypes = {
   label: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
-  sm: PropTypes.bool,
-  lg: PropTypes.bool
+  size: PropTypes.oneOf(GLOBAL_SIZES)
 }
 
 export default RadioInput

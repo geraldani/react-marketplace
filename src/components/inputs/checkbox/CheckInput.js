@@ -1,8 +1,15 @@
 import React from 'react'
-import { StyledIconContainer, StyledInput, StyledLabel, StyledLabelSimple, StyledCheckbox, StyledCheckboxIcon } from './styles'
-
 import PropTypes from 'prop-types'
 import CheckIcon from './CheckIcon'
+import { GLOBAL_SIZES } from '../../../styles/GlobalVariables'
+import {
+  StyledIconContainer,
+  StyledInput,
+  StyledLabel,
+  StyledLabelSimple,
+  StyledCheckbox,
+  StyledCheckboxIcon
+} from './styles'
 
 export const CheckInputSimple = (props) => {
   return (
@@ -14,12 +21,11 @@ export const CheckInputSimple = (props) => {
   )
 }
 
-const CheckInput = ({name, label, onChange, disabled, lg, sm}) => {
-  const commonProps = { sm, lg }
+const CheckInput = ({ name, label, onChange, disabled, size = 'md' }) => {
   return (
-    <StyledLabel disabled={disabled} {...commonProps}>
+    <StyledLabel disabled={disabled} size={size}>
       <StyledInput type="checkbox" name={name} onChange={onChange} disabled={disabled} />
-      <StyledIconContainer {...commonProps}>
+      <StyledIconContainer size={size}>
         <CheckIcon />
       </StyledIconContainer>
       {label}
@@ -32,8 +38,7 @@ CheckInput.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
-  lg: PropTypes.bool,
-  sm: PropTypes.bool
+  size: PropTypes.oneOf(GLOBAL_SIZES),
 }
 
 export default CheckInput

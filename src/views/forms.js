@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyledContainer, Title } from '../styles'
-import RadioInput from '../../components/inputs/radio/RadioInput'
-import Form from '../../components/Form/form'
-import Input from '../../components/inputs/generic/Input'
+import { StyledContainer, Title } from './styles'
+import RadioInput from '../components/inputs/radio/RadioInput'
+import Form from '../components/Form/form'
+import Input from '../components/inputs/generic/Input'
 
 const Forms = () => {
   return (

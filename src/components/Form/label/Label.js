@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StyledLabel } from './styles'
+import { GLOBAL_SIZES } from '../../../styles/GlobalVariables'
 
-const Label = ({ children, className, disabled, sm, lg }) => {
-  const commonProps = { className, disabled, sm, lg }
+const Label = ({ children, className, disabled, size='md' }) => {
+  const commonProps = { className, disabled, size }
   return (
     <StyledLabel {...commonProps}>
       {children}
@@ -13,6 +14,7 @@ const Label = ({ children, className, disabled, sm, lg }) => {
 
 Label.prototype = {
   className: PropTypes.string,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  size: PropTypes.oneOf(GLOBAL_SIZES)
 }
 export default Label

@@ -1,6 +1,6 @@
 import React from 'react'
-import Button from '../../components/button/Button'
-import { StyledContainer, Title } from '../styles'
+import Button from '../components/button/Button'
+import { StyledContainer, Title } from './styles'
 
 const Buttons = () => {
   return (

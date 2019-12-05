@@ -1,28 +1,29 @@
 import styled, { css } from 'styled-components'
-import { $color, $font_size } from '../../../styles/GlobalVariables'
+import { COLOR } from '../../../styles/GlobalVariables'
+import { findSize } from '../../utils'
 
-const label_font_sm = 0.9 + 'rem'
-const label_font_md = 1 + 'rem'
-const label_font_lg = 1.1 + 'rem'
+const label_font = {
+  sm: 0.9 + 'rem',
+  md: 1 + 'rem',
+  lg: 1.1 + 'rem',
+}
 
 const StyledLabel = styled.label`
   position: relative;
-  color: ${$color.text};
+  color: ${COLOR.text};
   font-weight: bold;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  font-size: ${label_font_md};
-  ${ props  => props.sm && css`font-size: ${label_font_sm}`};
-  ${ props  => props.lg && css`font-size: ${label_font_lg}`};
+  ${props => css`font-size: ${label_font[findSize(props.size)]}`};
   
   transition: all 200ms linear;
-  ${ props  => props.disabled && css` color: ${$color.disabledText}`};
+  ${props => props.disabled && css` color: ${COLOR.disabledText}`};
   &:hover{
-    color: ${$color.gray};
-    ${ props  => props.disabled && css`//cursor on disable radio
+    color: ${COLOR.gray};
+    ${props => props.disabled && css`//cursor on disable radio
       cursor: initial;
-      color: ${$color.disabledText}
+      color: ${COLOR.disabledText}
     `};
   }
 `

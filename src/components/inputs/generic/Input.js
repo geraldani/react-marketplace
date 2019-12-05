@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {StyledLabel, StyledInput} from './styles'
 
-const Input = ({ type, placeholder, label, disabled, aclaration }) => {
+const Input = ({ type, placeholder, label, disabled, clarification }) => {
   return (
     <StyledLabel disabled={disabled}>
       {label}
       <StyledInput type={type} placeholder={placeholder} disabled={disabled} />
       {
-        aclaration &&
-        <small className="text-muted">{aclaration}</small>
+        clarification &&
+        <small className="text-muted">{clarification}</small>
       }
     </StyledLabel>
   )
@@ -20,7 +20,7 @@ Input.propTypes = {
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
-  aclaration: PropTypes.bool,
+  clarification: PropTypes.string,
 }
 
 export default Input

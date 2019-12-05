@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyledContainer, Title } from '../styles'
-import RadioInput from '../../components/inputs/radio/RadioInput'
+import { StyledContainer, Title } from './styles'
+import RadioInput from '../components/inputs/radio/RadioInput'
 
 const Radio = () => {
   return (
@@ -20,9 +20,9 @@ const Radio = () => {
           <div>
             <Title>Radio inputs sizes</Title>
             <StyledContainer className='d-flex flex-column align-items-start'>
-              <RadioInput name='radio-sizes' value='1' label='Small radio - 15px' sm/>
-              <RadioInput name='radio-sizes' value='2' label='Normal radio - 22px'/>
-              <RadioInput name='radio-sizes' value='3' label='Large radio - 30px' lg/>
+              <RadioInput name='radio-sizes' value='1' label='Small radio - 15px' size='sm' />
+              <RadioInput name='radio-sizes' value='2' label='Normal radio - 22px' size='md'/>
+              <RadioInput name='radio-sizes' value='3' label='Large radio - 30px' size='lg' />
             </StyledContainer>
           </div>
         </div>
