@@ -25,10 +25,9 @@ const btn_font = {
 
 //border radius
 const btn_border_radius = {
-  sm: BORDER_RADIUS.sm,
-  md: BORDER_RADIUS.normal,
+  sm: BORDER_RADIUS.block,
+  md: BORDER_RADIUS.sm,
   lg: BORDER_RADIUS.lg,
-  xs: BORDER_RADIUS.block,
   none: BORDER_RADIUS.none
 }
 
@@ -113,10 +112,9 @@ const ShadowStyles = {
     }`
 }
 
-const buttonSize = (padding_x, padding_y, font_size, border_radius) => css`
+const buttonSize = (padding_x, padding_y, font_size) => css`
   padding: ${padding_y} ${padding_x};
-  font-size: ${font_size};
-  border-radius: ${border_radius};`
+  font-size: ${font_size};`
 
 const blockButton = css`
   display: block;
@@ -133,7 +131,7 @@ const buttonDisable = css`
 
 const findButtonSize = (size) => {
   const elem = findSize(size)
-  return buttonSize(btn_padding_x[elem], btn_padding_y[elem], btn_font[elem], btn_border_radius[elem])
+  return buttonSize(btn_padding_x[elem], btn_padding_y[elem], btn_font[elem])
 }
 
 const commosStyles = css`
@@ -147,6 +145,8 @@ const commosStyles = css`
   cursor: pointer;
   user-select: none;
   width: auto;
+  margin-bottom: 0.5rem;
+  display: inline-block;
   //shadows
   ${props => ShadowStyles[Object.keys(ShadowStyles).find(e => e === props.shadow)]};
   

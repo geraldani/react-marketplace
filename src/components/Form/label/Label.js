@@ -1,20 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StyledLabel } from './styles'
+import { StyledInlineLabel, StyledBlockLabel } from './styles'
 import { GLOBAL_SIZES } from '../../../styles/GlobalVariables'
 
-const Label = ({ children, className, disabled, size='md' }) => {
+const LabelInline = ({ children, className, disabled, size='md' }) => {
   const commonProps = { className, disabled, size }
   return (
-    <StyledLabel {...commonProps}>
+    <StyledInlineLabel {...commonProps}>
       {children}
-    </StyledLabel>
+    </StyledInlineLabel>
   )
 }
 
-Label.prototype = {
+export const LabelBlock = ({ children, className, disabled, size='md' }) => {
+  const commonProps = { className, disabled, size }
+  return (
+    <StyledBlockLabel {...commonProps}>
+      {children}
+    </StyledBlockLabel>
+  )
+}
+
+LabelInline.prototype = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   size: PropTypes.oneOf(GLOBAL_SIZES)
 }
-export default Label
+export default LabelInline

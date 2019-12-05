@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { COLOR } from '../../../styles/GlobalVariables'
 import { findSize } from '../../utils'
+import Label from './Label'
 
 const label_font = {
   sm: 0.9 + 'rem',
@@ -8,7 +9,7 @@ const label_font = {
   lg: 1.1 + 'rem',
 }
 
-const StyledLabel = styled.label`
+const StyledInlineLabel = styled.label`
   position: relative;
   color: ${COLOR.text};
   font-weight: bold;
@@ -17,7 +18,7 @@ const StyledLabel = styled.label`
   align-items: center;
   ${props => css`font-size: ${label_font[findSize(props.size)]}`};
   
-  transition: all 200ms linear;
+  transition: all 250ms ease-in-out;
   ${props => props.disabled && css` color: ${COLOR.disabledText}`};
   &:hover{
     color: ${COLOR.gray};
@@ -27,5 +28,10 @@ const StyledLabel = styled.label`
     `};
   }
 `
-
-export { StyledLabel }
+const StyledBlockLabel = styled(StyledInlineLabel)`
+  flex-direction: column;
+  width: 100%;
+  align-items: start;
+  margin-bottom: 0.8em;
+`
+export { StyledInlineLabel, StyledBlockLabel }

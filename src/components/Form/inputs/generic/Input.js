@@ -1,17 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {StyledLabel, StyledInput} from './styles'
+import {StyledInput} from './styles'
+import { LabelBlock } from '../../label/Label'
 
 const Input = ({ type, placeholder, label, disabled, clarification }) => {
   return (
-    <StyledLabel disabled={disabled}>
+    <LabelBlock disabled={disabled}>
       {label}
       <StyledInput type={type} placeholder={placeholder} disabled={disabled} />
       {
         clarification &&
         <small className="text-muted">{clarification}</small>
       }
-    </StyledLabel>
+    </LabelBlock>
   )
 }
 

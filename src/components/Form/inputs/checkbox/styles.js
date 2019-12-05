@@ -1,7 +1,7 @@
 import styled, { keyframes, css } from 'styled-components'
 import { COLOR } from '../../../../styles/GlobalVariables'
 import { findSize } from '../../../utils'
-import Label from '../../label/Label'
+import LabelInline from '../../label/Label'
 
 const size_check = {
   sm: 15,
@@ -30,6 +30,7 @@ const squareSize = (size) => css`
     width: ${size}px;
     height: ${size}px;
 `
+
 const StyledIconContainer = styled.span`
     ${props => squareSize(size_check[findSize(props.size)])};//para determinar el tamano del recuadro segun las props
     display: inline-block;
@@ -39,7 +40,7 @@ const StyledIconContainer = styled.span`
     border-radius: 3px;
     transform: scale(1);
     border: ${border_width}px solid ${COLOR.gray};
-    transition: all 0.2s ease;
+    transition: all 250ms ease-in-out;
     svg {//check
       position: absolute;
        ${props => checkSize(size_check[findSize(props.size)], padding_check[findSize(props.size)])};//para determinar el tamano del check segun las props
@@ -68,8 +69,11 @@ const StyledIconContainer = styled.span`
     }
 `
 
-const StyledLabel = styled(Label)`
+const StyledInlineLabel = styled(LabelInline)`
   margin-bottom: .5rem;
+  &:hover ${StyledIconContainer}{
+    border-color: ${COLOR.primary};
+  }
 `
 
 const StyledInput = styled.input`
@@ -157,6 +161,6 @@ const StyledCheckbox = styled.input`
 `
 
 export {
-  StyledIconContainer, StyledInput, StyledLabel,
+  StyledIconContainer, StyledInput, StyledInlineLabel,
   StyledCheckbox, StyledCheckboxIcon, StyledLabelSimple
 }

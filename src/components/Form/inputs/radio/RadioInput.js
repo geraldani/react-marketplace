@@ -1,12 +1,12 @@
 import React from 'react'
-import { StyledRadio, StyledCircleIcon, StyledLabel } from './styles'
+import { StyledRadio, StyledCircleIcon, StyledInlineLabel } from './styles'
 import PropTypes from 'prop-types'
 import { GLOBAL_SIZES } from '../../../../styles/GlobalVariables'
 
 const RadioInput = ({value, name, label, onChange, disabled, size='md'}) => {
 
   return (
-    <StyledLabel disabled={disabled} size={size}>
+    <StyledInlineLabel disabled={disabled} size={size}>
       <StyledRadio
         type='radio'
         value={value}
@@ -16,7 +16,7 @@ const RadioInput = ({value, name, label, onChange, disabled, size='md'}) => {
       />
       <StyledCircleIcon size={size} />
       {label}
-    </StyledLabel>
+    </StyledInlineLabel>
   )
 }
 

@@ -1,5 +1,5 @@
 import { createGlobalStyle, css } from 'styled-components'
-import { HEADING_SIZES } from './GlobalVariables'
+import { HEADING_SIZES, INPUT, FONT_SIZE, COLOR } from './GlobalVariables'
 
 const GlobalStyles = createGlobalStyle`
   body{
@@ -23,4 +23,22 @@ const Shadow = {
   noShadow: css`box-shadow: 0 0 0 rgb(0,0,0,0)`,
 }
 
-export { GlobalStyles, Shadow }
+const GlobalInputStyles = css`
+  width: 100%;
+  margin-top: 0.3em;
+  height: auto!important;
+  padding: ${INPUT.paddingY} ${INPUT.paddingX};
+  font-size: ${FONT_SIZE.base};
+  line-height: ${INPUT.lineHeight};
+  border: ${INPUT.borderWidth} solid ${COLOR.grayLightest};
+  border-radius: ${INPUT.radius};
+  color: ${COLOR.grayDark};
+  background-color: ${COLOR.white};
+  transition: all 250ms ease-in-out;
+  &:focus {
+    border-color: ${COLOR.primary};
+    outline: none; 
+  }
+`
+
+export { GlobalStyles, Shadow, GlobalInputStyles }

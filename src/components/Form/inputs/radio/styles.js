@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import Label from '../../label/Label'
+import LabelInline from '../../label/Label'
 import { BORDER_RADIUS, COLOR } from '../../../../styles/GlobalVariables'
 import { findSize } from '../../../utils'
 
@@ -36,6 +36,7 @@ const StyledCircleIcon = styled.span`
   border: solid ${border_width} ${COLOR.gray};
   ${props => radio_size(size[findSize(props.size)], border[findSize(props.size)])};
   border-radius: ${BORDER_RADIUS.circle};
+  transition: border-color 250ms ease-in-out;
   &:after{
     transform: scale(0);
     content: '';
@@ -67,7 +68,7 @@ const StyledRadio = styled.input`
   }
 `
 
-const StyledLabel = styled(Label)`
+const StyledInlineLabel = styled(LabelInline)`
   margin-bottom: .5rem;
   &:hover{
     ${StyledCircleIcon}{
@@ -79,4 +80,4 @@ const StyledLabel = styled(Label)`
   }
 `
 
-export { StyledRadio, StyledCircleIcon, StyledLabel }
+export { StyledRadio, StyledCircleIcon, StyledInlineLabel }

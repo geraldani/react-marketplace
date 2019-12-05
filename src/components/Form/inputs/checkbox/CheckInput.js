@@ -5,7 +5,7 @@ import { GLOBAL_SIZES } from '../../../../styles/GlobalVariables'
 import {
   StyledIconContainer,
   StyledInput,
-  StyledLabel,
+  StyledInlineLabel,
   StyledLabelSimple,
   StyledCheckbox,
   StyledCheckboxIcon
@@ -23,13 +23,13 @@ export const CheckInputSimple = (props) => {
 
 const CheckInput = ({ name, label, onChange, disabled, size = 'md' }) => {
   return (
-    <StyledLabel disabled={disabled} size={size}>
+    <StyledInlineLabel disabled={disabled} size={size}>
       <StyledInput type="checkbox" name={name} onChange={onChange} disabled={disabled} />
       <StyledIconContainer size={size}>
         <CheckIcon />
       </StyledIconContainer>
       {label}
-    </StyledLabel>
+    </StyledInlineLabel>
   )
 }
 

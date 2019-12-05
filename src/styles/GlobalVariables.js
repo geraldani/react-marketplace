@@ -51,7 +51,7 @@ const FONT_SIZE = {
   base: '1' + rem,
   lg: '1.2' + rem,
   md: '1' + rem,
-  sm: '0.9' + rem,
+  sm: '0.8' + rem,
   xs: '0.6' + rem
 }
 
@@ -59,7 +59,7 @@ const FONT_SIZE = {
 const BORDER_RADIUS = {
   normal: '25' + px,
   lg: '50' + px,
-  sm: '10' + px,
+  sm: '12' + px,
   block: '5' + px,
   circle: '50' + por,
   none: 0
@@ -69,12 +69,22 @@ const GLOBAL_SIZES = [
   'md',
   'lg'
 ]
+
+const INPUT = {
+  paddingX: 1 + rem,
+  paddingY: .8 + rem,
+  lineHeight: 1.25,
+  borderWidth: 2 + px,
+  radius:BORDER_RADIUS.block
+}
+
 export {
   COLOR,
   GRID_BREAKPOINTS,
   HEADING_SIZES,
   FONT_SIZE,
   GLOBAL_SIZES,
+  INPUT,
   BORDER_RADIUS,
 }
 

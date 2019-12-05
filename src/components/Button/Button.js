@@ -55,11 +55,11 @@ Button.propTypes = {
   radius: PropTypes.oneOf([
     'none',
     'sm',
-    'lg',
-    'xs'
+    'md',
+    'lg'
   ]),
   block: PropTypes.oneOfType([
-    PropTypes.string,
+    PropTypes.oneOf(['sm','md']),
     PropTypes.bool
   ]),
 }
