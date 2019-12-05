@@ -61,7 +61,8 @@ const BORDER_RADIUS = {
   lg: '50' + px,
   sm: '10' + px,
   block: '5' + px,
-  circle: '50' + por
+  circle: '50' + por,
+  none: 0
 }
 const GLOBAL_SIZES = [
   'sm',

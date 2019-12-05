@@ -1,7 +1,7 @@
 import styled, { keyframes, css } from 'styled-components'
-import { COLOR } from '../../../styles/GlobalVariables'
-import { findSize } from '../../utils'
-import Label from '../../Form/label/Label'
+import { COLOR } from '../../../../styles/GlobalVariables'
+import { findSize } from '../../../utils'
+import Label from '../../label/Label'
 
 const size_check = {
   sm: 15,

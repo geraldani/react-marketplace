@@ -1,29 +1,39 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import { COLOR, FONT_SIZE, BORDER_RADIUS, GRID_BREAKPOINTS } from '../../styles/GlobalVariables'
+import { findSize } from '../utils'
+import { Shadow } from '../../styles/GlobalStyles'
 
 //paddings
-const btn_padding_x = '1.333rem'
-const btn_padding_y = '0.6667rem'
-const btn_padding_x_sm = '0.8rem'
-const btn_padding_y_sm = '0.4rem'
-const btn_padding_x_lg = '2.667rem'
-const btn_padding_y_lg = '1.067rem'
+const btn_padding_x = {
+  sm: 0.8 + 'rem',
+  md: 1.333 + 'rem',
+  lg: 2.667 + 'rem'
+}
+
+const btn_padding_y = {
+  sm: 0.4 + 'rem',
+  md: 0.6667 + 'rem',
+  lg: 1.067 + 'rem'
+}
+
+const btn_font = {
+  sm: FONT_SIZE.sm,
+  md: FONT_SIZE.md,
+  lg: FONT_SIZE.lg
+}
 
 //border radius
-const btn_border_radius = BORDER_RADIUS.normal
-const btn_border_radius_sm = BORDER_RADIUS.sm
-const btn_border_radius_lg = BORDER_RADIUS.lg
-const btn_border_radius_block = BORDER_RADIUS.block
+const btn_border_radius = {
+  sm: BORDER_RADIUS.sm,
+  md: BORDER_RADIUS.normal,
+  lg: BORDER_RADIUS.lg,
+  xs: BORDER_RADIUS.block,
+  none: BORDER_RADIUS.none
+}
 
 const btn_line_height = '1.2'
 const btn_font_weight = 'normal'
-
-//shadow
-const btn_box_shadow = css`box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075)`
-const btn_active_box_shadow = css`box-shadow: inset 0 3px 5px rgba(0,0,0,.125)`
-const btn_shadow = css`box-shadow: 0 5px 8px 0 rgba(76,132,255,0.32)`
-
 
 const ButtonStylesTypes = {
   primary: css`
@@ -66,6 +76,8 @@ const ButtonStylesTypes = {
     background-color: transparent;
     border-color: transparent;
     color: ${COLOR.primary};
+    padding: ${btn_padding_y.sm} ${btn_padding_x.sm}!important;
+    border-radius: ${btn_border_radius.xs}!important;
     &:hover{
       background-color: transparent;
       border-color: transparent;
@@ -76,6 +88,8 @@ const ButtonStylesTypes = {
     background-color: transparent;
     border-color: transparent;
     color: ${COLOR.secondary};
+    padding: ${btn_padding_y.sm} ${btn_padding_x.sm}!important;
+    border-radius: ${btn_border_radius.xs}!important;
     &:hover{
       background-color: transparent;
       border-color: transparent;
@@ -84,15 +98,31 @@ const ButtonStylesTypes = {
   `,
 }
 
-const buttonSize = (padding_x, padding_y, fontSize, border_radius) => css`
+const ShadowStyles = {
+  none: css` box-shadow: none; `,
+  normal: Shadow.shadow,
+  onhover: css`
+    ${Shadow.noShadow};
+    &:hover{
+      ${Shadow.shadow};
+    }`,
+  onhoverout: css`
+    ${Shadow.shadow};
+    &:hover{
+      ${Shadow.noShadow};
+    }`
+}
+
+const buttonSize = (padding_x, padding_y, font_size, border_radius) => css`
   padding: ${padding_y} ${padding_x};
-  font-size: ${fontSize};
+  font-size: ${font_size};
   border-radius: ${border_radius};`
 
 const blockButton = css`
   display: block;
   width: 100%;
-  border-radius: ${btn_border_radius_block};`
+  margin-bottom: 0.5rem;
+  border-radius: ${btn_border_radius.block};`
 
 const buttonDisable = css` 
   background-color: ${COLOR.grayLight};
@@ -101,10 +131,15 @@ const buttonDisable = css`
   pointer-events: none;
   border-color: ${COLOR.grayLight};`
 
+const findButtonSize = (size) => {
+  const elem = findSize(size)
+  return buttonSize(btn_padding_x[elem], btn_padding_y[elem], btn_font[elem], btn_border_radius[elem])
+}
+
 const commosStyles = css`
   border: 1px solid;
   font-weight: ${btn_font_weight};
-  transition: background-color 250ms, transform 100ms linear;
+  transition: background-color 250ms, transform 90ms linear, box-shadow 300ms ease-in-out;
   line-height: ${btn_line_height};
   text-transform: inherit;
   text-align: center;
@@ -112,25 +147,19 @@ const commosStyles = css`
   cursor: pointer;
   user-select: none;
   width: auto;
-
-  //default
-  color: ${COLOR.white};
-  background-color: ${COLOR.primary};
-  border-color: ${COLOR.primary};
-  ${buttonSize(btn_padding_x, btn_padding_y, FONT_SIZE.base, btn_border_radius)};
+  //shadows
+  ${props => ShadowStyles[Object.keys(ShadowStyles).find(e => e === props.shadow)]};
+  
+  ${props => ButtonStylesTypes[Object.keys(ButtonStylesTypes).find(style => props.btntype === style)]};
+  
+  //buttonSize
+  ${props => findButtonSize(props.size)};
   
   //border-radius
-  ${props => props['no-radius'] && css`border-radius: 0!important;`};
-  ${props => props['radius-sm'] && css`border-radius: ${btn_border_radius_sm}!important;`}
-  ${props => props['radius-xs'] && css`border-radius: ${btn_border_radius_block}!important;`}
-  ${props => props['radius-lg'] && css`border-radius: ${btn_border_radius_lg}!important;`}
-  
-  //btn sizes
-  ${props => props.lg && buttonSize(btn_padding_x_lg, btn_padding_y_lg, FONT_SIZE.lg, btn_border_radius_lg)};
-  ${props => props.sm && buttonSize(btn_padding_x_sm, btn_padding_y_sm, FONT_SIZE.sm, btn_border_radius_sm)};
+  border-radius: ${props => btn_border_radius[Object.keys(btn_border_radius).find(e => e === props.radius)]};
   
   //block
-  ${props => props.block && blockButton}
+  ${props => typeof (props.block) === 'boolean' && props.block && blockButton}
   
   //disabled
   ${props => props.disabled && buttonDisable};
@@ -143,22 +172,17 @@ const commosStyles = css`
     outline: none;
   }
   &:hover{
-    background-color: ${COLOR.brandHover};
-    border-color: ${COLOR.brandHover};
     text-decoration: none;
-     ${props => props.disabled && buttonDisable}
+    ${props => props.disabled && buttonDisable};
   }
-  
-   //types
-  ${props => ButtonStylesTypes[Object.keys(props).find(elem => Object.keys(ButtonStylesTypes).find(style => elem === style))]};
 
   //medias
   @media(max-width: ${GRID_BREAKPOINTS.md}){
-    ${props => props['block-md'] && blockButton}
+    ${props => props.block === 'md' && blockButton};
   }
-  
   @media(max-width: ${GRID_BREAKPOINTS.sm}){
-    ${props => props['block-sm'] && blockButton}
+    ${props => props.block === 'sm' && blockButton};
+    font-size: ${FONT_SIZE.sm};
   }
 `
 

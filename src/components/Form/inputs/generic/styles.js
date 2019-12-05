@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import Label from '../../Form/label/Label'
-import { COLOR, FONT_SIZE } from '../../../styles/GlobalVariables'
+import Label from '../../label/Label'
+import { COLOR, FONT_SIZE } from '../../../../styles/GlobalVariables'
 
 const input_padding_x = 1 + 'rem'
 const input_padding_y = .8 + 'rem'

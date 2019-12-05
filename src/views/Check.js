@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledContainer, Title } from './styles'
-import CheckInput from '../components/inputs/checkbox/CheckInput'
+import CheckInput from '../components/Form/inputs/checkbox/CheckInput'
 
 const Check = () => {
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CheckIcon from './CheckIcon'
-import { GLOBAL_SIZES } from '../../../styles/GlobalVariables'
+import { GLOBAL_SIZES } from '../../../../styles/GlobalVariables'
 import {
   StyledIconContainer,
   StyledInput,

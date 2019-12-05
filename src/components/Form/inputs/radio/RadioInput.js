@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyledRadio, StyledCircleIcon, StyledLabel } from './styles'
 import PropTypes from 'prop-types'
-import { GLOBAL_SIZES } from '../../../styles/GlobalVariables'
+import { GLOBAL_SIZES } from '../../../../styles/GlobalVariables'
 
 const RadioInput = ({value, name, label, onChange, disabled, size='md'}) => {
 

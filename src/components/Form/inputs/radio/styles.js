@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
-import Label from '../../Form/label/Label'
-import { BORDER_RADIUS, COLOR } from '../../../styles/GlobalVariables'
-import { findSize } from '../../utils'
+import Label from '../../label/Label'
+import { BORDER_RADIUS, COLOR } from '../../../../styles/GlobalVariables'
+import { findSize } from '../../../utils'
 
 const size = {
   sm: 15,
