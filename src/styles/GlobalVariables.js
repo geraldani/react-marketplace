@@ -48,7 +48,7 @@ const fontSize = {
   base: 1 + medidas.rem,
   lg: 1.2 + medidas.rem,
   md: 1 + medidas.rem,
-  sm: 0.8 + medidas.rem,
+  sm: 0.9 + medidas.rem,
   xs: 0.6 + medidas.rem
 }
 

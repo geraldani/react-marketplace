@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import {StyledInput} from './styles'
 import { LabelBlock } from '../../label/Label'
 
-const Input = ({ type, placeholder, label, disabled, clarification }) => {
+const Input = ({ name, type, placeholder, label, disabled, clarification }) => {
   return (
     <LabelBlock disabled={disabled}>
       {label}
-      <StyledInput type={type} placeholder={placeholder} disabled={disabled} />
+      <StyledInput type={type} placeholder={placeholder} disabled={disabled} name={name} />
       {
         clarification &&
         <small className="text-muted">{clarification}</small>
@@ -18,6 +18,7 @@ const Input = ({ type, placeholder, label, disabled, clarification }) => {
 
 Input.propTypes = {
   type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   label: PropTypes.string,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
