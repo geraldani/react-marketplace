@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { StyledInlineLabel, StyledBlockLabel } from './styles'
 import { GLOBAL_SIZES } from '../../../styles/GlobalVariables'
 
+
 const LabelInline = ({ children, className, disabled, size='md' }) => {
   const commonProps = { className, disabled, size }
   return (
@@ -20,6 +21,7 @@ export const LabelBlock = ({ children, className, disabled, size='md' }) => {
     </StyledBlockLabel>
   )
 }
+
 
 LabelInline.prototype = {
   className: PropTypes.string,

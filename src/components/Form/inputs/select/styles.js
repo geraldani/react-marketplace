@@ -2,7 +2,9 @@ import styled from 'styled-components'
 import { GlobalInputStyles } from '../../../../styles/GlobalStyles'
 
 const StyledSelect = styled.select`
-  ${GlobalInputStyles}
+  ${GlobalInputStyles};
+  font-weight: 700;
+  //appearance: none;      
 `
 
 export {

@@ -18,7 +18,7 @@ const Input = ({ type, placeholder, label, disabled, clarification }) => {
 
 Input.propTypes = {
   type: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
   clarification: PropTypes.string,
