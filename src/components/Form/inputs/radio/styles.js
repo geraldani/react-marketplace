@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import LabelInline from '../../label/Label'
-import { BORDER_RADIUS, COLOR } from '../../../../styles/GlobalVariables'
+import { borderRadius, color } from '../../../../styles/GlobalVariables'
 import { findSize } from '../../../utils'
 
 const size = {
@@ -33,9 +33,9 @@ const StyledCircleIcon = styled.span`
   left: -14px;
   margin-right: -5px;
   cursor: pointer;
-  border: solid ${border_width} ${COLOR.gray};
+  border: solid ${border_width} ${color.gray};
   ${props => radio_size(size[findSize(props.size)], border[findSize(props.size)])};
-  border-radius: ${BORDER_RADIUS.circle};
+  border-radius: ${borderRadius.circle};
   transition: border-color 250ms ease-in-out;
   &:after{
     transform: scale(0);
@@ -47,8 +47,8 @@ const StyledCircleIcon = styled.span`
     bottom: -2px;
     right: -2px;
     margin: auto;
-    border-radius: ${BORDER_RADIUS.circle};
-    background-color: ${COLOR.primary};
+    border-radius: ${borderRadius.circle};
+    background-color: ${color.primary};
     transition: all 150ms;
   }
 `
@@ -58,13 +58,13 @@ const StyledRadio = styled.input`
   opacity: 0;
   height: 0;
   &:checked+${StyledCircleIcon}{
-    border-color: ${COLOR.primary};
+    border-color: ${color.primary};
     &:after{
       transform: scale(1);
     }
   }
   &[disabled]+${StyledCircleIcon}{
-    border-color: ${COLOR.grayLight};
+    border-color: ${color.grayLight};
   }
 `
 
@@ -72,10 +72,10 @@ const StyledInlineLabel = styled(LabelInline)`
   margin-bottom: .5rem;
   &:hover{
     ${StyledCircleIcon}{
-      border-color: ${COLOR.primary};
+      border-color: ${color.primary};
     }
     ${StyledRadio}[disabled]+${StyledCircleIcon}{//el borde del color cuando esta desabilitado
-      border-color: ${COLOR.disabledText};
+      border-color: ${color.disabledText};
     }
   }
 `

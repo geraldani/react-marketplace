@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StyledInlineLabel, StyledBlockLabel } from './styles'
-import { GLOBAL_SIZES } from '../../../styles/GlobalVariables'
+import { globalSizes } from '../../../styles/GlobalVariables'
 
 
 const LabelInline = ({ children, className, disabled, size='md' }) => {
@@ -26,6 +26,6 @@ export const LabelBlock = ({ children, className, disabled, size='md' }) => {
 LabelInline.prototype = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
-  size: PropTypes.oneOf(GLOBAL_SIZES)
+  size: PropTypes.oneOf(globalSizes)
 }
 export default LabelInline

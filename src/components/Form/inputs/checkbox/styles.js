@@ -1,5 +1,5 @@
 import styled, { keyframes, css } from 'styled-components'
-import { COLOR } from '../../../../styles/GlobalVariables'
+import { color } from '../../../../styles/GlobalVariables'
 import { findSize } from '../../../utils'
 import LabelInline from '../../label/Label'
 
@@ -39,13 +39,13 @@ const StyledIconContainer = styled.span`
     position: relative;
     border-radius: 3px;
     transform: scale(1);
-    border: ${border_width}px solid ${COLOR.gray};
+    border: ${border_width}px solid ${color.gray};
     transition: all 250ms ease-in-out;
     svg {//check
       position: absolute;
        ${props => checkSize(size_check[findSize(props.size)], padding_check[findSize(props.size)])};//para determinar el tamano del check segun las props
       fill: none;
-      stroke: ${COLOR.white};
+      stroke: ${color.white};
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
@@ -58,7 +58,7 @@ const StyledIconContainer = styled.span`
     &:before{//bola de efecto
       content: '';
       ${props => squareSize(size_check[findSize(props.size)])};//para determinar el tamano de la bola del efecto segun las props
-      background: ${COLOR.primary};
+      background: ${color.primary};
       display: block;
       position: absolute;
       top: ${-border_width}px;
@@ -72,15 +72,15 @@ const StyledIconContainer = styled.span`
 const StyledInlineLabel = styled(LabelInline)`
   margin-bottom: .5rem;
   &:hover ${StyledIconContainer}{
-    border-color: ${COLOR.primary};
+    border-color: ${color.primary};
   }
 `
 
 const StyledInput = styled.input`
   display: none;
   &:checked + ${StyledIconContainer}{
-    background: ${COLOR.primary};
-    border-color: ${COLOR.primary};
+    background: ${color.primary};
+    border-color: ${color.primary};
     animation: ${wave} 0.4s ease;
     svg{
       stroke-dashoffset: 0;
@@ -92,7 +92,7 @@ const StyledInput = styled.input`
     }
   }
   &[disabled]+${StyledIconContainer}{
-    border-color: ${COLOR.grayLight};
+    border-color: ${color.grayLight};
     &:hover{
       cursor: initial;
     }
@@ -102,14 +102,14 @@ const StyledInput = styled.input`
 const StyledLabelSimple = styled.label`
   position: relative;
   margin-bottom: .5rem;
-  color: ${COLOR.text};
+  color: ${color.text};
   font-weight: bold;
   display: inline-flex;
   align-items: center;
   transition: all 200ms linear;
   cursor: pointer;
   &:hover{
-    color: ${COLOR.gray};
+    color: ${color.gray};
   }
 `
 
@@ -120,7 +120,7 @@ const StyledCheckboxIcon = styled.span`
   width: 15px;
   border-style: solid;
   border-width: 2px;
-  border-color: ${COLOR.gray};
+  border-color: ${color.gray};
   border-radius: 2px;
   transition: all 0.4s;
   &:after{
@@ -149,11 +149,11 @@ const StyledCheckbox = styled.input`
   opacity: 0;
   height: 0;
   &:hover + ${StyledCheckboxIcon}{
-    background-color: ${COLOR.grayLighter};
+    background-color: ${color.grayLighter};
   }
   &:checked + ${StyledCheckboxIcon} {
-    background-color: ${COLOR.primary};
-    border-color: ${COLOR.primary}
+    background-color: ${color.primary};
+    border-color: ${color.primary}
   }
    &:checked + ${StyledCheckboxIcon}:after{
     display: block;

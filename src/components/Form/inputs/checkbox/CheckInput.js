@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CheckIcon from './CheckIcon'
-import { GLOBAL_SIZES } from '../../../../styles/GlobalVariables'
+import { globalSizes } from '../../../../styles/GlobalVariables'
 import {
   StyledIconContainer,
   StyledInput,
@@ -38,7 +38,7 @@ CheckInput.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
-  size: PropTypes.oneOf(GLOBAL_SIZES),
+  size: PropTypes.oneOf(globalSizes),
 }
 
 export default CheckInput

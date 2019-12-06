@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StyledButton, StyledLink } from './styles'
-import { GLOBAL_SIZES } from '../../styles/GlobalVariables'
+import { globalSizes } from '../../styles/GlobalVariables'
 
 const Button = (props) => {
   const className = props.className || ''
@@ -14,7 +14,7 @@ const Button = (props) => {
     block: props.block,
     disabled: props.disabled,
     shadow: props.shadow,
-    className,
+    className
   }
 
   return (
@@ -37,7 +37,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   link: PropTypes.string,
   disabled: PropTypes.bool,
-  size: PropTypes.oneOf(GLOBAL_SIZES),
+  size: PropTypes.oneOf(globalSizes),
   shadow: PropTypes.oneOf([
     'onhover',
     'onhoverout',

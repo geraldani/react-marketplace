@@ -1,98 +1,109 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
-import { COLOR, FONT_SIZE, BORDER_RADIUS, GRID_BREAKPOINTS } from '../../styles/GlobalVariables'
+import { color, fontSize, borderRadius, gridBreakpoints, borderWidth } from '../../styles/GlobalVariables'
 import { findSize } from '../utils'
 import { Shadow } from '../../styles/GlobalStyles'
 
+const btnLineHeight = '1.2'
+const btnFontWeight = 'normal'
+const btnBorderWidth = borderWidth.sm
+
 //paddings
-const btn_padding_x = {
+const btnPaddingX = {
   sm: 0.8 + 'rem',
   md: 1.333 + 'rem',
   lg: 2.667 + 'rem'
 }
 
-const btn_padding_y = {
+const btnPaddingY = {
   sm: 0.4 + 'rem',
   md: 0.6667 + 'rem',
   lg: 1.067 + 'rem'
 }
 
-const btn_font = {
-  sm: FONT_SIZE.sm,
-  md: FONT_SIZE.md,
-  lg: FONT_SIZE.lg
+const btnFont = {
+  sm: fontSize.sm,
+  md: fontSize.md,
+  lg: fontSize.lg
 }
 
 //border radius
-const btn_border_radius = {
-  sm: BORDER_RADIUS.block,
-  md: BORDER_RADIUS.sm,
-  lg: BORDER_RADIUS.lg,
-  none: BORDER_RADIUS.none
+const btnBorderRadius = {
+  sm: borderRadius.xs,
+  md: borderRadius.sm,
+  lg: borderRadius.lg,
+  none: borderRadius.none
 }
 
-const btn_line_height = '1.2'
-const btn_font_weight = 'normal'
+const btnColor = {
+  primary: color.primary,
+  secondary: color.secondary,
+  primaryHover: color.brandHover || color.primary + 'd6',
+  secondaryHover: color.brandHoverSecondary || color.secondary + 'd6',
+  white: color.white,
+  colorPrimary: color.white,
+  colorSecondary: color.white
+}
 
 const ButtonStylesTypes = {
   primary: css`
-    background-color: ${COLOR.primary};
-    color: ${COLOR.white};
-    border-color: ${COLOR.primary};
+    background-color: ${btnColor.primary};
+    color: ${btnColor.colorPrimary};
+    border-color: ${btnColor.primary};
     &:hover{
-      color: ${COLOR.white};
-      background-color: ${COLOR.brandHover};
-      border-color: ${COLOR.brandHover};
+      color: ${btnColor.colorPrimary};
+      background-color: ${btnColor.primaryHover};
+      border-color: ${btnColor.primaryHover};
 
   }`,
   secondary: css`
-    background-color: ${COLOR.secondary};
-    color: ${COLOR.white};
-    border-color: ${COLOR.secondary};
+    background-color: ${btnColor.secondary};
+    color: ${btnColor.colorSecondary};
+    border-color: ${btnColor.secondary};
     &:hover{
-      color: ${COLOR.white};
-      background-color: ${COLOR.brandHoverSecondary};
-      border-color: ${COLOR.brandHoverSecondary};
+      color: ${btnColor.colorSecondary};
+      background-color: ${btnColor.secondaryHover};
+      border-color: ${btnColor.secondaryHover};
 
   }`,
   'outline-primary': css`
     background-color: transparent;
-    color: ${COLOR.primary};
-    border-color: ${COLOR.primary};
+    color: ${btnColor.primary};
+    border-color: ${btnColor.primary};
      &:hover{
-      color: ${COLOR.white};
-      background-color: ${COLOR.primary};
+      color: ${btnColor.colorPrimary};
+      background-color: ${btnColor.primary};
   }`,
   'outline-secondary': css`
     background-color: transparent;
-    color: ${COLOR.secondary};
-    border-color: ${COLOR.secondary}!important;
+    color: ${btnColor.secondary};
+    border-color: ${btnColor.secondary}!important;
      &:hover{
-      color: ${COLOR.white};
-      background-color: ${COLOR.secondary};
+      color: ${btnColor.colorSecondary};
+      background-color: ${btnColor.secondary};
   }`,
   'simple-primary': css`
     background-color: transparent;
     border-color: transparent;
-    color: ${COLOR.primary};
-    padding: ${btn_padding_y.sm} ${btn_padding_x.sm}!important;
-    border-radius: ${btn_border_radius.xs}!important;
+    color: ${btnColor.primary};
+    padding: ${btnPaddingY.sm} ${btnPaddingX.sm}!important;
+    border-radius: ${btnBorderRadius.xs}!important;
     &:hover{
       background-color: transparent;
       border-color: transparent;
-      color: ${COLOR.brandHover};
+      color: ${btnColor.primaryHover};
     }
   `,
   'simple-secondary': css`
     background-color: transparent;
     border-color: transparent;
-    color: ${COLOR.secondary};
-    padding: ${btn_padding_y.sm} ${btn_padding_x.sm}!important;
-    border-radius: ${btn_border_radius.xs}!important;
+    color: ${btnColor.secondary};
+    padding: ${btnPaddingY.sm} ${btnPaddingX.sm}!important;
+    border-radius: ${btnBorderRadius.xs}!important;
     &:hover{
       background-color: transparent;
       border-color: transparent;
-      color: ${COLOR.brandHoverSecondary};
+      color: ${btnColor.secondaryHover};
     }
   `,
 }
@@ -114,31 +125,32 @@ const ShadowStyles = {
 
 const buttonSize = (padding_x, padding_y, font_size) => css`
   padding: ${padding_y} ${padding_x};
-  font-size: ${font_size};`
+  font-size: ${font_size};
+`
 
 const blockButton = css`
   display: block;
   width: 100%;
   margin-bottom: 0.5rem;
-  border-radius: ${btn_border_radius.block};`
+  border-radius: ${btnBorderRadius.block};`
 
 const buttonDisable = css` 
-  background-color: ${COLOR.grayLight};
-  color: ${COLOR.white};
+  background-color: ${color.grayLight};
+  color: ${btnColor.white};
   cursor: not-allowed;
   pointer-events: none;
-  border-color: ${COLOR.grayLight};`
+  border-color: ${color.grayLight};`
 
 const findButtonSize = (size) => {
   const elem = findSize(size)
-  return buttonSize(btn_padding_x[elem], btn_padding_y[elem], btn_font[elem])
+  return buttonSize(btnPaddingX[elem], btnPaddingY[elem], btnFont[elem])
 }
 
 const commosStyles = css`
-  border: 1px solid;
-  font-weight: ${btn_font_weight};
+  border: ${btnBorderWidth} solid;
+  font-weight: ${btnFontWeight};
   transition: background-color 250ms, transform 90ms linear, box-shadow 300ms ease-in-out;
-  line-height: ${btn_line_height};
+  line-height: ${btnLineHeight};
   text-transform: inherit;
   text-align: center;
   vertical-align: middle;
@@ -156,7 +168,7 @@ const commosStyles = css`
   ${props => findButtonSize(props.size)};
   
   //border-radius
-  border-radius: ${props => btn_border_radius[Object.keys(btn_border_radius).find(e => e === props.radius)]};
+  border-radius: ${props => btnBorderRadius[Object.keys(btnBorderRadius).find(e => e === props.radius)]};
   
   //block
   ${props => typeof (props.block) === 'boolean' && props.block && blockButton}
@@ -177,12 +189,12 @@ const commosStyles = css`
   }
 
   //medias
-  @media(max-width: ${GRID_BREAKPOINTS.md}){
+  @media(max-width: ${gridBreakpoints.md}){
     ${props => props.block === 'md' && blockButton};
   }
-  @media(max-width: ${GRID_BREAKPOINTS.sm}){
+  @media(max-width: ${gridBreakpoints.sm}){
     ${props => props.block === 'sm' && blockButton};
-    font-size: ${FONT_SIZE.sm};
+    font-size: ${fontSize.sm};
   }
 `
 

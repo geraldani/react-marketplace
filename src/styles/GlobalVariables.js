@@ -1,11 +1,12 @@
-const em = 'em'
-const rem = 'rem'
-const px = 'px'
-const por = '%'
+const medidas = {
+  px: 'px',
+  em: 'em',
+  rem: 'rem',
+  por: '%'
+}
 
 // Colors
-// Grayscale and brand colors for use across Bootstrap.
-const COLOR = {
+const color = {
   grayDark: '#444444',
   gray: '#555555',
   grayLight: '#999999',
@@ -23,68 +24,79 @@ const COLOR = {
   white: '#fff'
 }
 
-// Grid breakpoints
-// Define the minimum dimensions at which your layout will change,
-// adapting to different screen sizes, for use in media queries.
-
-const GRID_BREAKPOINTS = {
+const gridBreakpoints = {
   xs: 0,
-  sm: 544 + px,
-  md: 768 + px,
-  lg: 992 + px,
-  xl: 1200 + px
+  sm: 576 + medidas.px,
+  md: 768 + medidas.px,
+  lg: 992 + medidas.px,
+  xl: 1200 + medidas.px
 }
 
 // Headins sizes
-const HEADING_SIZES = {
-  h1: '3.067' + rem,
-  h2: '2.4' + rem,
-  h3: '1.733' + rem,
-  h4: '1.467' + rem,
-  h5: '1.2' + rem,
-  h6: '1' + rem
+const headingSizes = {
+  h1: 3.067 + medidas.rem,
+  h2: 2.4 + medidas.rem,
+  h3: 1.733 + medidas.rem,
+  h4: 1.467 + medidas.rem,
+  h5: 1.2 + medidas.rem,
+  h6: 1 + medidas.rem
 }
 
 // Pixel value used to responsively scale all typography. Applied to the `<html>` element.
-const FONT_SIZE = {
-  root: '15' + px,
-  base: '1' + rem,
-  lg: '1.2' + rem,
-  md: '1' + rem,
-  sm: '0.8' + rem,
-  xs: '0.6' + rem
+const fontSize = {
+  root: 15 + medidas.px,
+  base: 1 + medidas.rem,
+  lg: 1.2 + medidas.rem,
+  md: 1 + medidas.rem,
+  sm: 0.8 + medidas.rem,
+  xs: 0.6 + medidas.rem
+}
+
+const marginsPaddings = {
+  none: 0,
+  xs: 0.25 + medidas.rem, // m-1
+  sm: 0.5 + medidas.rem, // m-2
+  md: 1 + medidas.rem, // m-3
+  lg: 1.5 + medidas.rem, // m-4
+  xg: 3 + medidas.rem, // m-5
+  xxg: 4 + medidas.rem // m-6
+}
+
+//borders
+const borderWidth = {
+  sm: 1 + medidas.px,
+  md: 2 + medidas.px,
+  lg: 3 + medidas.px,
+  xl: 5 + medidas.px
 }
 
 //border radius
-const BORDER_RADIUS = {
-  normal: '25' + px,
-  lg: '50' + px,
-  sm: '12' + px,
-  block: '5' + px,
-  circle: '50' + por,
+const borderRadius = {
+  xs: 5 + medidas.px,
+  sm: 10 + medidas.px,
+  md: 25 + medidas.px,
+  lg: 50 + medidas.px,
+  circle: 50 + medidas.por,
   none: 0
 }
-const GLOBAL_SIZES = [
+
+const globalSizes = [
+  'xs',
   'sm',
   'md',
-  'lg'
+  'lg',
+  'xg'
 ]
 
-const INPUT = {
-  paddingX: 1 + rem,
-  paddingY: .8 + rem,
-  lineHeight: 1.25,
-  borderWidth: 2 + px,
-  radius:BORDER_RADIUS.block
-}
 
 export {
-  COLOR,
-  GRID_BREAKPOINTS,
-  HEADING_SIZES,
-  FONT_SIZE,
-  GLOBAL_SIZES,
-  INPUT,
-  BORDER_RADIUS,
+  color,
+  gridBreakpoints,
+  headingSizes,
+  fontSize,
+  globalSizes,
+  borderRadius,
+  marginsPaddings,
+  borderWidth
 }
 
