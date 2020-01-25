@@ -11,8 +11,8 @@ import PaginatorCountry from './views/paginator'
 const Routes = () =>
   <BrowserRouter>
     <Switch>
-      <Route exact path='/' component={PaginatorCountry} />
-      {/*<Route exact path='/otra-pag' component={App} />*/}
+      {/*<Route exact path='/' component={PaginatorCountry} />*/}
+      <Route exact path='/' component={App} />
     </Switch>
   </BrowserRouter>
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StyledInlineLabel, StyledBlockLabel } from './styles'
-import { GLOBAL_SIZES } from '../../../styles/GlobalVariables'
+import { globalSizes } from '../../../styles/GlobalVariables'
 
 const ComponentGenerated = (Component, props) => {
   const commonProps = {
@@ -34,7 +34,7 @@ const defaultProps = {
 const prototype = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
-  size: PropTypes.oneOf(GLOBAL_SIZES),
+  size: PropTypes.oneOf(globalSizes),
   labelname: PropTypes.string
 }
 

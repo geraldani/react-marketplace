@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { COLOR, fontSize } from '../../../styles/GlobalVariables'
+import { color, fontSize } from '../../../styles/GlobalVariables'
 import { findSize } from '../../utils'
 import Label from './Label'
 
@@ -11,7 +11,7 @@ const labelFont = {
 
 const StyledInlineLabel = styled.label`
   position: relative;
-  color: ${COLOR.text};
+  color: ${color.text};
   font-weight: bold;
   cursor: pointer;
   display: flex;
@@ -20,15 +20,15 @@ const StyledInlineLabel = styled.label`
     padding-right: 10px;
     white-space: nowrap;
   }
-  ${props => css`font-size: ${label_font[findSize(props.size)]}`};
+  ${props => css`font-size: ${labelFont[findSize(props.size)]}`};
   
   transition: all 250ms ease-in-out;
-  ${props => props.disabled && css` color: ${COLOR.disabledText}`};
+  ${props => props.disabled && css` color: ${color.disabledText}`};
   &:hover{
-    color: ${COLOR.gray};
+    color: ${color.gray};
     ${props => props.disabled && css`//cursor on disable radio
       cursor: initial;
-      color: ${COLOR.disabledText}
+      color: ${color.disabledText}
     `};
   }
 `
