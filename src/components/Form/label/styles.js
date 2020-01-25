@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components'
-import { COLOR } from '../../../styles/GlobalVariables'
+import { COLOR, fontSize } from '../../../styles/GlobalVariables'
 import { findSize } from '../../utils'
 import Label from './Label'
 
-const label_font = {
-  sm: 0.9 + 'rem',
-  md: 1 + 'rem',
-  lg: 1.1 + 'rem',
+const labelFont = {
+  sm: fontSize.sm,
+  md: fontSize.md,
+  lg: fontSize.lg
 }
 
 const StyledInlineLabel = styled.label`

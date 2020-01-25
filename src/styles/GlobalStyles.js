@@ -1,17 +1,25 @@
 import { createGlobalStyle, css } from 'styled-components'
-import { HEADING_SIZES, INPUT, FONT_SIZE, COLOR } from './GlobalVariables'
+import { headingSizes, fontSize, color, borderRadius } from './GlobalVariables'
+
+const  inputSettings = {
+  paddingX: 1 + 'rem',
+  paddingY: .8 + 'rem',
+  lineHeight: 1.25,
+  borderWidth: 2 + 'px',
+  radius:borderRadius.block
+}
 
 const GlobalStyles = createGlobalStyle`
   body{
     margin: 20px;
   }
     
-  h1 { font-size: ${HEADING_SIZES.h1}; }
-  h2 { font-size: ${HEADING_SIZES.h2}; }
-  h3 { font-size: ${HEADING_SIZES.h3}; }
-  h4 { font-size: ${HEADING_SIZES.h4}; }
-  h5 { font-size: ${HEADING_SIZES.h5}; }
-  h6 { font-size: ${HEADING_SIZES.h6}; }
+  h1 { font-size: ${headingSizes.h1}; }
+  h2 { font-size: ${headingSizes.h2}; }
+  h3 { font-size: ${headingSizes.h3}; }
+  h4 { font-size: ${headingSizes.h4}; }
+  h5 { font-size: ${headingSizes.h5}; }
+  h6 { font-size: ${headingSizes.h6}; }
   p { color: #68768C; }
 `
 
@@ -27,16 +35,16 @@ const GlobalInputStyles = css`
   width: 100%;
   margin-top: 0.3em;
   height: auto!important;
-  padding: ${INPUT.paddingY} ${INPUT.paddingX};
-  font-size: ${FONT_SIZE.base};
-  line-height: ${INPUT.lineHeight};
-  border: ${INPUT.borderWidth} solid ${COLOR.grayLightest};
-  border-radius: ${INPUT.radius};
-  color: ${COLOR.grayDark};
-  background-color: ${COLOR.white};
+  padding: ${inputSettings.paddingY} ${inputSettings.paddingX};
+  font-size: ${fontSize.base};
+  line-height: ${inputSettings.lineHeight};
+  border: ${inputSettings.borderWidth} solid ${color.grayLightest};
+  border-radius: ${inputSettings.radius};
+  color: ${color.grayDark};
+  background-color: ${color.white};
   transition: all 250ms ease-in-out;
   &:focus {
-    border-color: ${COLOR.primary};
+    border-color: ${color.primary};
     outline: none; 
   }
 `

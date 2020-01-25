@@ -2,21 +2,21 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { IoIosCloseCircle as IconCloseCircle} from 'react-icons/io'
-import { BORDER_RADIUS, COLOR, FONT_SIZE, GRID_BREAKPOINTS } from '../../../../styles/GlobalVariables'
+import { borderRadius, color, fontSize, gridBreakpoints } from '../../../../styles/GlobalVariables'
 
 const StyledCountrySelected = styled.div`
-  font-size: ${FONT_SIZE.sm};
+  font-size: ${fontSize.sm};
   display: inline-flex;
   justify-content: center;
   align-items: center;
   padding: 2px 5px;
-  border-radius: ${BORDER_RADIUS.sm};
+  border-radius: ${borderRadius.sm};
   bottom:0;
   margin-bottom: 0.8em;
   margin-top: 3px;
   position: relative;
-  background-color: ${COLOR.primary};
-  color: ${COLOR.white};
+  background-color: ${color.primary};
+  color: ${color.white};
   &:not(:last-child){
     margin-right: 5px;
   }
@@ -26,7 +26,7 @@ const StyledCountrySelected = styled.div`
     cursor: pointer;
     margin-left: 0.25rem;
   }
-  @media (max-width: ${GRID_BREAKPOINTS.lg}px){
+  @media (max-width: ${gridBreakpoints.lg}px){
     font-size: 0.8em;
     padding: 3px 9px;
     //margin-right: 9px;

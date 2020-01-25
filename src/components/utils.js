@@ -1,6 +1,6 @@
-import { GLOBAL_SIZES } from '../styles/GlobalVariables'
+import { globalSizes } from '../styles/GlobalVariables'
 
-const findSize = (size) => GLOBAL_SIZES.find(e => e === size)
+const findSize = (size) => globalSizes.find(e => e === size)
 
 //funcion que ordena un vector
 const sortArray = (array, order = 'asc', key) => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../components/Button/Button'
 import { StyledContainer, Title } from './styles'
-import { GRID_BREAKPOINTS } from '../styles/GlobalVariables'
+import { gridBreakpoints } from '../styles/GlobalVariables'
 import Container from './Container'
 import Hamburguers from './hamburger'
 
@@ -29,6 +29,13 @@ const Buttons = () => {
           <Button className='mr-4' size='md'>Default button</Button>
           <Button className='mr-4' size='lg'>Large button</Button>
         </StyledContainer>
+
+        <StyledContainer>
+          <Button className='mr-4' size='sm' btn-style='outline-primary'>Small button</Button>
+          <Button className='mr-4' size='md' btn-style='outline-primary'>Default button</Button>
+          <Button className='mr-4' size='lg' btn-style='outline-primary'>Large button</Button>
+        </StyledContainer>
+
       </div>
 
       <div>
@@ -63,9 +70,9 @@ const Buttons = () => {
         <Title>Responsive buttons</Title>
         <StyledContainer>
           <Button className='mr-4' block='sm'>Responsive button on sm
-            (<strong>{GRID_BREAKPOINTS.sm}</strong>)</Button>
+            (<strong>{gridBreakpoints.sm}</strong>)</Button>
           <Button block='md' btn-style='secondary'>Responsive button on md
-            (<strong>{GRID_BREAKPOINTS.md}</strong>)</Button>
+            (<strong>{gridBreakpoints.md}</strong>)</Button>
         </StyledContainer>
       </div>
 

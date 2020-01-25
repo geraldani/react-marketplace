@@ -30,6 +30,7 @@ Input.defaultProps = {
 }
 Input.propTypes = {
   type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   label: PropTypes.string,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
