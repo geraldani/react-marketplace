@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { StyledSelect } from './styles'
-import { LabelBlock } from '../../label/Label'
+import { LabelBlock, LabelInline } from '../../label/Label'
 import ElementSelected from './ElementSelected'
 import { sortArray } from '../../../utils'
 
-const SelectInput = ({ options, placeholder, label, multiple, onChange, name }) => {
+const SelectInput = (props) => {
+  const { options, placeholder, label, multiple, onChange, name } = props
   const [selectedElement, setSelectedElement] = useState(multiple ? [] : '')
   const [newOption, setNewOption] = useState(sortArray(options, 'asc', 'value'))
   const [multipleOptionTitle, setMultipleOptionTitle] = useState(placeholder)
@@ -40,10 +41,14 @@ const SelectInput = ({ options, placeholder, label, multiple, onChange, name }) 
     } else setMultipleOptionTitle(placeholder)
   }, [selectedElement.length])
 
+  let Label
+  props['position-label'] === 'block'
+    ? Label = LabelBlock
+    : Label = LabelInline
+
   return (
     <div>
-      <LabelBlock marginBottom={multiple && setSelectedElement.length === 0}>
-        {label}
+      <Label marginBottom={multiple && setSelectedElement.length === 0} labelname={label}>
         <StyledSelect name={name} multi={multiple} onChange={handleChange}>
           <option value=''>{multipleOptionTitle}</option>
           {
@@ -54,7 +59,7 @@ const SelectInput = ({ options, placeholder, label, multiple, onChange, name }) 
             ))
           }
         </StyledSelect>
-      </LabelBlock>
+      </Label>
       {
         multiple &&
         <div>
@@ -67,7 +72,11 @@ const SelectInput = ({ options, placeholder, label, multiple, onChange, name }) 
 
 SelectInput.defaultProps = {
   options: [],
-  placeholder: 'Choose an option'
+  placeholder: 'Choose an option',
+  label: '',
+  multiple: false,
+  name: '',
+  'position-label': 'block'
 }
 
 SelectInput.propTypes = {
@@ -75,6 +84,7 @@ SelectInput.propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string
   })).isRequired,
+  'position-label': PropTypes.oneOf(['block', 'inline']),
   placeholder: PropTypes.string,
   multiple: PropTypes.bool,
   label: PropTypes.string,

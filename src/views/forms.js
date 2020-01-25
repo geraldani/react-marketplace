@@ -21,7 +21,7 @@ const Forms = () => {
         <Title>Forms</Title>
         <StyledContainer className='d-flex flex-column align-items-start'>
           <Form>
-            <Input type='text' placeholder='Type your name here' label='Name' />
+            <Input type='text' placeholder='Inline input' label='Type your Name here' position-label='inline' />
             <Input
               type='email'
               placeholder='Type your email here'
@@ -33,6 +33,7 @@ const Forms = () => {
               options={selectOption}
               label='Example select'
               name='select1'
+              position-label='inline'
             />
             <SelectInput
               options={selectOption}

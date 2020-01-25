@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import LabelInline from '../../label/Label'
+import {LabelInline} from '../../label'
 import { BORDER_RADIUS, COLOR } from '../../../../styles/GlobalVariables'
 import { findSize } from '../../../utils'
 

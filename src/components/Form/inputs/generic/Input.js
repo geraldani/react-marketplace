@@ -1,27 +1,40 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {StyledInput} from './styles'
-import { LabelBlock } from '../../label/Label'
+import { StyledInput } from './styles'
+import { LabelBlock, LabelInline } from '../../label'
 
-const Input = ({ type, placeholder, label, disabled, clarification }) => {
+const Input = (props) => {
+  let Label
+  props['position-label'] === 'block'
+    ? Label = LabelBlock
+    : Label = LabelInline
+
   return (
-    <LabelBlock disabled={disabled}>
-      {label}
-      <StyledInput type={type} placeholder={placeholder} disabled={disabled} />
+    <Label disabled={props.disabled} labelname={props.label}>
+      <StyledInput type={props.type} placeholder={props.placeholder} disabled={props.disabled} />
       {
-        clarification &&
-        <small className="text-muted">{clarification}</small>
+        props.clarification &&
+        <small className="text-muted">{props.clarification}</small>
       }
-    </LabelBlock>
+    </Label>
   )
 }
 
+Input.defaultProps = {
+  type: 'text',
+  label: '',
+  placeholder: '',
+  disabled: false,
+  clarification: '',
+  'position-label': 'block'
+}
 Input.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
   clarification: PropTypes.string,
+  'position-label': PropTypes.oneOf(['block', 'inline'])
 }
 
 export default Input

@@ -1,7 +1,7 @@
 import styled, { keyframes, css } from 'styled-components'
 import { COLOR } from '../../../../styles/GlobalVariables'
 import { findSize } from '../../../utils'
-import LabelInline from '../../label/Label'
+import {LabelInline} from '../../label'
 
 const size_check = {
   sm: 15,
@@ -136,8 +136,6 @@ const StyledCheckboxIcon = styled.span`
     height: 9px;
     border: solid white;
     border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
 `

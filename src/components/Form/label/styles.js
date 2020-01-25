@@ -14,8 +14,12 @@ const StyledInlineLabel = styled.label`
   color: ${COLOR.text};
   font-weight: bold;
   cursor: pointer;
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  &>:first-child{
+    padding-right: 10px;
+    white-space: nowrap;
+  }
   ${props => css`font-size: ${label_font[findSize(props.size)]}`};
   
   transition: all 250ms ease-in-out;
@@ -33,5 +37,8 @@ const StyledBlockLabel = styled(StyledInlineLabel)`
   width: 100%;
   align-items: start;
   margin-bottom: 0.8em;
+ &>:first-child{
+  padding-right: 0;
+}
 `
 export { StyledInlineLabel, StyledBlockLabel }

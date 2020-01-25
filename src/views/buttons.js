@@ -3,6 +3,7 @@ import Button from '../components/Button/Button'
 import { StyledContainer, Title } from './styles'
 import { GRID_BREAKPOINTS } from '../styles/GlobalVariables'
 import Container from './Container'
+import Hamburguers from './hamburger'
 
 const Buttons = () => {
   return (
@@ -89,6 +90,13 @@ const Buttons = () => {
         <StyledContainer>
           <Button className='mr-4' primary link='/otra-pag'>Styled link like a button</Button>
           <Button className='mr-4' link='/otra-pag' disabled>Styled disabled link like a button</Button>
+        </StyledContainer>
+      </div>
+
+      <div>
+        <Title>Hamburger Buttons</Title>
+        <StyledContainer>
+          <Hamburguers />
         </StyledContainer>
       </div>
     </Container>
