@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import { color, fontSize, borderRadius, gridBreakpoints, borderWidth } from '../../styles/GlobalVariables'
-import { findSize } from '../utils'
+import { findSize } from '../helpers'
 import { Shadow } from '../../styles/GlobalStyles'
 
 const btnLineHeight = '1.2'

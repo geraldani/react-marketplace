@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import {LabelInline} from '../../label'
 import { borderRadius, color } from '../../../../styles/GlobalVariables'
-import { findSize } from '../../../utils'
+import { findSize } from '../../../helpers'
 
 const size = {
   sm: 15,

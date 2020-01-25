@@ -11,9 +11,9 @@ export const HamburgerButton = (props) => {
     setCloseButton(!closeButton)
     if (props.onClick) props.onClick()
   }
-  // const commonProps = { width: props.width, type: props.type }
+  const commonProps = { onClick: handleClick, active: closeButton, 'h-type': props['h-type'] }
   return (
-    <Hamburger onClick={handleClick} active={closeButton} type={props.type}>
+    <Hamburger {...commonProps}>
       <HamburgerBox>
         <HamburgerInner color={props.color || '#000'} />
       </HamburgerBox>
@@ -23,14 +23,19 @@ export const HamburgerButton = (props) => {
 
 const Hamburger = (props) => {
   let Wrapper = HamburgerTypes.Arrow
-  Object.keys(HamburgerTypes).forEach(e => {
-    if (props.type === e) Wrapper = HamburgerTypes[e]
+  Object.keys(HamburgerTypes).every(e => {
+    if (props['h-type'] === e) {
+      Wrapper = HamburgerTypes[e]
+      return false
+    }else{
+      return true
+    }
   })
   return <Wrapper {...props}>{props.children}</Wrapper>
 }
 
 HamburgerButton.propTypes = {
-  type: PropTypes.oneOf(Object.keys(HamburgerTypes).map(e => e)),
+  'h-type': PropTypes.oneOf(Object.keys(HamburgerTypes)),
   color: PropTypes.string,
   onClick: PropTypes.func
 }

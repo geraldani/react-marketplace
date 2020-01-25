@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { StyledSelect } from './styles'
 import { LabelBlock, LabelInline } from '../../label/Label'
 import ElementSelected from './ElementSelected'
-import { sortArray } from '../../../utils'
+import { sortArray } from '../../../../Utilidades'
 
 const SelectInput = (props) => {
   const { options, placeholder, label, multiple, onChange, name } = props

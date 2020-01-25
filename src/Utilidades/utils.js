@@ -1,8 +1,4 @@
-import { globalSizes } from '../styles/GlobalVariables'
-
-const findSize = (size) => globalSizes.find(e => e === size)
-
-//funcion que ordena un vector
+/* Ordena un vector, bien sea de objetos compuestos como de tipos simples */
 const sortArray = (array, order = 'asc', key) => {
   const compare = (a, b) => {
     let bandA
@@ -25,7 +21,10 @@ const sortArray = (array, order = 'asc', key) => {
   return array.slice().sort(compare)
 }
 
+/* Genera un color aleatorio */
+const getRandomColor = () => "#000000".replace(/0/g, () => (~~(Math.random() * 16)).toString(16))
+
 export {
-  findSize,
-  sortArray
+  sortArray,
+  getRandomColor
 }

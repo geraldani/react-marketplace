@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { color, fontSize } from '../../../styles/GlobalVariables'
-import { findSize } from '../../utils'
+import { findSize } from '../../helpers'
 import Label from './Label'
 
 const labelFont = {

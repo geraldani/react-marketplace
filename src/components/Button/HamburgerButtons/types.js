@@ -293,13 +293,6 @@ const ThreeDX = styled(Hamburger)`
     }
   `}
 `
-/*
-${props => props.active && css`
-   ${HamburgerInner}{
-
-    }
-`}
-*/
 
 const Vortex = styled(Hamburger)`
   ${HamburgerInner}{

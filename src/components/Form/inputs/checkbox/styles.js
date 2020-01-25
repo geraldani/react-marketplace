@@ -1,6 +1,6 @@
 import styled, { keyframes, css } from 'styled-components'
 import { color } from '../../../../styles/GlobalVariables'
-import { findSize } from '../../../utils'
+import { findSize } from '../../../helpers'
 import {LabelInline} from '../../label'
 
 const size_check = {

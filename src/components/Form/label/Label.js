@@ -9,14 +9,9 @@ const ComponentGenerated = (Component, props) => {
     disabled: props.disabled,
     size: props.size
   }
-  const label = React.useRef(null)
-  React.useEffect(()=>{
-  },[])
   return (
     <Component {...commonProps}>
-      {
-        props.labelname && <span ref={label}>{props.labelname}</span>
-      }
+      {props.labelname && <span>{props.labelname}</span>}
       {props.children}
     </Component>
   )
