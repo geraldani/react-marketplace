@@ -9,9 +9,9 @@ const mansorylayout = (container, items, columns, gap) => {
   const loquesubio = []
   let totalHeight = Array(columns).fill(0)
 
-  const columasTotales = Math.ceil(children.length / columns)
+  const filasTotales = Math.ceil(children.length / columns)
 
-  for (let m = 0; m < columasTotales; m++) {
+  for (let m = 0; m < filasTotales; m++) {
     loquesubio.push([])
     let mayorDeFila = 0
     for (let n = 0; n < columns; n++) {
@@ -19,10 +19,12 @@ const mansorylayout = (container, items, columns, gap) => {
       if (children[index]) {
         const heightImg = parseInt(children[index].firstChild.clientHeight)
         const altoImgActual = parseInt(children[index].firstChild.clientHeight)
-        const overlay = children[index].childNodes[1]
-        overlay.innerHTML = `Imagen ${index + 1}<br/>Fila ${m + 1}`
 
         if (heightImg > mayorDeFila) mayorDeFila = heightImg
+
+        if (m === 0) {
+          children[index].style.top = '0'
+        }
 
         if (m > 0) {
           const imagenAnterior = parseInt(children[index - columns].firstChild.clientHeight)
@@ -33,7 +35,6 @@ const mansorylayout = (container, items, columns, gap) => {
           }
           children[index].style.top = `-${margin}px`
           loquesubio[m].push(margin)
-          overlay.innerHTML += `<br/>Subio ${margin}px`
         }
         totalHeight[n] += altoImgActual
         children[index].style.height = `${altoImgActual}px`
@@ -45,62 +46,71 @@ const mansorylayout = (container, items, columns, gap) => {
   totalHeight.forEach(e => {
     if (e > columaMayor) columaMayor = e
   })
-  const marginBottom = parseInt(getComputedStyle(container).marginBottom)
   const paddingBottom = parseInt(getComputedStyle(container).paddingBottom)
-  container.style.height = `${marginBottom + paddingBottom + columaMayor + gap * (columasTotales - 2)}px`
+  const containerHeight = (paddingBottom*2) + columaMayor + (gap * (filasTotales - 1))
+  container.style.height = `${containerHeight}px`
 }
 
 const calculateColumns = (totalWidth, gap, columnsWidth) => {
   let columns = Math.floor(totalWidth / columnsWidth)
-
   const gapsShuoldBe = gap * (columns - 1)
-  // console.log(`el gap que deberia tener es ${gapsShuoldBe} y el nro de columnas ${columnsWithoutGap} el ancho es de ${width} | el ancho total seria de ${columnsWithoutGap * columsWidth + gapsShuoldBe}`)
   if ((columns * columnsWidth + gapsShuoldBe) > totalWidth) columns--
 
   return columns
 }
 export const MansoryLayout = (props) => {
   const { widthColumn, nroColumns, items, space } = props
-  const [col, setCol] = React.useState(null)
+  const [col, setCol] = React.useState(nroColumns)
   const container = React.useRef(null)
 
   React.useEffect(() => {
-    setCol(calculateColumns(container.current.parentNode.clientWidth, parseInt(space), parseInt(widthColumn)))
     const calculateColumnsonResize = () => {
-      const newCol = calculateColumns(container.current.parentNode.clientWidth, parseInt(space), parseInt(widthColumn))
-      if (col !== newCol) setCol(newCol)
+      const currentWidth = container.current.parentNode.clientWidth
+      if (nroColumns === 'auto-fill') {
+        const newCol = calculateColumns(currentWidth, parseInt(space), parseInt(widthColumn))
+        if (col !== newCol) setCol(newCol)
+      }
+      if (widthColumn === '1fr') {
+        mansorylayout(container.current, items, col, space)
+      }
     }
-    if (nroColumns === 'auto-fill') {
-      window.addEventListener('resize', calculateColumnsonResize)
+
+    if (!(nroColumns === 'auto-fill' && widthColumn === '1fr')) {
+      if (nroColumns === 'auto-fill') { //initial rending
+        setCol(calculateColumns(container.current.parentNode.clientWidth, parseInt(space), parseInt(widthColumn)))
+      }
+
+      if (nroColumns === 'auto-fill' || widthColumn === '1fr') {
+        window.addEventListener('resize', calculateColumnsonResize)
+      } else {
+        mansorylayout(container.current, items, col, space)
+      }
+      return () => window.removeEventListener('resize', calculateColumnsonResize)
     }
-    setTimeout(() => mansorylayout(container.current, items, col, space), 100)
-    return () => window.removeEventListener('resize', calculateColumnsonResize)
   }, [])
+
+  React.useEffect(() => {
+    if (typeof col === 'number') mansorylayout(container.current, items, col, space)
+  }, [col])
 
   return (
     <StyledContainer ref={container} columns={col} columnWidth={widthColumn} gap={space}>
-      {
-        items.map((img, i) => (
-          <StyledItem key={img}>
-            <img src={img} alt={`img-${i + 1}`} />
-            <StyledOverlay />
-          </StyledItem>
-        ))
-      }
+      {props.children}
     </StyledContainer>
   )
 }
+
+
+export const MansoryItem = props => <StyledItem>{props.children}</StyledItem>
 
 MansoryLayout.defaultProps = {
   widthColumn: '1fr',
   nroColumns: 3,
   space: '0',
-  items: []
 }
 
 MansoryLayout.prototype = {
   widthColumn: PropTypes.string,
   nroColumns: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   space: PropTypes.string,
-  items: PropTypes.array.isRequired
 }
