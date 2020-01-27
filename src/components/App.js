@@ -5,18 +5,19 @@ import Radio from '../views/Radio'
 import Check from '../views/Check'
 import Forms from '../views/forms'
 import Mansory from '../views/mansory'
+import Mo from '../views/modal'
 
 const App = () => {
   return (
     <>
       <GlobalStyles />
-      <Buttons/>
+      <Buttons />
       <Radio />
-      <Check/>
-      <Forms/>
-      <Mansory/>
-      <h1>holaaaa</h1>
-      </>
+      <Check />
+      <Forms />
+      {/*<Mansory />*/}
+      <Mo />
+    </>
   )
 }
 
