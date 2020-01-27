@@ -104,7 +104,7 @@ const Mansory = () => {
 
       <MansoryLayout
         widthColumn='236px'
-        space='10px'
+        space='3px'
         nroColumns='auto-fill'
       >
         {
