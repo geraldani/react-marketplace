@@ -14,7 +14,8 @@ const Button = (props) => {
     block: props.block,
     disabled: props.disabled,
     shadow: props.shadow,
-    className
+    className,
+    style: props.style
   }
 
   return (
