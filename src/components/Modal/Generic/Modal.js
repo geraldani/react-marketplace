@@ -1,90 +1,88 @@
 import React, { useState, useEffect } from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import { Modal } from './modalMine'
-// import cx from 'classnames';
+import './styles.css'
+import { StyledMask, StyledCloseButton, StyledDialog, StyledModal, StyledContainer } from './styles'
 
-// env
-const IN_BROWSER = typeof window !== 'undefined'
-const UA = IN_BROWSER && window.navigator.userAgent.toLowerCase()
-const IS_IE_9 = UA && UA.indexOf('msie 9.0') > 0
+const CONTAINER_MODAL = document.getElementById('modal')
+const ESC = 27 //tecla de escape
 
 const Dialog = props => {
-  const animation = (props.animationType === 'enter' ? props.enterAnimation : props.leaveAnimation) || props.animation
-  const className = `rodal-dialog rodal-${animation}-${props.animationType}`
+  const {
+    animationType,
+    enterAnimation,
+    leaveAnimation,
+    width,
+    height,
+    duration,
+    customStyles,
+    bgColor,
+    animation,
+    showCloseButton,
+    children,
+    onClose
+  } = props
+  const animations = (animationType === 'enter' ? enterAnimation : leaveAnimation) || animation
+  const className = `rodal-${animations}-${animationType}`
 
-  const CloseButton = props.showCloseButton ? <span className="rodal-close" onClick={props.onClose} /> : null
-  const { width, height, measure, duration, customStyles } = props
-  const style = {
-    width: width ,
-    height: height ,
-    animationDuration: duration + 'ms',
-    WebkitAnimationDuration: duration + 'ms'
+  const commonPropsStyles = {
+    bgWidth: width,
+    bgHeight: height,
+    animationDuration: duration,
+    backgroundColor: bgColor
   }
-  console.log(style)
-  const mergedStyles = { ...style, ...customStyles }
 
   return (
-    <div style={mergedStyles} className={className}>
-      {CloseButton}
-      {props.children}
-    </div>
+    <StyledDialog style={customStyles} className={className} {...commonPropsStyles}>
+      {showCloseButton && <StyledCloseButton onClick={onClose} />}
+      {children}
+    </StyledDialog>
   )
 }
 
-const Rodal = (props) => {
-  const [isShow, setIsShow] = useState(false)
+const MainModal = props => {
+  const {
+    closeMaskOnClick,
+    onClose,
+    customMaskStyles,
+    showMask,
+    duration,
+    className,
+    bgMaskColor,
+    children,
+    visible,
+    closeOnEsc,
+    onAnimationEnd,
+    showDialog
+  } = props
+  const [isShow, setIsShow] = useState(visible)
   const [animationType, setAnimationType] = useState('leave')
   const el = React.useRef(null)
 
   const enter = () => {
     setIsShow(true)
     setAnimationType('enter')
-    // this.setState({ isShow: true, animationType: 'enter' });
   }
 
   const leave = () => setAnimationType('leave')
 
-  useEffect(() => {
-    if (props.visible) {
-      enter()
-    }
-  }, [])
-
-  /*  componentDidMount() {
-      if (this.props.visible) {
-        this.enter();
-      }
-    }*/
+/*  useEffect(() => {
+    if (visible) enter()
+  }, [])*/
 
   useEffect(() => {
-    props.visible ? enter() : leave()
-  }, [props.visible])
-
-  /*  componentDidUpdate(prevProps) {
-      if (this.props.visible && !prevProps.visible) {
-        this.enter();
-      }
-
-      if (!this.props.visible && prevProps.visible) {
-        this.leave();
-      }
-    }*/
+    visible ? enter() : leave()
+  }, [visible])
 
   const onKeyUp = event => {
-    if (!props.closeOnEsc || event.keyCode !== 27) {
-      return
+    if (closeOnEsc && event.keyCode === ESC) { // verifico que la tecla presioanda sea esc para cerrar el modal
+      onClose()
     }
-
-    props.onClose()
   }
 
   const animationEnd = event => {
-    // const { animationType } = this.state
-    const { closeOnEsc, onAnimationEnd } = props
-
     if (animationType === 'leave') {
       setIsShow(false)
-      // this.setState({ isShow: false })
     } else if (closeOnEsc) {
       el.current.focus()
     }
@@ -94,48 +92,40 @@ const Rodal = (props) => {
     }
   }
 
-  const {
-    closeMaskOnClick,
-    onClose,
-    customMaskStyles,
-    showMask,
-    duration,
-    className,
-    children
-  } = props
-  const mask = showMask
-    ? (
-      <div
-        className="rodal-mask"
-        style={customMaskStyles}
-        onClick={closeMaskOnClick ? onClose : void 0}
-      />
-    )
-    : null
-  const style = {
-    display: isShow ? '' : 'none',
-    animationDuration: duration + 'ms',
-    WebkitAnimationDuration: duration + 'ms'
-  }
+  const commonStyle = { isShow, duration }
 
   return (
-    <div
-      style={style}
-      className={`rodal rodal-fade-${animationType} className`}
+    <StyledModal
+      {...commonStyle}
+      className={`rodal-fade-${animationType} ${className}`}
       onAnimationEnd={animationEnd}
       tabIndex="-1"
       ref={el}
       onKeyUp={onKeyUp}
     >
-      {mask}
-      <Dialog {...props} animationType={animationType}>
-        {children}
-      </Dialog>
-    </div>
+      {
+        showMask
+        &&
+          <StyledMask
+            style={customMaskStyles}
+            bgMaskColor={bgMaskColor}
+            onClick={closeMaskOnClick ? onClose : void 0}
+          />
+      }
+
+      {
+        showDialog
+          ? <Dialog {...props} animationType={animationType}>{children}</Dialog>
+          : <StyledContainer>{children}</StyledContainer>
+      }
+
+    </StyledModal>
   )
 }
 
-Rodal.propTypes = {
+export const Modal = (props) => ReactDOM.createPortal(<MainModal {...props} />, CONTAINER_MODAL)
+
+Modal.propTypes = {
   width: PropTypes.string, // ancho del recuadro dentro del modal
   height: PropTypes.string, // alto del recuadro dentro del modal
   bgColor: PropTypes.string, // color del fondo del recuadro del modal
@@ -157,7 +147,7 @@ Rodal.propTypes = {
   onAnimationEnd: PropTypes.func // funcion que se ejecuta despues de que el modal se haya ido
 }
 
-Rodal.defaultProps = {
+Modal.defaultProps = {
   width: '400px',
   height: '240px',
   bgColor: '#fff',
@@ -176,5 +166,3 @@ Rodal.defaultProps = {
   customStyles: {},
   customMaskStyles: {},
 }
-
-export default Rodal

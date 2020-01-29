@@ -5,7 +5,7 @@ import Radio from '../views/Radio'
 import Check from '../views/Check'
 import Forms from '../views/forms'
 import Mansory from '../views/mansory'
-import Mo from '../views/modal'
+import OwnModal from '../views/modal'
 
 const App = () => {
   return (
@@ -16,7 +16,7 @@ const App = () => {
       <Check />
       <Forms />
       {/*<Mansory />*/}
-      <Mo />
+      <OwnModal />
     </>
   )
 }

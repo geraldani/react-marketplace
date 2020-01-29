@@ -8,7 +8,7 @@ const StyledModal = styled.div`
     z-index: 100;
     position: fixed;
     display: ${props => props.isShow ? '' : 'none'};
-    animation-duration: ${props => props.duration}ms;
+    animation-duration: ${props => props.duration}ms!important;
 `
 const StyledMask = styled.div`
     position: absolute;
@@ -19,7 +19,12 @@ const StyledMask = styled.div`
     height: 100%;
     z-index: 100;
 `
+
 const StyledDialog = styled.div`
+  width: ${props => props.bgWidth};
+  height: ${props => props.bgHeight};
+  animation-duration: ${props => props.animationDuration}ms!important;
+  background-color: ${props => props.backgroundColor};
   position: absolute;
   top: 0;
   left: 0;
@@ -28,12 +33,9 @@ const StyledDialog = styled.div`
   margin: auto;
   z-index: 101;
   padding: 15px;
-  background: ${props => props.bgColor};
   border-radius: 3px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
-  width: ${props => props.width};
-  height: ${props => props.height};
-  animation-duration: ${props => props.animationDuration}ms;
+    
   &:focus {
     outline: none;
   }
@@ -82,7 +84,6 @@ const StyledCloseButton = styled.button`
     outline: none;
   }
 `
-
 
 const StyledContainer = styled.div`
   display: flex;
