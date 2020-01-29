@@ -1,4 +1,7 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { styles, animations } from './animations'
+
+const findAnimation = type => css`${styles[type]}; animation-name: ${animations[type]};`
 
 const StyledModal = styled.div`
    top: 0;
@@ -7,7 +10,8 @@ const StyledModal = styled.div`
     height: 100%;
     z-index: 100;
     position: fixed;
-    display: ${props => props.isShow ? '' : 'none'};
+    display: ${props => props.isShow ? 'block' : 'none'};
+    ${props => findAnimation('fade' + props.animationType)};
     animation-duration: ${props => props.duration}ms!important;
 `
 const StyledMask = styled.div`
@@ -23,7 +27,6 @@ const StyledMask = styled.div`
 const StyledDialog = styled.div`
   width: ${props => props.bgWidth};
   height: ${props => props.bgHeight};
-  animation-duration: ${props => props.animationDuration}ms!important;
   background-color: ${props => props.backgroundColor};
   position: absolute;
   top: 0;
@@ -35,7 +38,8 @@ const StyledDialog = styled.div`
   padding: 15px;
   border-radius: 3px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
-    
+  ${props => findAnimation(props.animationType)};
+  animation-duration: ${props => props.animationDuration}ms!important;
   &:focus {
     outline: none;
   }
@@ -50,7 +54,6 @@ const StyledCloseButton = styled.button`
   right: 16px;
   width: 16px;
   height: 16px;
-  
   &:before, 
   &:after{
     position: absolute;
@@ -62,16 +65,13 @@ const StyledCloseButton = styled.button`
     margin-top: -1px;
     background: #999;
     border-radius: 100%;
-    -webkit-transition: background .2s;
     transition: background .2s;
   }
   &:before {
-    -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
   }
   
   &:after {
-    -webkit-transform: rotate(-45deg);
     transform: rotate(-45deg);
   }
   

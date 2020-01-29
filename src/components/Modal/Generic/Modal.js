@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import './styles.css'
 import { StyledMask, StyledCloseButton, StyledDialog, StyledModal, StyledContainer } from './styles'
 
 const CONTAINER_MODAL = document.getElementById('modal')
@@ -23,7 +22,6 @@ const Dialog = props => {
     onClose
   } = props
   const animations = (animationType === 'enter' ? enterAnimation : leaveAnimation) || animation
-  const className = `rodal-${animations}-${animationType}`
 
   const commonPropsStyles = {
     bgWidth: width,
@@ -33,7 +31,7 @@ const Dialog = props => {
   }
 
   return (
-    <StyledDialog style={customStyles} className={className} {...commonPropsStyles}>
+    <StyledDialog style={customStyles} {...commonPropsStyles} animationType={`${animations}${animationType}`}>
       {showCloseButton && <StyledCloseButton onClick={onClose} />}
       {children}
     </StyledDialog>
@@ -64,7 +62,9 @@ const MainModal = props => {
     setAnimationType('enter')
   }
 
-  const leave = () => setAnimationType('leave')
+  const leave = () => {
+    setAnimationType('leave')
+  }
 
 /*  useEffect(() => {
     if (visible) enter()
@@ -93,11 +93,11 @@ const MainModal = props => {
   }
 
   const commonStyle = { isShow, duration }
-
   return (
     <StyledModal
       {...commonStyle}
-      className={`rodal-fade-${animationType} ${className}`}
+      animationType={`${animationType}`}
+      className={className}
       onAnimationEnd={animationEnd}
       tabIndex="-1"
       ref={el}
@@ -125,6 +125,19 @@ const MainModal = props => {
 
 export const Modal = (props) => ReactDOM.createPortal(<MainModal {...props} />, CONTAINER_MODAL)
 
+const animationTypes = [
+  'zoom',
+  'fade',
+  'flip',
+  'door',
+  'rotate',
+  'slideUp',
+  'slideDown',
+  'slideLeft',
+  'slideRight',
+  ''
+]
+
 Modal.propTypes = {
   width: PropTypes.string, // ancho del recuadro dentro del modal
   height: PropTypes.string, // alto del recuadro dentro del modal
@@ -136,9 +149,9 @@ Modal.propTypes = {
   closeOnEsc: PropTypes.bool, // si se cierra el modal al presionar ESC
   closeMaskOnClick: PropTypes.bool, // si se cierra el modal al presionar fuera del recuadro del modal
   showCloseButton: PropTypes.bool, // si muestra un boton de cerrar en forma de X dentro del modal
-  animation: PropTypes.string, // el tipo de animacion que tendra en modal
-  enterAnimation: PropTypes.string, // la animacion al aparecer el modal
-  leaveAnimation: PropTypes.string, //  la animacion al desaparecer el modal
+  animation: PropTypes.oneOf(animationTypes), // el tipo de animacion que tendra en modal
+  enterAnimation: PropTypes.oneOf(animationTypes), // la animacion al aparecer el modal
+  leaveAnimation: PropTypes.oneOf(animationTypes), //  la animacion al desaparecer el modal
   duration: PropTypes.number, // el tiempo que dura la animacion expresado en ms
   className: PropTypes.string, // alguna clase
   customStyles: PropTypes.object, // stilos custom para el recuadro del modal
