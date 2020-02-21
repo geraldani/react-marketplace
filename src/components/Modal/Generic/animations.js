@@ -27,7 +27,7 @@ const zoomleave = keyframes`
 /* -- slideDown -- */
 const slideDownenter = keyframes`
   from {
-    transform: translate3d(0, -100px, 0);
+    transform: translate3d(0, -50px, 0);
   }
 `
 const slideDownleave = keyframes`
@@ -124,50 +124,25 @@ const doorleave = keyframes`
   }
 `
 
-const bothCubic = css`animation-fill-mode: both; animation-timing-function: cubic-bezier(0.4, 0, 0, 1.5)`
-const both = css`animation-fill-mode: both;`
-
-export const styles = {
-  zoomenter: bothCubic,
-  zoomleave: both,
-  slideDownenter: bothCubic,
-  slideDownleave: both,
-  slideLeftenter: bothCubic,
-  slideLeftleave: both,
-  slideRightenter: bothCubic,
-  slideRightleave: both,
-  slideUpenter: bothCubic,
-  slideUpleave: both,
-  doorenter: bothCubic,
-  doorleave: both,
-  rotateenter: css`animation-fill-mode: both; transform-origin: center`,
-  rotateleave: css`animation-fill-mode: both; transform-origin: center`,
-  fadeenter: css`animation-fill-mode: both; animation-timing-function: ease-in`,
-  fadeleave: css`animation-fill-mode: both; animation-timing-function: ease-out`,
-  flipenter: css`animation-fill-mode: both; animation-timing-function: ease-in; backface-visibility: visible !important`,
-  flipleave: css`animation-fill-mode: both; backface-visibility: visible !important`
-}
-
-
-export const animations = {
-  fadeenter,
-  fadeleave,
-  zoomenter,
-  zoomleave,
-  slideDownenter,
-  slideDownleave,
-  slideLeftenter,
-  slideLeftleave,
-  slideRightenter,
-  slideRightleave,
-  slideUpenter,
-  slideUpleave,
-  flipenter,
-  flipleave,
-  rotateenter,
-  rotateleave,
-  doorenter,
-  doorleave
+export const animationsStyles = {
+  zoomenter: css`animation: ${zoomenter} cubic-bezier(0.4, 0, 0, 1.5) both;`,
+  zoomleave: css`animation: ${zoomleave} both;`,
+  slideDownenter: css`animation: ${slideDownenter} cubic-bezier(0.4, 0, 0, 1.5) both;`,
+  slideDownleave: css`animation: ${slideDownleave} both;`,
+  slideLeftenter: css`animation: ${slideLeftenter} cubic-bezier(0.4, 0, 0, 1.5) both;`,
+  slideLeftleave: css`animation: ${slideLeftleave} both;`,
+  slideRightenter: css`animation: ${slideRightenter} cubic-bezier(0.4, 0, 0, 1.5) both;`,
+  slideRightleave: css`animation: ${slideRightleave} both;`,
+  slideUpenter: css`animation: ${slideUpenter} cubic-bezier(0.4, 0, 0, 1.5) both;`,
+  slideUpleave: css`animation: ${slideUpleave} both;`,
+  doorenter: css`animation: ${doorenter} cubic-bezier(0.4, 0, 0, 1.5) both;`,
+  doorleave: css`animation: ${doorleave} both;`,
+  rotateenter: css`animation: ${rotateenter} both; transform-origin: center`,
+  rotateleave: css`animation: ${rotateleave} both; transform-origin: center`,
+  fadeenter: css`animation: ${fadeenter} ease-in both`,
+  fadeleave: css`animation: ${fadeleave} ease-out both`,
+  flipenter: css`animation: ${flipenter} ease-in both; backface-visibility: visible !important`,
+  flipleave: css`animation: ${flipleave} both; backface-visibility: visible !important`
 }
 
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Modal } from '../components/Modal/Generic/Modal'
 import Button from '../components/Button/Button'
 import Container from './Container'
@@ -6,15 +6,17 @@ import { Title } from './styles'
 
 const OwnModal = () => {
 
-  const [visible, setVisible] = React.useState(false)
-  const [type, setType] = React.useState('')
+  const [showModal, setShowModal] = useState(false)
+  const [type, setType] = useState('')
+
+  const [showmodal1 , setshow2] = useState(false)
 
   const show = (type) => {
-    setVisible(true)
+    setShowModal(true)
     setType(type)
   }
 
-  const hide = () => setVisible(false)
+  const hide = () => setShowModal(false)
 
   const animationTypes = [
     'zoom',
@@ -30,16 +32,51 @@ const OwnModal = () => {
   return (
     <Container>
       <Title>Modales</Title>
-      <div className='d-flex justify-content-center my-4'>
+      <div className='d-flex justify-content-center my-4 flex-wrap'>
         {
-          animationTypes.map(type => <Button key={type} style={{ marginRight: '10px' }}
-                                             onClick={() => show(type)}>{type}</Button>)
+          animationTypes.map(type => (
+            <Button
+              key={type}
+              style={{ marginRight: '10px' }}
+              onClick={() => show(type)}
+            >
+              {type}
+            </Button>
+          ))
         }
       </div>
-      <Modal animation={type} duration={500} visible={visible} onClose={hide}>
-        <div>Content</div>
+      <Modal animation={type} duration={500} visible={showModal} onClose={hide}>
+        <h1>Este es un lindo modal</h1>
       </Modal>
-
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+      <Button   onClick={() => setshow2(true)}>open otro modal</Button>
+      <Modal enterAnimation='slideDown' leaveAnimation='slideUp' duration={500} visible={showmodal1} onClose={() => setshow2(false)}>
+        <h1>Este es un lindo modal</h1>
+      </Modal>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
+<p>sadxasasadaSadASD</p>
     </Container>
   )
 }

@@ -1,7 +1,5 @@
-import styled, { css } from 'styled-components'
-import { styles, animations } from './animations'
-
-const findAnimation = type => css`${styles[type]}; animation-name: ${animations[type]};`
+import styled, { createGlobalStyle, css } from 'styled-components'
+import { animationsStyles } from './animations'
 
 const StyledModal = styled.div`
    top: 0;
@@ -11,7 +9,7 @@ const StyledModal = styled.div`
     z-index: 100;
     position: fixed;
     display: ${props => props.isShow ? 'block' : 'none'};
-    ${props => findAnimation('fade' + props.animationType)};
+    ${props => animationsStyles['fade' + props.animationType]};
     animation-duration: ${props => props.duration}ms!important;
 `
 const StyledMask = styled.div`
@@ -23,23 +21,22 @@ const StyledMask = styled.div`
     height: 100%;
     z-index: 100;
 `
-
 const StyledDialog = styled.div`
-  width: ${props => props.bgWidth};
-  height: ${props => props.bgHeight};
-  background-color: ${props => props.backgroundColor};
+  width: ${props => props.width};
+  height: ${props => props.height};
+  background-color: ${props => props.bgColor};
   position: absolute;
-  top: 0;
+  top: ${props => props.position === 'top' ? '30px': '0'};
+  bottom: ${props => props.position === 'top' ? '': '0'};
   left: 0;
   right: 0;
-  bottom: 0;
   margin: auto;
   z-index: 101;
   padding: 15px;
   border-radius: 3px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
-  ${props => findAnimation(props.animationType)};
-  animation-duration: ${props => props.animationDuration}ms!important;
+  ${props => animationsStyles[props.animationType]};
+  animation-duration: ${props => props.duration}ms!important;
   &:focus {
     outline: none;
   }
@@ -81,11 +78,11 @@ const StyledCloseButton = styled.button`
   }
   
   &:focus{
-    outline: none;
+    outline: dotted 1px gray;
   }
 `
 
-const StyledContainer = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -96,11 +93,30 @@ const StyledContainer = styled.div`
   margin: auto;
   justify-content: center;
   align-items: center;
+  ${props => animationsStyles[props.animationType]};
+  animation-duration: ${props => props.duration}ms!important;
+  z-index: 1000;
+  width: fit-content;
+  height: fit-content;
 `
+
+//es para ocultar el scroll al abrir el modal
+const BodyStyled = createGlobalStyle`
+  body{
+    height: 100vh;
+    overflow: hidden;
+    margin-right: 15px!important; // por el scroll que habia
+    @media (max-width: 520px){
+      margin-right: 0!important;
+    }
+  }`
+
+
 export {
   StyledModal,
   StyledMask,
   StyledDialog,
   StyledCloseButton,
-  StyledContainer
+  Wrapper,
+  BodyStyled
 }
