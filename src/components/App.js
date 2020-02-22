@@ -6,11 +6,13 @@ import Check from '../views/Check'
 import Forms from '../views/forms'
 import Mansory from '../views/mansory'
 import OwnModal from '../views/modal'
+import NewChat from '../views/chat'
 
 const App = () => {
   return (
     <>
       <GlobalStyles />
+      <NewChat/>
       <Buttons />
       <Radio />
       <Check />
