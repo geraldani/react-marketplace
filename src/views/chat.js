@@ -1,6 +1,6 @@
 import React from 'react'
 import { ThemeProvider, css } from 'styled-components'
-import BubbleImage from '../components/chats/Index'
+import BubbleImage from '../components/chats/ChatImage'
 
 const Colors = {
   cliengoMain: '#7D60F5',
@@ -58,7 +58,7 @@ const NewChat = () => {
     {
       type: 'visitor',
       urlImage: `https://picsum.photos/${ramdom(400, 800)}/${ramdom(800, 1200)}`,
-      caption: 'Hola que hace, jugando o que hace'
+      caption: 'Hola que hace, jugando o que hace Hola que hace, jugando o que hace Hola que hace, jugando o que hace Hola que hace, jugando o que hace Hola que hace, jugando o que hace'
     },
     {
       type: 'visitor',
@@ -72,7 +72,7 @@ const NewChat = () => {
     {
       type: 'visitor',
       urlImage: `https://picsum.photos/${ramdom(600, 1200)}/${ramdom(400, 800)}`,
-      caption: 'Soy una linda mariposa, Soy una linda mariposa Soy una linda mariposaSoy una linda mariposaSoy una linda mariposa, Soy una linda mariposa'
+      caption: 'Soy una linda mariposa, Soy una linda mariposa Soy una linda mariposa Soy una linda mariposaSoy una linda mariposa, Soy una linda mariposa'
     },
     {
       type: 'user',
@@ -83,7 +83,7 @@ const NewChat = () => {
   return (
       <div>
         {
-          info.map(inf => <Chat {...inf} />)
+          info.map(inf => <Chat key={Math.random()} {...inf} />)
         }
       </div>
     )

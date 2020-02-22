@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { StyledMask, StyledCloseButton, StyledDialog, StyledModal, Wrapper, BodyStyled } from './styles'
@@ -25,11 +25,11 @@ const MainModal = ({
   onClose,
   children,
   onAnimationEnd,
-  position
+  position,
 }) => {
   const [isShow, setIsShow] = useState(visible)
   const [animationType, setAnimationType] = useState('leave')
-  const el = React.useRef(null)
+  const el = useRef(null)
 
   const enter = () => {
     setIsShow(true)
@@ -87,7 +87,7 @@ const MainModal = ({
             <StyledMask
               style={customMaskStyles}
               bgMaskColor={bgMaskColor}
-              onClick={closeMaskOnClick ? onClose : ()=>{}}
+              onClick={closeMaskOnClick ? onClose : null}
             />
         }
 
@@ -109,8 +109,15 @@ const MainModal = ({
               </StyledDialog>
             )
             : (
-              <Wrapper duration={duration} animationType={customAnimations + animationType}>
-                {children}
+              <Wrapper
+                position={position}
+                duration={duration}
+                animationType={customAnimations + animationType}
+                onClick={closeMaskOnClick ? onClose : null}
+              >
+                <div onClick={ev => ev.stopPropagation()}>
+                  {children}
+                </div>
               </Wrapper>
               )
         }
@@ -175,6 +182,6 @@ Modal.defaultProps = {
   className         : '',
   customStyles      : {},
   customMaskStyles  : {},
-  onAnimationEnd    : () => {console.log('me ejecute despues que se ocultara el modal')},
+  onAnimationEnd    : () => {},
   position          : 'center'
 }

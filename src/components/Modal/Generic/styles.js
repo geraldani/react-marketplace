@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle, css } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import { animationsStyles } from './animations'
 
 const StyledModal = styled.div`
@@ -85,19 +85,15 @@ const StyledCloseButton = styled.button`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  justify-content: center;
+  position: relative;
+  justify-content: ${props => props.position === 'top' ? 'flex-start' : 'center'};
+  margin-top: ${props => props.position === 'top' ? '20px' : ''};
   align-items: center;
   ${props => animationsStyles[props.animationType]};
   animation-duration: ${props => props.duration}ms!important;
   z-index: 1000;
-  width: fit-content;
-  height: fit-content;
+  width: 100%;
+  height: 100%;
 `
 
 //es para ocultar el scroll al abrir el modal
