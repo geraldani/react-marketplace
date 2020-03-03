@@ -14,8 +14,9 @@ import pdf from '../img/fitness.pdf'
 import Button from './Button/Button'
 import { Modal } from './Modal/Generic'
 import { IoMdClose as IconClose, IoIosSend as IconSend} from "react-icons/io";
-import styled  from 'styled-components';
+import styled, {css}  from 'styled-components';
 import { MdContentCopy as CopyIcon, MdDoneAll as CopiedIcon } from 'react-icons/md'
+import { FaRegFileAudio as IconFileAudio, FaRegFile as IconFileEmpty, FaPaperclip as IconClip } from 'react-icons/fa'
 
 
 const imageExtern = 'https://storage.googleapis.com/m-infra.appspot.com/public/res/Cliengo/f1e6/3438/90d8/5aec/055e/c2a9/eee4/91d6/f1e6343890d85aec055ec2a9eee491d6.jpeg'
@@ -66,23 +67,27 @@ const Copy = () => {
 }
 
 
-const UploadFile = ({id}) => {
+const UploadFile = ({id, children}) => {
   const [file, setFile] = useState('')
   const [fileType, setFileType] = useState('')
+  const [fileName, setFileName] = useState('')
   const [showModal, setShowModal] = useState(false)
+  const captionWriteable = ['image', 'video'].includes(fileType);
+
   const toggleModal = () => setShowModal(!showModal);
 
-  const onClickImage = () => {
+  const onClickUpload = () => {
     document.querySelector(`#${id}`).click();
   }
+
+
   const uploadFile = async (target) => {
     const fileTarget = target.files[0];
-    const {name} = fileTarget
     const type = fileTarget.type.split('/')[0]
     setFileType(type)
+    setFileName(fileTarget.name)
     switch (type) {
       case 'image':
-        console.log('voy a  subir una imagen')
         const image = await new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.readAsDataURL(fileTarget);
@@ -93,17 +98,15 @@ const UploadFile = ({id}) => {
         break;
       case 'video':
         console.log('tengo que subir un video');
-        setFile('un video')
         break;
       case 'audio':
         console.log('tengo que subir un audio');
-        setFile('un audio')
         break;
       default:
         console.log('tengo que subir otro tipo de archivo');
-        setFile('un archivo')
         break;
     }
+    if(type!== 'image') setFile(target.value)
     target.value = '';
   }
 
@@ -112,44 +115,61 @@ const UploadFile = ({id}) => {
   }, [file])
 
   const ModalContent = () => {
-    console.log('el tipo de render ', fileType)
+    let WrappedContent;
+
+
     switch (fileType) {
-      case 'image': return  (
-        <FileWrapper>
-          <img src={file} alt="" />
-        </FileWrapper>
-      )
-      case 'video': return <h1>rendereo un video</h1>
-      case 'audio': return <h1>rendereo un audio</h1>
-      default: return <h1>rendereo un archivo</h1>
+      case 'image':
+        WrappedContent = <img src={file} alt="" />
+      break;
+      case 'video':
+        WrappedContent = <h1>rendereo un video</h1>
+        break;
+      case 'audio':
+        WrappedContent = <IconFileAudio />
+      break;
+      default:
+        WrappedContent = <IconFileEmpty />
+      break;
     }
+
+    return (
+      <FileWrapper>
+        {WrappedContent}
+        {
+          !captionWriteable && <p>{fileName}</p>
+        }
+      </FileWrapper>
+    )
+
   }
 
   const ModalHeader = () => (
     <ModalHeaderStyled>
       <IconClose onClick={toggleModal} />
-      {/*<i onClick={toggleModal} className="icon-cancelar" />*/}
     </ModalHeaderStyled>
   );
 
   const ModalCaptionSend = () => {
     return(
-      <InputCaption>
-        {/*<input type="text" placeholder='Escribe un comentario' />*/}
-        <IconSend size='30px' />
+      <InputCaption writeable={captionWriteable}>
+        {
+          captionWriteable && <input type="text" placeholder='Escribe un comentario' />
+        }
+        <IconSend />
       </InputCaption>
     )
   }
 
+
   return(
     <div>
-      <Button onClick={onClickImage}>Subir Archivo</Button>
+      {children(onClickUpload)}
       <input
         style={{display: 'none'}}
         type="file"
         id={id}
         name={id}
-        // accept="image/*"
         onChange={e => uploadFile(e.target)}
       />
       <Modal
@@ -162,9 +182,7 @@ const UploadFile = ({id}) => {
       >
         <ModalHeader />
         <ModalContent />
-        {
-          (fileType === 'image' || fileType === 'video') && <ModalCaptionSend />
-        }
+        <ModalCaptionSend />
       </Modal>
     </div>
   )
@@ -199,7 +217,12 @@ const App = () => {
   return (
     <>
       <GlobalStyles />
-      <UploadFile id='file-upload'/>
+      <UploadFile id='file-upload'>
+        {
+          (onClick) => <IconClip onClick={onClick} />
+          // (onClick) => <Button onClick={onClick}>Subir Archivo</Button>
+        }
+      </UploadFile>
       {/*    <OwnModal />
 
      <div>
@@ -229,6 +252,20 @@ const FileWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  p{
+    margin-top: 24px;
+    font-size: 14px;
+  }
+  i{
+    color: #515151;
+    font-size: 50px;
+  }
+  svg{
+    fill: #515151;
+    width: 50px;
+    height: 50px;
+  }
   img{
     max-height: 50vh;
   }
@@ -241,6 +278,14 @@ const InputCaption = styled.div`
   left: 0;
   right: 0;
   bottom: 130px;
+  ${props => !props.writeable && css`
+    display: flex;
+    justify-content: center;
+    svg{
+      height: 45px!important;
+      width: 45px!important;
+    }
+  `}
   input{
     margin-top: 100px;
     width: calc(100% - 40px); //esos 30px son el ancho del icono de enviar
@@ -252,11 +297,15 @@ const InputCaption = styled.div`
       border-bottom-color: #7D60F5;
     }
   }
-  svg{
-    position: absolute;
+  svg, i{
+    position: ${props => props.writeable ?  'absolute' : ''};
     bottom: 5px;
     right: 0;
     fill: #7D60F5;
+    height: 30px;
+    width: 30px;
+    //font-size: 30px;
+    //color: #7D60F5;
   }
   
 `
