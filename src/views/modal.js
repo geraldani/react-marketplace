@@ -59,7 +59,7 @@ const OwnModal = () => {
 <p>sadxasasadaSadASD</p>
 <p>sadxasasadaSadASD</p>
       <Button   onClick={() => setshow2(true)}>open otro modal</Button>
-      <Modal enterAnimation='slideDown' leaveAnimation='slideUp' duration={500} visible={showmodal1} onClose={() => setshow2(false)}>
+      <Modal showDialog={false} enterAnimation='slideDown' leaveAnimation='slideUp' duration={500} visible={showmodal1} onClose={() => setshow2(false)}>
         <h1>Este es un lindo modal</h1>
       </Modal>
 <p>sadxasasadaSadASD</p>

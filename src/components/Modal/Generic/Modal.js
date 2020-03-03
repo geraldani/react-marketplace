@@ -30,6 +30,8 @@ const MainModal = ({
   const [isShow, setIsShow] = useState(visible)
   const [animationType, setAnimationType] = useState('leave')
   const el = useRef(null)
+  const customAnimations = (animationType === 'enter' ? enterAnimation : leaveAnimation) || animation
+
 
   const enter = () => {
     setIsShow(true)
@@ -65,8 +67,6 @@ const MainModal = ({
       onAnimationEnd() // esto es para ejecutar la funcion tanto de entrada o de salida al terminar al animacion
     }*/
   }
-
-  const customAnimations = (animationType === 'enter' ? enterAnimation : leaveAnimation) || animation
 
   if (!isShow) return null;
   return (
