@@ -23,10 +23,19 @@ const sortArray = (array, order = 'asc', key) => {
 
 /* Genera un color aleatorio */
 const getRandomColor = () => "#000000".replace(/0/g, () => (~~(Math.random() * 16)).toString(16))
+
+/* Genera un numero aleatoreo entre un rango de numeros */
 const getRandomNumber = (x = 0, y = 100) => Math.floor(Math.random() * (y - x)) + x;
 
+/* Extrae el tipo de archivo dado un nombre de archivo, ejemplo fileName = archivo.pdf devuelve pdf */
+const extractExtension = (fileName) => {
+  const fileExtensionPattern = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gmi;
+  const match = fileName.match(fileExtensionPattern);
+  return (match ? match[0].substring(1) : 'FILE');
+};
 export {
   sortArray,
   getRandomColor,
-  getRandomNumber
+  getRandomNumber,
+  extractExtension
 }
