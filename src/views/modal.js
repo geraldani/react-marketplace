@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Modal } from '../components/Modal/Generic/Modal'
-import Button from '../components/Button/Button'
+import Button from '../components/Button'
 import Container from './Container'
 import { Title } from './styles'
 
@@ -9,7 +9,7 @@ const OwnModal = () => {
   const [showModal, setShowModal] = useState(false)
   const [type, setType] = useState('')
 
-  const [showmodal1 , setshow2] = useState(false)
+  const [showmodal1, setshow2] = useState(false)
 
   const show = (type) => {
     setShowModal(true)
@@ -44,39 +44,22 @@ const OwnModal = () => {
             </Button>
           ))
         }
+        <Button onClick={() => setshow2(true)}>Modal compuesto: entrada slideDown, salida slideUp </Button>
+
       </div>
       <Modal animation={type} duration={500} visible={showModal} onClose={hide}>
         <h1>Este es un lindo modal</h1>
       </Modal>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-      <Button   onClick={() => setshow2(true)}>open otro modal</Button>
-      <Modal showDialog={false} enterAnimation='slideDown' leaveAnimation='slideUp' duration={500} visible={showmodal1} onClose={() => setshow2(false)}>
+
+      <Modal
+        enterAnimation='slideDown'
+        leaveAnimation='slideUp'
+        duration={500}
+        visible={showmodal1}
+        onClose={() => setshow2(false)}
+      >
         <h1>Este es un lindo modal</h1>
       </Modal>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
-<p>sadxasasadaSadASD</p>
     </Container>
   )
 }

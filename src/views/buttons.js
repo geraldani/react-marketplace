@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../components/Button/Button'
+import Button from '../components/Button'
 import { StyledContainer, Title } from './styles'
 import { gridBreakpoints } from '../styles/GlobalVariables'
 import Container from './Container'
