@@ -5,6 +5,8 @@ const FileWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+   height: 100%;
+  width: 100%;
   p{
     margin-top: 24px;
     font-size: 14px;
@@ -19,11 +21,12 @@ const FileWrapper = styled.div`
     height: 50px;
   }
   img{
-    max-height: 50vh;
+    max-height: 60%;
+    max-width: 70%;
   }
 `
 const InputCaption = styled.div`
-  width: 100vw;
+  width: 100%;
   max-width: 80%;
   margin: auto;
   position: absolute;
@@ -58,10 +61,10 @@ const InputCaption = styled.div`
     width: 30px;
     cursor: pointer;
   }
-  
 `
 const ModalHeader = styled.div`
-  width: 100vw;
+  width: 100%;
+  height: 60px;
   background: #7D60F5;
   justify-content: flex-end;
   position: absolute;
@@ -71,9 +74,11 @@ const ModalHeader = styled.div`
   left: 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 200;
-  padding: 15px 20px;
   svg{
     fill: #fff;
+    position: absolute;
+    top: 15px;
+    right: 20px;
     transition: fill 200ms, transform 100ms;
     width: 30px;
     height: 30px;

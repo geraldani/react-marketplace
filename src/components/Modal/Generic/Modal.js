@@ -126,7 +126,26 @@ const MainModal = ({
   )
 }
 
-export const Modal = (props) => ReactDOM.createPortal(<MainModal {...props} />, CONTAINER_MODAL)
+export const Modal = ({id, ...props}) => {
+  const DOM_ELEMENT = document.getElementById(id);
+
+  React.useLayoutEffect(() => {
+    if (!DOM_ELEMENT) {
+      const newModalNode = document.createElement('div');
+      newModalNode.id = id;
+      document.body.insertBefore(newModalNode, document.body.firstChild);
+    }
+  }, []);
+
+  if (!DOM_ELEMENT) return null;
+  return (
+    ReactDOM.createPortal(
+      <MainModal {...props} />,
+      DOM_ELEMENT
+    )
+  );
+  // ReactDOM.createPortal(<MainModal {...props} />, CONTAINER_MODAL)
+}
 
 const animationTypes = [
   'zoom',
@@ -142,6 +161,7 @@ const animationTypes = [
 ]
 
 Modal.propTypes = {
+  id                : PropTypes.string, // el id del dom donde se renderizara el modal
   width             : PropTypes.string, // ancho del recuadro dentro del modal
   height            : PropTypes.string, // alto del recuadro dentro del modal
   bgColor           : PropTypes.string, // color del fondo del recuadro del modal
@@ -165,6 +185,7 @@ Modal.propTypes = {
 }
 
 Modal.defaultProps = {
+  id                : 'uniquePortalModalID',
   width             : '400px',
   height            : '240px',
   bgColor           : '#fff',

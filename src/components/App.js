@@ -66,8 +66,6 @@ const Copy = () => {
   )
 }
 
-
-
 function forceDownload (blob, filename) {
   const a = document.createElement('a')
   a.download = filename
