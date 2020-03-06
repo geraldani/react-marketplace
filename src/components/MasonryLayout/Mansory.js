@@ -73,7 +73,7 @@ export const MansoryLayout = (props) => {
     }
 
     if (!(nroColumns === 'auto-fill' && widthColumn === '1fr')) { // si nro de columnas es diferente a autofill y 1fr, esto es para que cuando esos dos valores esten asi, se muestren las imagenes con CSS normal
-      if (nroColumns === 'auto-afill') { //
+      if (nroColumns === 'auto-fill') { //
         setCol(calculateColumns(container.current.parentNode.clientWidth, parseInt(space), parseInt(widthColumn))) // si es auto, se tiene que calcular el nro de columnas al inicio del rendering
       }
 

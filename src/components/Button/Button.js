@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { StyledButton, StyledLink } from './styles'
 import { globalSizes } from '../../styles/GlobalVariables'
 
-const Button = (props) => {
+export const Button = (props) => {
   const className = props.className || ''
   const ButtonLink = props.link ? StyledLink : StyledButton
   const commonProps = {
@@ -64,4 +64,3 @@ Button.propTypes = {
     PropTypes.bool
   ]),
 }
-export default Button

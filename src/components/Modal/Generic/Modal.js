@@ -94,31 +94,35 @@ const MainModal = ({
         {
           showDialog
             ?(
-              <StyledDialog
-                style={customStyles}
-                className={className}
-                width={width}
-                height={height}
-                duration={duration}
-                bgColor={bgColor}
-                animationType={customAnimations + animationType}
-                position={position}
-              >
-                {showCloseButton && <StyledCloseButton onClick={onClose} />}
-                {children}
-              </StyledDialog>
+                <StyledDialog
+                  style={customStyles}
+                  className={className}
+                  width={width}
+                  height={height}
+                  duration={duration}
+                  bgColor={bgColor}
+                  animationType={customAnimations + animationType}
+                  position={position}
+                >
+                  {showCloseButton && <StyledCloseButton onClick={onClose} />}
+                  {children}
+                </StyledDialog>
             )
             : (
-              <Wrapper
-                position={position}
-                duration={duration}
-                animationType={customAnimations + animationType}
-                onClick={closeMaskOnClick ? onClose : null}
-              >
-                <div onClick={ev => ev.stopPropagation()}>
-                  {children}
-                </div>
-              </Wrapper>
+                <Wrapper
+                  position={position}
+                  duration={duration}
+                  animationType={customAnimations + animationType}
+                  onClick={closeMaskOnClick ? onClose : null}
+                >
+                  <div
+                    onClick={ev => ev.stopPropagation()}
+                    style={customStyles}
+                    className={className}
+                  >
+                    {children}
+                  </div>
+                </Wrapper>
               )
         }
       </StyledModal>
