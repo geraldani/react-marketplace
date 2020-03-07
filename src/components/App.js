@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { GlobalStyles } from '../styles/GlobalStyles'
 import Buttons from '../views/buttons'
 import Radio from '../views/Radio'
@@ -10,14 +10,13 @@ import NewChat from '../views/chat'
 import EllipsisLoader from './Loaders/Ellipsis'
 import CopiarContenido from '../views/copiarContenido'
 
-
 const App = () => {
   return (
     <>
       <GlobalStyles />
-      <CopiarContenido/>
-   {/*   <OwnModal />
-      <div style={{ height: '50px', width: '100px', background: 'hotpink' }}><EllipsisLoader color='black' /></div>
+      <CopiarContenido />
+      <OwnModal />
+      {/* <div style={{ height: '50px', width: '100px', background: 'hotpink' }}><EllipsisLoader color='black' /></div>
       <NewChat />
       <Buttons />
       <Radio />

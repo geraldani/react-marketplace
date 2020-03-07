@@ -10,6 +10,7 @@ export const CopyContentButton = ({content}) => {
 
   const copyTextV1 = () => {
     const domElement = document.querySelector(`#${content}`);
+    console.log(domElement.tagName)
     const textToCopy = domElement.textContent
 
     // create temp textarea
@@ -33,7 +34,7 @@ export const CopyContentButton = ({content}) => {
     const domElement = document.querySelector(`#${content}`);
     const textToShare = domElement.textContent;
 
-    // create temp element
+    // create temp span
     const copyElement = document.createElement('span');
     copyElement.appendChild(document.createTextNode(textToShare));
     document.body.append(copyElement)

@@ -6,7 +6,7 @@ const CopiarContenido = () => {
   return (
     <div>
       <div id={id}>
-        Tengo cualquier cosa en este div <br />
+        Tengo cualquier cosa en este div
         Tengo cualquier cosa en este div
         Tengo cualquier cosa en este div
         Tengo cualquier cosa en este div

@@ -67,6 +67,7 @@ const MainModal = ({
       onAnimationEnd() // esto es para ejecutar la funcion tanto de entrada o de salida al terminar al animacion
     }*/
   }
+  console.log('animationType ',customAnimations + animationType)
 
   if (!isShow) return null;
   return (
@@ -161,6 +162,7 @@ const animationTypes = [
   'slideDown',
   'slideLeft',
   'slideRight',
+  'slideBlurredTop',
   ''
 ]
 

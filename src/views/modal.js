@@ -19,13 +19,18 @@ const OwnModal = () => {
   const hide = () => setShowModal(false)
 
   const animationTypes = [
-    'zoom',
+    'zoomIn',
+    'zoomOut',
+    'puffIn',
+    'puffOut',
+    'rotate',
     'fade',
     'flip',
     'door',
-    'rotate',
     'slideUp',
     'slideDown',
+    'slideBlurredTop',
+    'slideInEllipticRight',
     'slideLeft',
     'slideRight',
   ]
@@ -50,7 +55,7 @@ const OwnModal = () => {
       <Modal animation={type} duration={500} visible={showModal} onClose={hide}>
         <h1>Este es un lindo modal</h1>
       </Modal>
-
+{/*
       <Modal
         enterAnimation='slideDown'
         leaveAnimation='slideUp'
@@ -59,7 +64,7 @@ const OwnModal = () => {
         onClose={() => setshow2(false)}
       >
         <h1>Este es un lindo modal</h1>
-      </Modal>
+      </Modal>*/}
     </Container>
   )
 }
