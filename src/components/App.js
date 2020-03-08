@@ -9,11 +9,13 @@ import OwnModal from '../views/modal'
 import NewChat from '../views/chat'
 import EllipsisLoader from './Loaders/Ellipsis'
 import CopiarContenido from '../views/copiarContenido'
+import Spiners from '../views/spiners'
 
 const App = () => {
   return (
     <>
       <GlobalStyles />
+      <Spiners/>
       <CopiarContenido />
       <OwnModal />
       {/* <div style={{ height: '50px', width: '100px', background: 'hotpink' }}><EllipsisLoader color='black' /></div>

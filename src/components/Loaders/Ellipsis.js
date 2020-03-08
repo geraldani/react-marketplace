@@ -2,6 +2,7 @@ import React from 'react'
 // import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types'
+import { COLOR_PRIMARY } from './ColorDefault'
 
 const EllipsisLoader = ({color, size, space}) => {
   return (
@@ -26,8 +27,8 @@ const Ellipsis = styled.div`
   display: inline-block;
   position: relative;
   width: 64px;
-  height: 100%;
-  background-color: pink;
+  height: 10px;
+  //background-color: pink;
   div{
     position: absolute;
     top: 0;
@@ -60,7 +61,7 @@ const Ellipsis = styled.div`
 EllipsisLoader.defaultProps = {
   size: '10px',
   space: '20px',
-  color: 'black',
+  color: COLOR_PRIMARY,
 }
 
 EllipsisLoader.prototype = {
