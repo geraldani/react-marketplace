@@ -11,7 +11,16 @@ import {
   DotsProgress,
   SpinStretch,
   DotsFalling,
-  DotsPendulum, SpinCaracol, DotsSutil
+  DotsPendulum,
+  SpinCaracol,
+  DotsSutil,
+  SquareGrow,
+  SquareFilling,
+  SpinerFingerprint,
+  SpinnerAtom,
+  RubikCube,
+  Ventilador,
+  CircularLoading, LeafLoader, SandWatch
 } from '../components/Loaders'
 
 const Spiners = () => {
@@ -46,6 +55,21 @@ const Spiners = () => {
             <small>DotsFalling</small>
           </p>
         </div>
+
+        <div>
+          <CircularLoading />
+          <p>
+            <small>CircularLoading</small>
+          </p>
+        </div>
+
+        <div>
+          <LeafLoader />
+          <p>
+            <small>LeafLoader</small>
+          </p>
+        </div>
+
 
         <div>
           <CircleBasic />
@@ -85,7 +109,7 @@ const Spiners = () => {
         <div>
           <SpinCaracol />
           <p>
-            <small>SpinCaracol <br />type: normal</small>
+            <small>SpinCaracol <br />type: normal(d)</small>
           </p>
         </div>
 
@@ -98,11 +122,76 @@ const Spiners = () => {
         </div>
 
         <div>
-          <DotsSutil/>
+          <DotsSutil />
           <p>
-            <small>DotsSutil</small>
+            <small>DotsSutil <br />type: fade(d)</small>
           </p>
         </div>
+
+        <div>
+          <DotsSutil type='sutil' />
+          <p>
+            <small>DotsSutil <br />type: sutil</small>
+          </p>
+        </div>
+
+        <div>
+          <SquareGrow />
+          <p>
+            <small>SquareGrow</small>
+          </p>
+        </div>
+
+        <div>
+          <SquareFilling />
+          <p>
+            <small>SquareFilling</small>
+          </p>
+        </div>
+
+        <div>
+          <SpinnerAtom type='sharp' />
+          <p>
+            <small>SpinnerAtom</small>
+          </p>
+        </div>
+
+        <div>
+          <SpinerFingerprint />
+          <p>
+            <small>SpinerFingerprint  <br />type: normal(d)</small>
+          </p>
+        </div>
+
+        <div>
+          <SpinerFingerprint type='sharp' />
+          <p>
+            <small>SpinerFingerprint  <br />type: sharp</small>
+          </p>
+        </div>
+
+
+        <div>
+          <SandWatch />
+          <p>
+            <small>SandWatch</small>
+          </p>
+        </div>
+
+        <div>
+          <RubikCube />
+          <p>
+            <small>RubikCube</small>
+          </p>
+        </div>
+
+        <div>
+          <Ventilador />
+          <p>
+            <small>Ventilador</small>
+          </p>
+        </div>
+
       </Grilla>
     </Container>
   )
@@ -114,11 +203,15 @@ const Grilla = styled.div`
   grid-auto-rows: minmax(100px, auto);
    justify-content: center;
   grid-gap: 10px;
+  padding-bottom: 15px;
   &>div{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
+    background: bisque;
+    padding-top: 10px;
+    padding-bottom: 10px;
     p{
       margin-top: 15px;
       text-align: center;

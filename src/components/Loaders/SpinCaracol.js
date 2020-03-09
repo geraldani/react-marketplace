@@ -40,8 +40,6 @@ const Dots = styled.div`
     &:nth-of-type(1) {
       width: ${props => props.size};
       height: ${props => props.size};
-      //margin-left: -1.75em;
-      //margin-top: -1.75em;
       top: 0;
       left: 0;
       animation: ${spin} 2s linear infinite;
@@ -54,8 +52,6 @@ const Dots = styled.div`
       right: 0;
       bottom: 0;
       margin: auto;
-      //margin-left: -1.05em;
-      //margin-top: -1.05em;
       animation: ${spin} 1.75s linear reverse infinite;
     }
     &:nth-of-type(3) {
