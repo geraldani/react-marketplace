@@ -20,7 +20,7 @@ import {
   SpinnerAtom,
   RubikCube,
   Ventilador,
-  CircularLoading, LeafLoader, SandWatch
+  CircularLoading, LeafLoader, SandWatch, HorizontalSquares
 } from '../components/Loaders'
 
 const Spiners = () => {
@@ -191,6 +191,19 @@ const Spiners = () => {
             <small>Ventilador</small>
           </p>
         </div>
+
+
+        <div>
+          <HorizontalSquares circular />
+          <br/>
+          <HorizontalSquares />
+          <br/>
+          <HorizontalSquares type='turning' />
+          <p>
+            <small>HorizontalSquares</small>
+          </p>
+        </div>
+
 
       </Grilla>
     </Container>

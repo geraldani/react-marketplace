@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal } from '../components/Modal/Generic/Modal'
+import { Modal } from '../components/Modal/Modal'
 import Button from '../components/Button'
 import Container from './Container'
 import { Title } from './styles'

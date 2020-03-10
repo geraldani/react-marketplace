@@ -18,8 +18,8 @@ import CircularLoading from './CircularLoading'
 import LeafLoader from './LeafLoader'
 import SandWatch from './SandWatch'
 import RubikCube from './RubikCube/RubikCube'
+import HorizontalSquares from './HorizontalSquares'
 /*
-import  from './'
 import  from './'
 import  from './'
 */
@@ -41,6 +41,6 @@ export {
   SpinerFingerprint,
   SpinnerAtom,
   SandWatch,
-  Ventilador, CircularLoading, LeafLoader,RubikCube
+  Ventilador, CircularLoading, LeafLoader,RubikCube, HorizontalSquares
 }
 

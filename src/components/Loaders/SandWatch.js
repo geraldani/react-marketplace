@@ -5,10 +5,8 @@ import { COLOR_PRIMARY } from './ColorDefault'
 
 const SandWatch = props => {
   return (
-    <SandWatchStyled>
-      <TriangleTop />
-      <TriangleBottom />
-      <Line/>
+    <SandWatchStyled {...props}>
+      {[...Array(3)].map(() => <div key={Math.random()} />)}
     </SandWatchStyled>
   )
 }
@@ -21,63 +19,68 @@ const animation = keyframes`
 const top = keyframes`
   90% { transform: scale(0); }
   100% { transform: scale(0);}
-`
+`;
 
 const bottom = keyframes`
   10% { transform: scale(0); }
   90% { transform: scale(1); }
   100% { transform: scale(1); }
-`
+`;
 
-const line = keyframes`
-  10% { height: 19px; }
-  100% { height: 19px; }
-`
+const line = height => keyframes`
+  10% { height: ${height}; }
+  100% { height: ${height}; }
+`;
 
-const Line = styled.div`
-  animation: ${line} 5.75s linear infinite;
-  border-left: 1px dotted rgb(0,0,0);
-  height: 0;
-  width: 0;
-  position: absolute;
-  top: 19px;
-  left: 19px;
-`
-const TriangleBottom = styled.div`
-  animation: ${bottom} 5.75s linear infinite;
-  border-right: 19px solid transparent;
-  border-bottom: 19px solid rgb(0,0,0);
-  border-left: 19px solid transparent;
-  height: 0;
-  width: 1px;
-  transform: scale(0);
-  transform-origin: 50% 100%;
+const sandWidth = '1px';
 
-`
-const TriangleTop = styled.div`
-  animation: ${top} 5.75s linear infinite;
-  border-top: 19px solid rgb(0,0,0);
-  border-right: 19px solid transparent;
-  border-left: 19px solid transparent;
-  height: 0;
-  width: 1px;
-  transform-origin: 50% 100%;
-`
-const SandWatchStyled = styled.div`
-  height: 39px;
-  width: 40px;
-  position: relative;
-  animation: ${animation} 5.75s cubic-bezier(.8,0,.2,1) infinite;
-`
+const styles = ({sizeHeight, sizeWidth, duration, color}) => {
+  const middleHeight = parseInt(sizeHeight) / 2 + 'px';
+  const middleWidth = parseInt(sizeWidth) / 2 + 'px';
+  return css`
+    height: ${sizeHeight};
+    width: ${sizeWidth};
+    position: relative;
+    animation: ${animation} ${duration} cubic-bezier(.8,0,.2,1) infinite;
+    div:nth-child(1){
+      animation: ${top} ${duration} linear infinite;
+      border-top: ${middleHeight} solid ${color};
+      border-right: ${middleWidth} solid transparent;
+      border-left: ${middleWidth} solid transparent;
+      transform-origin: 50% 100%;
+    }
+    div:nth-child(2){
+      animation: ${bottom} ${duration} linear infinite;
+      border-bottom: ${middleHeight} solid ${color};
+      border-right: ${middleWidth} solid transparent;
+      border-left: ${middleWidth} solid transparent;
+      transform: scale(0);
+      transform-origin: 50% 100%;
+    }
+    div:nth-child(3){
+      animation: ${line(middleHeight)} ${duration} linear infinite;
+      border-left: ${sandWidth} dotted ${color};
+      top: ${middleHeight};
+      left: calc(${middleWidth} - (${sandWidth} / 2));
+      position: absolute;
+    }
+  `
+}
+
+const SandWatchStyled = styled.div`${props => styles(props)}`;
 
 SandWatch.defaultProps = {
-  size: '40px',
+  sizeWidth: '50px',
+  sizeHeight: '60px',
   color: COLOR_PRIMARY,
+  duration: '5s',
 }
 
 SandWatch.propTypes = {
-  size: PropTypes.string,
+  sizeWidth: PropTypes.string,
+  sizeHeight: PropTypes.string,
   color: PropTypes.string,
+  duration: PropTypes.string,
 }
 
 export default SandWatch

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import { AiOutlineDownload as DownloadIcon, AiOutlineClose as CloseIcon } from "react-icons/ai";
-import { Modal } from '../Modal/Generic'
+import { Modal } from '../Modal'
 
 const Overlay = styled.div`
    width: 100%;
