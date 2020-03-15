@@ -10,12 +10,14 @@ import NewChat from '../views/chat'
 import EllipsisLoader from './Loaders/Ellipsis'
 import CopiarContenido from '../views/copiarContenido'
 import Spiners from '../views/spiners'
+import VideoAudioPlayer from '../views/VideoAudioPlayer'
 
 const App = () => {
   return (
     <>
       <GlobalStyles />
-      <Spiners/>
+      {/*<Spiners/>*/}
+      <VideoAudioPlayer/>
       <CopiarContenido />
       <OwnModal />
       {/* <div style={{ height: '50px', width: '100px', background: 'hotpink' }}><EllipsisLoader color='black' /></div>

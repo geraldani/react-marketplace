@@ -41,6 +41,10 @@ export {
   SpinerFingerprint,
   SpinnerAtom,
   SandWatch,
-  Ventilador, CircularLoading, LeafLoader,RubikCube, HorizontalSquares
+  Ventilador,
+  CircularLoading,
+  LeafLoader,
+  RubikCube,
+  HorizontalSquares
 }
 
