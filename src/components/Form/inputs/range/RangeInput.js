@@ -107,6 +107,14 @@ Range.propTypes = {
   trackShadowBlur: PropTypes.string,
   trackShadowColor: PropTypes.string,
   trackShadow: PropTypes.string,
+
+  progressColor: PropTypes.string,
+  progressBorderWidth: PropTypes.string,
+  progressBorderColor: PropTypes.string,
+  progressRadius: PropTypes.string,
+  progressShadowSize: PropTypes.string,
+  progressShadowBlur: PropTypes.string,
+  progressShadowColor: PropTypes.string,
 }
 
 export default Range
