@@ -11,16 +11,17 @@ import EllipsisLoader from './Loaders/Ellipsis'
 import CopiarContenido from '../views/copiarContenido'
 import Spiners from '../views/spiners'
 import VideoAudioPlayer from '../views/VideoAudioPlayer'
-
+import styled from 'styled-components'
+import PlayPauseButton from './Button/PlayPauseButton'
 const App = () => {
   return (
     <>
       <GlobalStyles />
-      {/*<Spiners/>*/}
       <VideoAudioPlayer/>
+      {/*<Spiners />
       <CopiarContenido />
       <OwnModal />
-      {/* <div style={{ height: '50px', width: '100px', background: 'hotpink' }}><EllipsisLoader color='black' /></div>
+      <div style={{ height: '50px', width: '100px', background: 'hotpink' }}><EllipsisLoader color='black' /></div>
       <NewChat />
       <Buttons />
       <Radio />
@@ -30,5 +31,6 @@ const App = () => {
     </>
   )
 }
+
 
 export default App

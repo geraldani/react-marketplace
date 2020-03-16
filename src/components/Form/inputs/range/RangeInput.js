@@ -45,7 +45,7 @@ Range.defaultProps = {
 
   thumbColor: '#d4d4d4',
   thumbColorHover: '#acacac',
-  thumbRadius: '20px',
+  thumbRadius: '0',
   thumbHeight: '16px',
   thumbWidth: '16px',
   thumbBorderWidth: '0',
@@ -53,27 +53,30 @@ Range.defaultProps = {
   thumbShadowSize: '', //px
   thumbShadowBlur: '', //4px
   thumbShadowColor: '', // rgba(0,0,0,.2)
-  thumbShadow: '0 0 2px rgba(0, 0, 0, 0.4), inset 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.6), 0 4px 2px rgba(0, 0, 0, 0.2), 0 9px 4px rgba(0, 0, 0, 0.1), inset 0 2px 1px white',
+  thumbShadow: '',
+  // thumbShadow: '0 0 2px rgba(0, 0, 0, 0.4), inset 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.6), 0 4px 2px rgba(0, 0, 0, 0.2), 0 9px 4px rgba(0, 0, 0, 0.1), inset 0 2px 1px white',
 
   trackColor: '#565656',
   trackWidth: '100%',
   trackHeight: '7px',
   trackBorderWidth: '0px',
   trackBorderColor: '',
-  trackRadius: '7px',
+  trackRadius: '0',
   trackShadowSize: '0',
   trackShadowBlur: '0',
   trackShadowColor: '',
-  trackShadow: '0 1px 0 rgba(255, 255, 255, 0.25), inset 0 0 4px rgba(0, 0, 0, 0.9)',
+  trackShadow: '',
+  // trackShadow: '0 1px 0 rgba(255, 255, 255, 0.25), inset 0 0 4px rgba(0, 0, 0, 0.9)',
 
   progressColor: '#9FD0E9',
-  progressBorderWidth: '0px',
+  progressBorderWidth: '0',
   progressBorderColor: 'gray',
-  progressRadius: '',
+  progressRadius: '0',
   progressShadowSize: '0',
   progressShadowBlur: '0',
   progressShadowColor: '',
-  progressShadow: 'inset 0 0 4px rgba(0, 85, 151, 0.8), inset 0 0 2px rgba(0, 0, 0, 0.5);',
+  progressShadow: '',
+  // progressShadow: 'inset 0 0 4px rgba(0, 85, 151, 0.8), inset 0 0 2px rgba(0, 0, 0, 0.5)',
 }
 
 Range.propTypes = {

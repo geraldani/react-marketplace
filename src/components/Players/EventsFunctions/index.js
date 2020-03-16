@@ -74,6 +74,7 @@ export const useEventHandlers = (autoplay) => {
 
   // cambia el tiempo actual de la reproduccion
   const changeTime = e => {
+    console.log('me llame al cambiar ')
     const currentValue = parseInt(e.target.value)
     element.currentTime = currentValue
     changeInfo({ currentTime: currentValue })
@@ -96,6 +97,5 @@ export const useEventHandlers = (autoplay) => {
     lessVolume,
     moreVolume,
     changeVolume,
-
   ])
 }
