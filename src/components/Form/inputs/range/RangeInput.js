@@ -11,13 +11,13 @@ const Range = ({
   step,
   ...styles
 }) => {
-  const [currentValuePorcent, setCurrentValuePorcent] = useState(actualValue)
-  const onChangeDefault = e => setCurrentValuePorcent((parseInt(e.target.value) * 100) / maxValue)
-  useEffect(() => setCurrentValuePorcent((actualValue * 100) / maxValue), [actualValue])
+  // const [currentValuePorcent, setCurrentValuePorcent] = useState(actualValue)
+  // const onChangeDefault = e => setCurrentValuePorcent((parseInt(e.target.value) * 100) / maxValue)
+  // useEffect(() => setCurrentValuePorcent((actualValue * 100) / maxValue), [actualValue])
   const isWebkit = (Array.prototype.slice.call(window.getComputedStyle(document.documentElement, '')).join('').match(/-(moz|webkit|ms)-/))[1] === 'webkit'
 
   return (
-    <InputContainer {...styles} currentValue={currentValuePorcent}>
+    <InputContainer {...styles} currentValue={(actualValue * 100) / maxValue}>
       <input
         type="range"
         name={name}
@@ -26,7 +26,7 @@ const Range = ({
         step={step}
         defaultValue={onChange ? undefined : actualValue}
         value={onChange ? actualValue : undefined}
-        onChange={onChange || onChangeDefault}
+        onChange={onChange}
       />
       {
         isWebkit && <ProgressLoader />
@@ -100,7 +100,6 @@ Range.propTypes = {
   thumbShadow: PropTypes.string,
 
   trackColor: PropTypes.string,
-  trackFillColor: PropTypes.string,
   trackWidth: PropTypes.string,
   trackHeight: PropTypes.string,
   trackBorderWidth: PropTypes.string,

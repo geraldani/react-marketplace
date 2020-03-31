@@ -35,7 +35,7 @@ export const useEventHandlers = (autoplay) => {
   const loadDuration = () => changeInfo({ duration: element.duration })
 
   // baja el voluemn
-  const lessVolume = () => {
+  const onLessVolume = () => {
     const newVolume = elementInfo.volume - 1
     if (newVolume >= 0) {
       element.volume = newVolume / 100
@@ -44,7 +44,7 @@ export const useEventHandlers = (autoplay) => {
   }
 
   // sube el volumen
-  const moreVolume = () => {
+  const onMoreVolume = () => {
     const newVolume = elementInfo.volume + 1
     if (newVolume <= 100) {
       element.volume = newVolume / 100
@@ -53,31 +53,31 @@ export const useEventHandlers = (autoplay) => {
   }
 
   //pausa o reproduce
-  const playPause = () => {
+  const onPlayPause = () => {
     element.paused ? element.play() : element.pause()
     changeInfo({ playing: !element.paused })
   }
 
   // detiene la reproduccion
-  const stopPlaying = () => {
+  const onStopPlaying = () => {
     element.pause()
     element.currentTime = 0
     changeInfo({ currentTime: 0, playing: false })
   }
 
   // cambia el volumen
-  const changeVolume = (ev) => {
+  const onChangeVolume = (ev) => {
     const volume = parseInt(ev.target.value)
     element.volume = volume / 100
     changeInfo({ volume })
   }
 
   // cambia el tiempo actual de la reproduccion
-  const changeTime = e => {
-    console.log('me llame al cambiar ')
+  const onChangeTime = e => {
     const currentValue = parseInt(e.target.value)
-    element.currentTime = currentValue
-    changeInfo({ currentTime: currentValue })
+    const realTime = (currentValue*element.duration)/100;
+    element.currentTime = realTime
+    changeInfo({ currentTime: realTime })
   }
 
   useEffect(() => {
@@ -85,17 +85,17 @@ export const useEventHandlers = (autoplay) => {
     setElement(refElement.current)
   }, [])
 
-  return ([
+  return ({
     refElement,
     elementInfo,
     loadDuration,
     onProgressTime,
-    playPause,
-    stopPlaying,
-    changeTime,
+    onPlayPause,
+    onStopPlaying,
+    onChangeTime,
     setMuted,
-    lessVolume,
-    moreVolume,
-    changeVolume,
-  ])
+    onLessVolume,
+    onMoreVolume,
+    onChangeVolume,
+  })
 }

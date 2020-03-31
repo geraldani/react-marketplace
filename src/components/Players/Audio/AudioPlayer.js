@@ -3,18 +3,18 @@ import PropTypes from 'prop-types'
 import { useEventHandlers, formateTime } from '../EventsFunctions'
 
 const AudioPlayer = ({ url, autoplay, children, type }) => {
-  const [
-    refAudio,
-    audio,
+  const {
+    refElement: refAudio,
+    elementInfo: audio,
     loadDuration,
     onProgressTime,
     onPlayPause,
-    stopPlaying,
+    onStopPlaying,
     onChangeTime,
     setMuted,
     onLessVolume,
     onMoreVolume,
-    onChangeVolume] = useEventHandlers(autoplay)
+    onChangeVolume} = useEventHandlers(autoplay)
 
   return (
     <>
@@ -26,13 +26,13 @@ const AudioPlayer = ({ url, autoplay, children, type }) => {
         muted={audio.muted}
         onLoadedMetadata={loadDuration}
         controls={false}
-        onEnded={() => setTimeout(stopPlaying, 1000)}
+        onEnded={() => setTimeout(onStopPlaying, 1000)}
       />
       {
         children({
           audio,
           onPlayPause,
-          stopPlaying,
+          onStopPlaying,
           onChangeTime,
           setMuted,
           onLessVolume,

@@ -1,7 +1,7 @@
 import React from 'react'
 import AudioPlayer from '../components/Players/Audio'
 import Range from '../components/Form/inputs/range'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import {
   FiVolume2 as VolumeHight,
   FiVolume1 as VolumeLow,
@@ -12,10 +12,15 @@ import {
   FiPlayCircle as PlayIcon,
   FiPauseCircle as PauseIcon,
   FiStopCircle as StopIcon
-} from 'react-icons/fi';
+} from 'react-icons/fi'
 import PlayPauseButton from '../components/Button/PlayPauseButton'
-const audioURL = 'https://res.cloudinary.com/hbrrdozyj/video/upload/v1584166014/live_files_adj/d9ctocsq3fhbqatvbcww.mp3'
+import { Darken, Lighten } from '../Utilidades'
 
+// const audioURL = 'https://res.cloudinary.com/hbrrdozyj/video/upload/v1584166014/live_files_adj/d9ctocsq3fhbqatvbcww.mp3'
+const audioURL = 'https://storage.googleapis.com/m-infra.appspot.com/public/res/Cliengo/4dd0/cb2b/8737/57c0/53d0/aa19/d837/db70/4dd0cb2b873757c053d0aa19d837db70.ogg'
+const audioLargo = 'https://res.cloudinary.com/hbrrdozyj/video/upload/live_files_adj/tkskbfp6j1uy3n8qqh1c.mp3';
+const videoURL = 'https://res.cloudinary.com/hbrrdozyj/video/upload/v1584481896/live_files_adj/wz71bzopqyxu99jepghm.mp4'
+// const videoURL = 'https://giant.gfycat.com/RemoteBlandBlackrussianterrier.webm'
 const VideoAudioPlayer = () => {
 
   const VolumeIcon = ({ volume, muted }) => {
@@ -25,9 +30,49 @@ const VideoAudioPlayer = () => {
     else return <VolumeLow />
   }
 
+  const videoRef = React.useRef(null)
+  const squares = 30
+  const [thumb, setThumb] = React.useState('')
+  React.useEffect(() => {
+
+    const canvas = document.createElement('canvas')
+    const context = canvas.getContext('2d')
+
+    context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height)
+
+    let dataURL = canvas.toDataURL()
+    setThumb(dataURL)
+    // img.setAttribute('src', dataURL);
+
+  }, [])
+
+  const loaded = () => {
+    console.log('el video  ancho', videoRef.current.videoWidth)
+    console.log('el video  ancho', videoRef.current.videoHeight)
+const vv=document.querySelector('#videoo')
+    // const canvas = document.createElement("canvas")
+    const canvas = document.querySelector('#canvas-element')
+    console.log('video ', videoRef.current)
+    console.log('vv ', vv)
+    canvas.width = videoRef.current.videoWidth
+    canvas.height = videoRef.current.videoHeight
+
+
+    const context = canvas.getContext('2d')
+    context.drawImage(vv, 0, 0, canvas.width, canvas.height)
+
+    console.log('context ', context)
+    console.log('canvas ', canvas)
+
+    let dataURL = canvas.toDataURL()
+    console.log('la data url ', dataURL)
+    setThumb(dataURL)
+  }
+
   return (
     <div>
-      <AudioPlayer url={audioURL}>
+      <AudioPlayer url={audioLargo}>
+      {/*<AudioPlayer url='https://storage.googleapis.com/m-infra.appspot.com/public/res/Cliengo/8d16/69f8/7501/ad67/dca6/e61f/af62/fb6c/8d1669f87501ad67dca6e61faf62fb6c.ogg'>*/}
         {
           ({
              audio: { playing, duration, currentTime },
@@ -50,13 +95,14 @@ const VideoAudioPlayer = () => {
                     width='20px'
                     height='25px'
                     color='#757575'
-                    colorHover='#757575d9'
-                    style={{marginRight: '10px'}}
+                    // colorHover='green'
+                    colorHover='#999'
+                    style={{ marginRight: '10px' }}
                   />
                   <Range
-                    maxValue={duration}
+                    maxValue={100}
                     minValue={0}
-                    actualValue={currentTime}
+                    actualValue={(currentTime*100)/duration}
                     onChange={onChangeTime}
                     trackHeight='2px'
                     trackColor='#00000042'
@@ -70,7 +116,7 @@ const VideoAudioPlayer = () => {
                   />
                 </Player>
                 <Time>
-                  {currentTime === 0 ? totalTimeFormatted : currentTimeFormatted }
+                  {currentTime === 0 ? totalTimeFormatted : currentTimeFormatted}
                 </Time>
               </Container>
               {/* <button onClick={onPlayPause}>
@@ -118,6 +164,16 @@ const VideoAudioPlayer = () => {
           )
         }
       </AudioPlayer>
+
+      <video id='videoo' width={200} height={100} src={videoURL} ref={videoRef} controls onLoadedData={loaded} onTimeUpdate={()=>{
+        const canvas = document.querySelector('#canvas-element')
+        canvas.getContext('2d').drawImage(videoRef.current, 0, 0, canvas.width, canvas.height)
+        let dataURL = canvas.toDataURL()
+        console.log('la data url ', dataURL)
+        setThumb(dataURL)
+      }}/>
+      <canvas id="canvas-element" />
+      <img src={thumb} alt="thumb" style={{ border: 'solid 1px black' }} crossOrigin />
     </div>
   )
 }

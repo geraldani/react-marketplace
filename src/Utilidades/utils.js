@@ -33,9 +33,10 @@ const extractExtension = (fileName) => {
   const match = fileName.match(fileExtensionPattern);
   return (match ? match[0].substring(1) : 'FILE');
 };
+
 export {
   sortArray,
   getRandomColor,
   getRandomNumber,
-  extractExtension
+  extractExtension,
 }

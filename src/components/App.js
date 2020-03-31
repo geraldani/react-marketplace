@@ -13,11 +13,18 @@ import Spiners from '../views/spiners'
 import VideoAudioPlayer from '../views/VideoAudioPlayer'
 import styled from 'styled-components'
 import PlayPauseButton from './Button/PlayPauseButton'
+import ColorPicker from './Color/ColorPicker'
 const App = () => {
+  /*const nombre = 'set livin.jojojo.sdsdsd.kakaka.xls'
+  const nameSplitted = nombre.split('.');
+  console.log('nombreee ', nameSplitted)
+  const extension = nameSplitted.length > 1 ? nameSplitted[nameSplitted.length-1] : '';
+  console.log('la real extension ', extension.toUpperCase())*/
   return (
     <>
       <GlobalStyles />
-      <VideoAudioPlayer/>
+      <ColorPicker />
+      {/*<VideoAudioPlayer/>*/}
       {/*<Spiners />
       <CopiarContenido />
       <OwnModal />

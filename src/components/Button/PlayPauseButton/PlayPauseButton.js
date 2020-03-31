@@ -2,14 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {PlayPauseContainer} from './styles';
 
-const PlayPauseButton = props => {
-  return (
-    <PlayPauseContainer {...props}>
-      <div className='first' />
-      <div  className='last' />
-    </PlayPauseContainer>
-  )
-}
+const PlayPauseButton = props => <PlayPauseContainer {...props} />
 
 PlayPauseButton.defaultProps = {
   color: '#000',

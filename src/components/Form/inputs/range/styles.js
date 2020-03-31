@@ -89,7 +89,6 @@ const styles = ({
           background: #eeeee8;
           box-shadow: none;
           cursor: not-allowed;
-
         }
         &::-moz-range-track {
           cursor: not-allowed;
