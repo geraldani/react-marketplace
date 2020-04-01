@@ -21,9 +21,6 @@ const sortArray = (array, order = 'asc', key) => {
   return array.slice().sort(compare)
 }
 
-/* Genera un color aleatorio */
-const getRandomColor = () => "#000000".replace(/0/g, () => (~~(Math.random() * 16)).toString(16))
-
 /* Genera un numero aleatoreo entre un rango de numeros */
 const getRandomNumber = (x = 0, y = 100) => Math.floor(Math.random() * (y - x)) + x;
 
@@ -36,7 +33,6 @@ const extractExtension = (fileName) => {
 
 export {
   sortArray,
-  getRandomColor,
   getRandomNumber,
   extractExtension,
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { HamburgerButton } from '../components/Button/HamburgerButtons'
 import { HamburgerTypes } from '../components/Button/HamburgerButtons/types'
-import { getRandomColor } from '../Utilidades'
+import { GetRandomColor } from '../components/Color/Functions/Utilities'
 
 const StyleContainer = styled.div`
   display: flex;
@@ -30,7 +30,7 @@ const Hamburguers = () => {
     <div className='d-flex flex-wrap justify-content-start'>
       {
         types.map((elem, i) => (
-          <StyleContainer key={elem} style={{ background: getRandomColor() }}>
+          <StyleContainer key={elem} style={{ background: GetRandomColor() }}>
             {/*<StyleContainer key={elem} style={{background: colors[i]}}>*/}
             <HamburgerButton h-type={elem} color='white' />
             <p className='text-center m-0 font-weight-bold'>{elem}</p>

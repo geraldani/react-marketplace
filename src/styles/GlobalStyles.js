@@ -20,7 +20,7 @@ const GlobalStyles = createGlobalStyle`
   h4 { font-size: ${headingSizes.h4}; }
   h5 { font-size: ${headingSizes.h5}; }
   h6 { font-size: ${headingSizes.h6}; }
-  p { color: #68768C; }
+  //p { color: #68768C; }
 `
 
 //shadow
