@@ -24,8 +24,10 @@ const App = () => {
     <>
       <GlobalStyles />
       <ColorPicker />
+      {/*<Mansory />*/}
+      {/*<Spiners />*/}
       {/*<VideoAudioPlayer/>*/}
-      {/*<Spiners />
+      {/*
       <CopiarContenido />
       <OwnModal />
       <div style={{ height: '50px', width: '100px', background: 'hotpink' }}><EllipsisLoader color='black' /></div>
@@ -34,7 +36,7 @@ const App = () => {
       <Radio />
       <Check />
       <Forms />
-      <Mansory />*/}
+      */}
     </>
   )
 }

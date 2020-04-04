@@ -4,58 +4,90 @@ import {
   parseFromIntToHex,
   hueToRgb,
   defineTypeColor,
-  TYPE_COLORS, isValidHex, validateHexColor, hasAlpha, fillColor, parseFromHexToInt
+  isValidHex,
+  validateHexColor,
+  hasAlpha,
+  parseFromHexToInt,
+  isValidRGB,
+  isValidHSL,
+  TYPE_COLORS,
 } from './Utilities'
 
 // Tranforma un color de hexadecimal a RGB y lo retorna como una cade tipo rgb(r, g, b)
 const HexToRGB = (color, obj) => {
-  let colorConverted = 'No valid Hex Color'
+  let colorConverted = ''
   if (isValidHex(color)) {
     let alpha = ''
+    let string = '';
     const isAlpha = hasAlpha(color);
     const rgb = rgbVectorFromHex(color)
     if (isAlpha) {
       color = validateHexColor(color);
       alpha = parseFromHexToInt(color.substr(color.length-2));
-      alpha = Number((alpha/255).toFixed(2))
+      alpha = Number((alpha/255).toFixed(2));
+      string = `rgba(${rgb.toString()},${alpha})`
     }
+    else string = `rgb(${rgb.toString()})`
+
     if (obj) {
-      colorConverted =  { r: rgb[0], g: rgb[1], b: rgb[2] }
-      if (isAlpha) colorConverted.a = alpha;
-    }
-    else {
-      if(isAlpha) colorConverted = `rgba(${rgb.toString()},${alpha})`
-      else colorConverted = `rgb(${rgb.toString()})`
-    }
+      const split = { r: rgb[0], g: rgb[1], b: rgb[2] }
+      if (isAlpha) split.a = alpha
+      colorConverted = split
+      if (obj === 2) colorConverted = { string, split }
+    } else colorConverted = string
   }
-  return colorConverted;
+  return colorConverted
 }
 
 const HexToHSL = (color, obj) => {
   const rgb = HexToRGB(color);
-  const {h,s,l} = RGBToHSL(rgb);
-  if(obj) return {h,s,l}
-  else return `hsl(${h},${s}%,${l}%)`
+  let colorReturn = '';
+  if (isValidHex(color)) {
+    colorReturn = RGBToHSL(rgb, obj);
+  }
+  return colorReturn;
 }
 
 const RGBToHex = color => {
   let hexColor = ''
   let alpha = '';
   const type = defineTypeColor(color);
-  const chennels = extractChannelsFromString(color);
-  if (type === TYPE_COLORS.RGBA){
-    const last = Math.round(chennels.pop() * 255);
-    alpha = `${last <= 15 ? '0' : ''}${parseFromIntToHex(last)}`;
+  let colorConverted = '';
+  if(isValidRGB(color)){
+    const channels = extractChannelsFromString(color);
+    if (type === TYPE_COLORS.RGBA){
+      const last = Math.round(channels.pop() * 255);
+      alpha = `${last <= 15 ? '0' : ''}${parseFromIntToHex(last)}`;
+    }
+    channels.forEach(int => hexColor += parseFromIntToHex(int));
+    colorConverted = `#${hexColor}${alpha}`.toUpperCase();
   }
-  chennels.forEach(int => hexColor += parseFromIntToHex(int));
-  return `#${hexColor}${alpha}`.toUpperCase();
+  return colorConverted;
 }
 
-const RGBToHSL = color => {
-  // console.log(color)
-  const type = defineTypeColor(color);
-  const channels = extractChannelsFromString(color);
-  const red = channels[0], green = channels[1], blue = channels[2];
+const RGBToHSL = (color, obj) => {
+  let colorConverted = '';
+  const chennels = extractChannelsFromString(color);
+  const hasAlpha =  chennels.length === 4;
+  const chanelVec= ['red','green', 'blue', 'alpha'];
+  if(isValidRGB(color)){
+    let regObj = {};
+    chanelVec.forEach((e, i) => regObj[e] = chennels[i]);
+    const hsl = fromRgbToHsl(regObj);
+    const stringHSL = `${hsl.h},${hsl.s}%,${hsl.l}%`;
+    let string = `hsl(${stringHSL})`;
+    if (hasAlpha) string = `hsla(${stringHSL},${regObj.alpha})`
+    if (obj) {
+      const split = hsl
+      if (hasAlpha) split.a = regObj.alpha
+      colorConverted = split
+      if (obj === 2) colorConverted = { string, split }
+    } else colorConverted = string
+  }
+  return colorConverted;
+}
+
+const fromRgbToHsl = ({ red, green, blue }) => {
   let min, max, h=0, l, s, maxColor, rgb = {};
 
   // step 1, divide the value entre 255
@@ -81,8 +113,8 @@ const RGBToHSL = color => {
   // Step 4, calculating the Saturation
   if (min === max) s = 0 //if the min and max are the same, there is no saturation
   else {
-    if (l < 0.5) s = (max - min) / (max + min)
-    else s = (max - min) / (2 - max - min)
+    if (l < 0.5) s = (max - min) / (max + min);
+    else s = (max - min) / (2 - max - min);
   }
 
   // Step 5, calculating the Hue
@@ -90,22 +122,43 @@ const RGBToHSL = color => {
   if (maxColor === 0) h = (G - B) / (max - min); // if Red is max
   if (maxColor === 1) h = 2 + (B - R) / (max - min); // if Green is max
   if (maxColor === 2) h = 4 + (R - G) / (max - min) // if Blue is max
-  // if (isNaN(h)) h = 0;
+  if (isNaN(h)) h = 0;
   h = h * 60; //  have to be multiplied by 60 to convert it to degrees on the color circle
   if (h < 0) h = h + 360 // if hue is negative, it add 360, cause a circle has 360 degrees
 
   // Step 6, Rounden all values
-  /*h = Number(h.toFixed(0));
-  s = Number(s.toFixed(2)) * 100;
-  l = Number(l.toFixed(2)) * 100;*/
+  h = parseInt(Number(h.toFixed(0)));
+  s = parseInt(Number(s.toFixed(2)) * 100);
+  l = parseInt(Number(l.toFixed(2)) * 100);
 
-  h = Math.round(h);
+  /*h = Math.round(h);
   s = Math.round(s * 100);
-  l = Math.round(l * 100);
+  l = Math.round(l * 100);*/
   return {h, s, l};
 }
 
-function HSLToRGB(hue, sat, light) {
+const HSLToRGB = (color, obj) => {
+  const chanel = extractChannelsFromString(color);
+  let colorConverted = '';
+  const hasAlpha = chanel.length === 4;
+  const chanelVec= ['hue','sat', 'light', 'alpha'];
+  if(isValidHSL(color)){
+    const hslVec = {}
+    chanelVec.forEach((col, i) => hslVec[col] = chanel[i])
+    const rgb = fromHslToRgb(hslVec);
+    if (obj){
+      colorConverted = rgb;
+      if (hasAlpha) colorConverted.a = hslVec.alpha;
+    }else{
+      const stringRGB = `${rgb.r},${rgb.g},${rgb.b}`;
+      if (hasAlpha) colorConverted = `rgba(${stringRGB},${hslVec.alpha})`
+      else colorConverted = `rgb(${stringRGB})`;
+    }
+  }
+  return colorConverted;
+}
+
+function fromHslToRgb({hue, sat, light}) {
   let t1, t2, r, g, b;
   hue = hue / 60;
   sat = sat / 100;
@@ -123,8 +176,13 @@ function HSLToRGB(hue, sat, light) {
   return {r , g , b };
 }
 
-const HSLToHex = () => {
-
+const HSLToHex = color => {
+  let colorConverted = '';
+  if (isValidHSL(color)) {
+    const rgb = HSLToRGB(color);
+    colorConverted = RGBToHex(rgb);
+  }
+  return colorConverted;
 }
 
 

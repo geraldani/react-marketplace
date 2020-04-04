@@ -32,14 +32,14 @@ const validateHexColor = color => {
 const isValidRGB = color => {
   const channels = extractChannelsFromString(color)
   const isAlpha = defineTypeColor(color) === TYPE_COLORS.RGBA
-  let valid = true
-  if (isAlpha && channels.length < 4) valid = false
-  else {
-    if (channels.length >= 3) {
-      valid = !channels.some(c => c < 0 || c > 255)
-      if (channels.length === 4 && (channels[3] < 0 || channels[3] > 1)) valid = false
+  let valid = !channels.some(c => c < 0 || c > 255)
+  if (valid) {
+    if (isAlpha) {
+      if (channels.length !== 4) valid = false
+      else if (channels[3] < 0 || channels[3] > 1) valid = false
+    } else {
+      if (channels.length !== 3) valid = false
     }
-    if (channels.length > 4) valid = false
   }
   return valid
 }
@@ -48,13 +48,14 @@ const isValidHSL = color => {
   const channels = extractChannelsFromString(color);
   const isAlpha = defineTypeColor(color) === TYPE_COLORS.HSLA
   let valid = true
-  if (isAlpha && channels.length < 4) valid = false
-  if (channels.length >= 3) {
-    const h = channels[0], s = channels[1], l = channels[2]
-    if (h < 0 || h > 360 || s < 0 || s > 100 || l < 0 || l > 100) valid = false;
-    if (channels.length === 4 && (channels[3] < 0 || channels[3] > 1)) valid = false;
+  const h = channels[0], s = channels[1], l = channels[2]
+  if (h < 0 || h > 360 || s < 0 || s > 100 || l < 0 || l > 100) valid = false;
+  if (isAlpha) {
+    if (channels.length !== 4) valid = false
+    else if (channels[3] < 0 || channels[3] > 1) valid = false
+  } else {
+    if (channels.length !== 3) valid = false
   }
-  if (channels.length > 4) valid = false;
   return valid;
 }
 

@@ -50,8 +50,8 @@ const calculatePositions = (container, items, columns, gap) => {
 
 const calculateColumns = (totalWidth, gap, columnsWidth) => {
   let columns = Math.floor(totalWidth / columnsWidth)
-  const gapsShuoldBe = gap * (columns - 1)
-  if ((columns * columnsWidth + gapsShuoldBe) > totalWidth) columns--
+  const gapsShouldBe = gap * (columns - 1)
+  if ((columns * columnsWidth + gapsShouldBe) > totalWidth) columns--
   return columns
 }
 

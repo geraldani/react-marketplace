@@ -9,13 +9,20 @@ import {
   HSLToRGB,
   RGBToHSL,
   defineTypeColor,
-  parseFromIntToHex, RGBToHex, extractChannelsFromString, isValidHSL, isValidRGB
+  parseFromIntToHex,
+  RGBToHex,
+  extractChannelsFromString,
+  isValidHSL,
+  isValidRGB,
+  HSLToHex,
+  GetDarkenLightenColors,
+  LighterDarkerScale, SaturationScale
 } from './Functions/'
 import styled, { css } from 'styled-components'
 
 const ColorPicker = props => {
-  const colorPrimary = '#ffff99'
-  const variation = 15
+  const colorPrimary = '#ffff00'
+  const variation = 5
 
   const hex = [
     '#fa7',
@@ -30,8 +37,12 @@ const ColorPicker = props => {
   const rgb = [
     'rgb(255,74,45,0.4)',
     'rgb(211,74,74)',
+    'rgb(57,100,44)',
+    'rgb(57,854,44)',
+    'rgba(57,100,44,1.4)',
     'rgba(74,74,45)',
     'rgba(34,21,45,0.5)',
+    'rgba(432,21,45,0.5)',
   ]
 
 
@@ -39,108 +50,93 @@ const ColorPicker = props => {
     'hsl(255,74%,45%,0.4)',
     'hsl(211,74%,74%)',
     'hsla(74,74%,45%)',
+    'hsla(432,74%,45%,0.4)',
     'hsla(34,21%,45%,0.5)',
+    'hsla(34,21%,45%,2)',
+    'hsl(34,21%,101%)',
+    'hsl(34,50%,17%)',
+    'hsl(34,21,10)',
   ]
 
-  hex.forEach(col => console.log(`hex${col.length-1} -> ${col} / `, HexToRGB(col, true)))
+/*  hex.forEach(col => console.log(`hex${col.length-1} -> ${col} / ${HexToRGB(col)} - ${HexToHSL(col)}`))
+  console.log('')
+  rgb.forEach(col => console.log(`${col} -> ${RGBToHex(col)} - ${RGBToHSL(col)}`))
+  console.log('')
+  hsl.forEach(col => console.log(`${col} -> ${HSLToHex(col)} - ${HSLToRGB(col)}`))*/
 
+  const vectorHex = GetDarkenLightenColors(colorPrimary, variation);
+  const vecRGB = vectorHex.map(col => HexToRGB(col));
+  const vecHSL = vectorHex.map(colr => HexToHSL(colr, 2));
 
-  // console.log('hsl(220, 66%, 43%) es ', HSLToRGB(220, 66, 43))
-  // console.log('rgb(45,245,150) es ', RGBToHSL(45,245,150))
+  const lightnessScale = LighterDarkerScale(colorPrimary, variation);
+  const saturationsScale = SaturationScale(colorPrimary, variation);
 
-  const calculateDarkerOrLighter = (baseColor, variation, lightness) => {
-    const vectorColor = []
-    if (isValidHex(baseColor)) {
-      const isDark = lightness < 0
-      let i = isDark ? 1 : 0 // el color base va a quedar en el array de los claros siempre y va a quedar de ultimo
-      let color = baseColor
-      const stopColor = isDark ? '#000000' : '#ffffff' // si es darker, entonces me tengo que llegar al negro, simo al blanco
-      const colorFunction = isDark ? DarkenRGB : LightenRGB
-      while (color !== stopColor) {
-        color = colorFunction(baseColor, i * variation)
-        vectorColor.push(color)
-        i++
-        if (i === 100) break
-      }
-      return isDark ? vectorColor : vectorColor.reverse()
-    } else return vectorColor;
-  }
-
-  const lighterRGB = (baseColor, variation) => calculateDarkerOrLighter(baseColor, variation, 1)
-  const darkerRGB = (baseColor, variation) => calculateDarkerOrLighter(baseColor, variation, -1)
-
-  const lighterVector = lighterRGB(colorPrimary, variation)
-  const darkerVector = darkerRGB(colorPrimary, variation)
-
-
-
-
-  // console.log('rgb(45,74,88) es ', RGBToHex('rgb(45,74,88)'))
-  // console.log('rgb(45,74,88,0.06) es ',RGBToHex('rgba(45,74,88,0.06)'))
-  /*const hsl = 'hsl(44,74%,45%)'
-  const hsla = 'hsla(45,74%,88%,6,74)'
-  console.log(`${hsl} es valido? `,isValidHSL(hsl))
-  console.log(`${hsla} es valido? `,isValidHSL(hsla))
-
-  const rgb = 'rgb(255,74,45,4)'
-  const rgba = 'rgba(74,74,45)'
-  console.log(`${rgb} es valido? `,isValidRGB(rgb))
-  console.log(`${rgba} es valido? `,isValidRGB(rgba))
-*/
-  /*
-  const hex3 = '#577'
-  const hex4 = '#afa3'
-  const hex6 = '#85da23'
-  const hex8 = '#74a36cb3'
-  const hex5 = '#74acb'
-  const hex7 = '#74acba41'
-  console.log(`${hex3} es valido? `,isValidHex(hex3))
-  console.log(`${hex4} es valido? `,isValidHex(hex4))
-  console.log(`${hex6} es valido? `,isValidHex(hex6))
-  console.log(`${hex8} es valido? `,isValidHex(hex8))
-  console.log(`${hex5} es valido? `,isValidHex(hex5))
-  console.log(`${hex7} es valido? `,isValidHex(hex7))*/
-
+  console.log()
   return (
     <div style={{padding: '20px 0'}}>
-     {/*<div>
-        {[...Array(256)].map((e, i) =>
-        <p>{`${i} (${(i/255).toFixed(2)}) - ${parseFromIntToHex(i)}`}</p>
-      )}
-      </div>
-
       <h3 style={{ textAlign: 'center' }}>Base: <strong>{colorPrimary.toUpperCase()} - {HexToRGB(colorPrimary)} - {HexToHSL(colorPrimary)}</strong></h3>
       <h3 style={{ textAlign: 'center' }}>Variacion: <strong>{variation}</strong></h3>
       <Container>
         {
-          lighterVector.map((color, i) => (
-            <Square bgColor={color} bold={i === lighterVector.length - 1} light>
-              <p>{i + 1}</p>
-              <p>{color.toUpperCase()}</p>
-              <small>{HexToRGB(color)}</small>
-            </Square>)
+          vecHSL.map((color, i) => {
+            const hex = vectorHex[i]
+              return (
+                <Square bgColor={hex} bold={hex === colorPrimary} light={color.split.l <= 50}>
+                  <p>{i + 1}</p>
+                  <p>{hex.toUpperCase()}</p>
+                  <small>{vecRGB[i]}</small>
+                  <small>{color.string}</small>
+                </Square>
+              )
+            }
           )
         }
+      </Container>
+
+      <h3>Lightness Scale</h3>
+
+      <Container>
         {
-          darkerVector.map((color, i) => (
-            <Square bgColor={color}>
-              <p>{i + lighterVector.length + 1}</p>
-              <p>{color.toUpperCase()}</p>
-              <small>{HexToRGB(color)}</small>
-            </Square>
-          ))
+          lightnessScale.map((color, i) => {
+              return (
+                <Square bgColor={color} bold={color === HexToHSL(colorPrimary)}>
+                  <p>{i + 1}</p>
+                  <p>{HSLToHex(color)}</p>
+                  <small>{HSLToRGB(color)}</small>
+                  <small>{color}</small>
+                </Square>
+              )
+            }
+          )
         }
       </Container>
-      <div>
-        <h3>Lighter / Darker:</h3>
-      </div>*/}
+
+      <h3>Saturation Scale</h3>
+
+      <Container>
+        {
+          saturationsScale.map((color, i) => {
+              return (
+                <Square bgColor={color} bold={color === HexToHSL(colorPrimary)}>
+                  <p>{i + 1}</p>
+                  <p>{HSLToHex(color)}</p>
+                  <small>{HSLToRGB(color)}</small>
+                  <small>{color}</small>
+                </Square>
+              )
+            }
+          )
+        }
+      </Container>
+
+
 
      {/* <div>
         <div style={{margin: '10px auto', height: '250px', width: '250px', background: hsl}}/>
         {
           [...Array(360)].map((e, i)=> {
             const colorHSL = `hsl(${i}, 100%, 50%)`;
-            return <Square onClick={()=>setHsl(colorHSL)} bgColor={colorHSL} style={{height: '22px', width: '4px'}} />
+            return <Square   bgColor={colorHSL} style={{height: '22px', width: '4px'}} />
           })
         }
       </div>*/}
@@ -169,7 +165,7 @@ const Square = styled.div`
   flex-direction: column;
   background: ${props => props.bgColor};
   font-weight: ${props => props.bold ? 'bold' : ''};
-  color: ${props => props.light ? 'black' : 'white'};
+  color: ${props => props.light ? 'white' : 'black'};
   p:first-child{
     margin-top: 10px;
   }
