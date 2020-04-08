@@ -22,6 +22,7 @@ import {
   Ventilador,
   CircularLoading, LeafLoader, SandWatch, HorizontalSquares
 } from '../components/Loaders'
+import Cubic from '../components/Loaders/Cubic'
 
 const Spiners = () => {
   return (
@@ -204,6 +205,13 @@ const Spiners = () => {
           </p>
         </div>
 
+
+        <div>
+          <Cubic />
+          <p>
+            <small>Cubic</small>
+          </p>
+        </div>
 
       </Grilla>
     </Container>

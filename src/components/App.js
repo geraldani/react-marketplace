@@ -23,9 +23,9 @@ const App = () => {
   return (
     <>
       <GlobalStyles />
+      {/*<Spiners />*/}
       <ColorPicker />
       {/*<Mansory />*/}
-      {/*<Spiners />*/}
       {/*<VideoAudioPlayer/>*/}
       {/*
       <CopiarContenido />

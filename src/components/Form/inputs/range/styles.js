@@ -14,6 +14,7 @@ const styles = ({
   thumbShadowBlur,
   thumbShadowColor,
   thumbShadow,
+  thumbStyles,
   trackColor,
   trackWidth,
   trackHeight,
@@ -24,6 +25,7 @@ const styles = ({
   trackShadowBlur ,
   trackShadowColor,
   trackShadow,
+  trackStyles,
   progressColor,
   progressBorderWidth,
   progressBorderColor,
@@ -32,7 +34,9 @@ const styles = ({
   progressShadowBlur,
   progressShadowColor,
   progressShadow,
+  progressStyles,
   currentValue,
+  showProgress,
 }) => {
 
   const  shadow = (shadowsize, shadowblur, shadowcolor, shadow) => shadow ||
@@ -43,6 +47,7 @@ const styles = ({
     background: ${progressColor};
     border: ${progressBorderWidth} solid ${progressBorderColor};
     border-radius: ${progressRadius};
+    ${progressStyles};
   `
   const track = css`
     box-shadow: ${shadow(trackShadowSize, trackShadowBlur, trackShadowColor, trackShadow)};
@@ -50,6 +55,7 @@ const styles = ({
     height: ${trackHeight};
     transition: all .2s ease;
     width: ${trackWidth};
+    ${trackStyles};
   `
 
   const thumb = css`
@@ -58,10 +64,11 @@ const styles = ({
     border: ${thumbBorderWidth} solid ${thumbBorderColor};
     box-sizing: border-box;
     cursor: pointer;
-    transition: 400ms all;
+    //transition: 400ms all;
     border-radius: ${thumbRadius};
     height: ${thumbHeight};
     width: ${thumbWidth};
+    ${thumbStyles};
     &:hover{
       background: ${thumbColorHover};
     }
@@ -131,10 +138,12 @@ const styles = ({
         ${thumb};
       }
       &::-moz-range-progress {
-        background: ${progressColor};
-        height: ${trackHeight};
-        cursor: pointer;
-        ${progress};
+        ${showProgress && css`
+          background: ${progressColor};
+          height: ${trackHeight};
+          cursor: pointer;
+          ${progress};
+        `};
       }
         
       //Para ms (edge, explorer)
