@@ -23,13 +23,13 @@ const App = () => {
   return (
     <>
       <GlobalStyles />
-      {/*<Spiners />*/}
+      {/*<OwnModal />*/}
       <ColorPicker />
+      {/*<Spiners />*/}
       {/*<Mansory />*/}
       {/*<VideoAudioPlayer/>*/}
       {/*
       <CopiarContenido />
-      <OwnModal />
       <div style={{ height: '50px', width: '100px', background: 'hotpink' }}><EllipsisLoader color='black' /></div>
       <NewChat />
       <Buttons />

@@ -16,7 +16,7 @@ const Sketch = props => {
   const thumbSize = '20px'
   const MAX_HUE = 359
   const hex = '#1ABC9C'
-  const {h,s,l} = HexToHSL(hex,1);
+  const { h, s, l } = HexToHSL(hex, 1)
   const [hue, setHue] = useState(h)
   const [sat, setSat] = useState(s)
   const [light, setLight] = useState(l)
@@ -138,27 +138,26 @@ const Sketch = props => {
         thumbColor={() => getHSLStringColor(hue, 100, light)}
         thumbColorHover={() => getHSLStringColor(hue, 100, light)}
         {...commonProps}
+        thumbBorderColor={light > 90 ? '#cac9c9' : 'white'}
       />
 
-      {/*Para el brillo */}
+      {/*Para la opacidad */}
       <h5>OPACIDAD</h5>
-      <div style={{backgroundImage: 'url(https://previews.123rf.com/images/fokaspokas/fokaspokas1607/fokaspokas160700259/59781701-cuadr%C3%ADcula-de-transparencia-patr%C3%B3n-sin-fisuras.jpg)'}}>
-
-      <Range
-        minValue={0}
-        maxValue={100}
-        actualValue={alpha * 100}
-        onChange={onChangeAlpha}
-        thumbStyles={() => thumbStyles(alpha * 100, 100)}
-        trackColor={`linear-gradient(to right,
+      <TransparencySquare>
+        <Range
+          minValue={0}
+          maxValue={100}
+          actualValue={alpha * 100}
+          onChange={onChangeAlpha}
+          thumbStyles={() => thumbStyles(alpha * 100, 100)}
+          trackColor={`linear-gradient(to right,
                     hsla(${hue},100%,50%,0) 0%,
                     hsla(${hue},100%,50%,1) 100%)`}
-        thumbColor={() => getHSLStringColor(hue, 100, 50)}
-        thumbColorHover={() => getHSLStringColor(hue, 100, 50)}
-        {...commonProps}
-      />
-
-      </div>
+          thumbColor={() => getHSLStringColor(hue, 100, 50)}
+          thumbColorHover={() => getHSLStringColor(hue, 100, 50)}
+          {...commonProps}
+        />
+      </TransparencySquare>
 
       <Container>
         <Sample color={color} name='Selecciondo' light={light} />
@@ -168,6 +167,9 @@ const Sketch = props => {
   )
 }
 
+const TransparencySquare = styled.div`
+  
+`
 const SampleStyled = styled.div`
   position: relative;
   height: 150px;

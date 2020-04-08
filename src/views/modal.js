@@ -52,7 +52,7 @@ const OwnModal = () => {
         <Button onClick={() => setshow2(true)}>Modal compuesto: entrada slideDown, salida slideUp </Button>
 
       </div>
-      <Modal animation={type} duration={500} visible={showModal} onClose={hide}>
+      <Modal animation={type} duration={500} visible={showModal} onClose={hide} customStyles={{padding: '15px'}}>
         <h1>Este es un lindo modal</h1>
       </Modal>
 {/*

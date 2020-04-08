@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { StyledMask, StyledCloseButton, StyledDialog, StyledModal, Wrapper, BodyStyled } from './styles'
 
-const CONTAINER_MODAL = document.getElementById('modal')
 const MainModal = ({
   width,
   height,
@@ -26,6 +25,8 @@ const MainModal = ({
   children,
   onAnimationEnd,
   position,
+  autoFocus,
+  hideContent,
 }) => {
   const [isShow, setIsShow] = useState(visible)
   const [animationType, setAnimationType] = useState('leave')
@@ -42,10 +43,6 @@ const MainModal = ({
     setAnimationType('leave')
   }
 
-/*  useEffect(() => {
-    if (visible) enter()
-  }, [])*/
-
   useEffect(() => {
     visible ? enter() : leave()
   }, [visible])
@@ -60,27 +57,28 @@ const MainModal = ({
     if (animationType === 'leave') {
       setIsShow(false)
       onAnimationEnd() // ejecuta un callback al ocuntar el modal
-    } else if (closeOnEsc) {
+    } else if (closeOnEsc && autoFocus) {
       el.current.focus() //para enfocar el primer elemento q sea enfocable dentro del modal
     }
     /*if (event.target !== el.current && onAnimationEnd && animationType === 'leave') {
       onAnimationEnd() // esto es para ejecutar la funcion tanto de entrada o de salida al terminar al animacion
     }*/
   }
-  console.log('animationType ',customAnimations + animationType)
 
   if (!isShow) return null;
   return (
     <>
-      <BodyStyled />
+      { hideContent && <BodyStyled />}
       <StyledModal
         isShow={isShow}
         duration={duration}
-        animationType={`${animationType}`}
+        animationType={animationType}
         onAnimationEnd={animationEnd}
         tabIndex="-1"
         ref={el}
         onKeyUp={onKeyUp}
+        mask={showMask}
+        hideContent={hideContent}
       >
         {
           showMask
@@ -97,13 +95,13 @@ const MainModal = ({
             ?(
                 <StyledDialog
                   style={customStyles}
-                  className={className}
-                  width={width}
-                  height={height}
                   duration={duration}
                   bgColor={bgColor}
-                  animationType={customAnimations + animationType}
+                  className={className}
                   position={position}
+                  width={width}
+                  height={height}
+                  animationType={customAnimations + animationType}
                 >
                   {showCloseButton && <StyledCloseButton onClick={onClose} />}
                   {children}
@@ -111,15 +109,15 @@ const MainModal = ({
             )
             : (
                 <Wrapper
-                  position={position}
-                  duration={duration}
                   animationType={customAnimations + animationType}
+                  duration={duration}
+                  position={position}
                   onClick={closeMaskOnClick ? onClose : null}
                 >
                   <div
                     onClick={ev => ev.stopPropagation()}
-                    style={customStyles}
                     className={className}
+                    style={customStyles}
                   >
                     {children}
                   </div>
@@ -168,13 +166,14 @@ const animationTypes = [
 
 Modal.propTypes = {
   id                : PropTypes.string, // el id del dom donde se renderizara el modal
+  autoFocus: PropTypes.bool, // decide se se auto-enfoca el modal, esto para poder usar la tecla esc para cerrar el modal
   width             : PropTypes.string, // ancho del recuadro dentro del modal
   height            : PropTypes.string, // alto del recuadro dentro del modal
   bgColor           : PropTypes.string, // color del fondo del recuadro del modal
   bgMaskColor       : PropTypes.string, // color del fondo de la mascara del modal
   visible           : PropTypes.bool, // si el modal es visible o no
   showMask          : PropTypes.bool, // si muestra o no el fondo detras del modal
-  showDialog        : PropTypes.bool, // si muestra o no el recuadro blanco
+  showDialog        : PropTypes.bool, // si muestra o no el recuadro de dialogo
   closeOnEsc        : PropTypes.bool, // si se cierra el modal al presionar ESC
   closeMaskOnClick  : PropTypes.bool, // si se cierra el modal al presionar fuera del recuadro del modal
   showCloseButton   : PropTypes.bool, // si muestra un boton de cerrar en forma de X dentro del modal
@@ -182,16 +181,18 @@ Modal.propTypes = {
   enterAnimation    : PropTypes.oneOf(animationTypes), // la animacion al aparecer el modal
   leaveAnimation    : PropTypes.oneOf(animationTypes), //  la animacion al desaparecer el modal
   duration          : PropTypes.number, // el tiempo que dura la animacion expresado en ms
-  className         : PropTypes.string, // alguna clase
-  customStyles      : PropTypes.object, // stilos custom para el recuadro del modal
+  className         : PropTypes.string, // alguna clase aplicada al recuadro del modal
+  customStyles      : PropTypes.object, // estilos custom para el recuadro del modal
   customMaskStyles  : PropTypes.object, // estilos customs para la mascara del modal
   onClose           : PropTypes.func.isRequired, // funcion para cerrar el modal
   onAnimationEnd    : PropTypes.func, // funcion que se ejecuta despues de que el modal se haya ido
-  position          : PropTypes.oneOf(['center', 'top']) // define la posicion del cuadro de dialogo del modal
+  hideContent: PropTypes.bool, // decide si ocular lo que esta detras del modal, para que no se pueda hacer scroll cunado el modal esta abierto
+  position: PropTypes.oneOf(['center', 'top', 'right', 'left', 'bottom', 'leftTop', 'rightTop', 'leftBottom', 'rightBottom']), // define la posicion del cuadro de dialogo del modal
 }
 
 Modal.defaultProps = {
   id                : 'uniquePortalModalID',
+  autoFocus         :  true,
   width             : '400px',
   height            : '240px',
   bgColor           : '#fff',
@@ -210,5 +211,8 @@ Modal.defaultProps = {
   customStyles      : {},
   customMaskStyles  : {},
   onAnimationEnd    : () => {},
-  position          : 'center'
-}
+  hideContent       : true,
+  position          : 'center',
+};
+
+MainModal.propTypes = Modal.propTypes;

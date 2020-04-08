@@ -89,7 +89,7 @@ const styles = ({
     input[type='range'] {
       appearance: none;
       background: transparent;
-      margin: calc(${thumbHeight} / 2) 0;
+      //margin: calc(${thumbHeight} / 2) 0;
       width: ${trackWidth};
       &:disabled{
         &::-webkit-slider-runnable-track {

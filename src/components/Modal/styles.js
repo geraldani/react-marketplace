@@ -1,6 +1,65 @@
 import styled, { createGlobalStyle } from 'styled-components'
 import { animationsStyles } from './animations'
 
+const positions = {
+  top: {
+    top: '0',
+    left: '0',
+    right: '0',
+    bottom: '',
+  },
+  bottom: {
+    top: '',
+    left: '0',
+    right: '0',
+    bottom: '0',
+  },
+  left: {
+    top: '0',
+    left: '0',
+    right: '',
+    bottom: '0',
+  },
+  right: {
+    top: '0',
+    left: '',
+    right: '0',
+    bottom: '0',
+  },
+  center: {
+    top: '0',
+    left: '0',
+    right: '0',
+    bottom: '0',
+  },
+
+  leftTop: {
+    top: '0',
+    left: '0',
+    right: '',
+    bottom: '',
+  },
+  rightTop: {
+    top: '0',
+    left: '',
+    right: '0',
+    bottom: '',
+  },
+  leftBottom: {
+    top: '',
+    left: '0',
+    right: '',
+    bottom: '0',
+  },
+  rightBottom: {
+    top: '',
+    left: '',
+    right: '0',
+    bottom: '0',
+  },
+};
+
+
 const StyledModal = styled.div`
    top: 0;
     left: 0;
@@ -9,7 +68,8 @@ const StyledModal = styled.div`
     z-index: 100;
     position: fixed;
     display: ${props => props.isShow ? 'block' : 'none'};
-    ${props => animationsStyles['fade' + props.animationType]};
+    ${props => animationsStyles[`fade${props.animationType}`]};
+    pointer-events: ${props => ((props.mask && props.hideContent) ? 'auto' : 'none')};
     animation-duration: ${props => props.duration}ms!important;
 `
 const StyledMask = styled.div`
@@ -20,23 +80,23 @@ const StyledMask = styled.div`
     width: 100%;
     height: 100%;
     z-index: 100;
+    pointer-events: auto;
 `
 const StyledDialog = styled.div`
   width: ${props => props.width};
   height: ${props => props.height};
   background-color: ${props => props.bgColor};
   position: absolute;
-  top: ${props => props.position === 'top' ? '30px': '0'};
-  bottom: ${props => props.position === 'top' ? '': '0'};
-  left: 0;
-  right: 0;
+  top: ${props => positions[props.position].top};
+  bottom: ${props => positions[props.position].bottom};
+  left: ${props => positions[props.position].left};
+  right: ${props => positions[props.position].right};
   margin: auto;
   z-index: 101;
-  padding: 15px;
-  border-radius: 3px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
   ${props => animationsStyles[props.animationType]};
   animation-duration: ${props => props.duration}ms!important;
+  pointer-events: auto;
   &:focus {
     outline: none;
   }
@@ -78,22 +138,27 @@ const StyledCloseButton = styled.button`
   }
   
   &:focus{
-    outline: dotted 1px gray;
+    outline: none;
   }
 `
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
-  justify-content: ${props => props.position === 'top' ? 'flex-start' : 'center'};
-  margin-top: ${props => props.position === 'top' ? '20px' : ''};
+  position: absolute;
+    top: ${props => positions[props.position].top};
+  bottom: ${props => positions[props.position].bottom};
+  left: ${props => positions[props.position].left};
+  right: ${props => positions[props.position].right};
+  margin: auto;
+  justify-content: center;
   align-items: center;
-  ${props => animationsStyles[props.animationType]};
-  animation-duration: ${props => props.duration}ms!important;
-  z-index: 1000;
   width: 100%;
   height: 100%;
+  z-index: 1000;
+  pointer-events: auto;
+  ${props => animationsStyles[props.animationType]};
+  animation-duration: ${props => props.duration}ms!important;
 `
 
 //es para ocultar el scroll al abrir el modal
