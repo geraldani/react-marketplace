@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Range from '../Form/inputs/range'
 import styled, { css } from 'styled-components'
+import transparency from '../../assets/img/transparency.png';
+
 import {
   ConvertToHex,
   ConvertToHSL,
@@ -12,61 +14,52 @@ import {
   HSLToRGB
 } from './Functions'
 
+const height = 10;
+
 const Sketch = props => {
   const thumbSize = '20px'
   const MAX_HUE = 359
-  const hex = '#1ABC9C'
-  const { h, s, l } = HexToHSL(hex, 1)
-  const [hue, setHue] = useState(h)
-  const [sat, setSat] = useState(s)
-  const [light, setLight] = useState(l)
+  const [hue, setHue] = useState(0)
+  const [sat, setSat] = useState(100)
+  const [light, setLight] = useState(50)
   const [alpha, setAlpha] = useState(1)
   const [color, setColor] = useState(getHSLStringColor(hue, sat, light, alpha))
-  let complementColor = getComplement(color)
+  let complementColor ='#785cde'
 
   const thumbStyles = (channel, max) => css`
     left: ${channel === 0 ? `calc(${thumbSize} / -2)` : ''};
     right: ${channel === max ? `calc(${thumbSize} / -2)` : ''};
   `
-  const trackStyles = css`
-    background-image: url('https://previews.123rf.com/images/fokaspokas/fokaspokas1607/fokaspokas160700259/59781701-cuadr%C3%ADcula-de-transparencia-patr%C3%B3n-sin-fisuras.jpg');
-  `
 
-  const setColors = color => {
-    setColor(color)
-    complementColor = getComplement(color)
-  }
-
-  const onChangeHue = e => {
-    const newHue = parseInt(e.target.value)
-    setColors(getHSLStringColor(newHue, sat, light, alpha))
-    setHue(newHue)
-  }
-
-  const onChangeSat = e => {
-    const newSat = parseInt(e.target.value)
-    setSat(newSat)
-    setColors(getHSLStringColor(hue, newSat, light, alpha))
-  }
-
-  const onChangeLight = e => {
-    const newLight = parseInt(e.target.value)
-    setLight(newLight)
-    setColors(getHSLStringColor(hue, sat, newLight, alpha))
-  }
-
-  const onChangeAlpha = e => {
-    const newAlpha = parseInt(e.target.value) / 100
-    console.log('newAlphat ', newAlpha)
-    setAlpha(newAlpha)
-    setColors(getHSLStringColor(hue, sat, light, newAlpha))
-
+  const onChangeColor = e => {
+    const { name } = e.target
+    const newValue = parseInt(e.target.value);
+    let newColor = '';
+    switch (name) {
+      case 'hue':
+        newColor = getHSLStringColor(newValue, sat, light, alpha)
+        setHue(newValue)
+        break
+      case 'sat':
+        newColor = getHSLStringColor(hue, newValue, light, alpha)
+        setSat(newValue)
+        break
+      case 'light':
+        setLight(newValue)
+        newColor = getHSLStringColor(hue, sat, newValue, alpha)
+        break
+      case 'alpha':
+        setAlpha(newValue / 100)
+        newColor = getHSLStringColor(hue, sat, light, newValue / 100)
+        break
+    }
+    setColor(newColor);
   }
 
   const commonProps = {
     showProgress: false,
     thumbRadius: '50%',
-    trackHeight: '16px',
+    trackHeight: `${height}px`,
     thumbWidth: thumbSize,
     thumbHeight: thumbSize,
     thumbBorderColor: 'white',
@@ -92,7 +85,8 @@ const Sketch = props => {
         minValue={0}
         maxValue={MAX_HUE}
         actualValue={hue}
-        onChange={onChangeHue}
+        name='hue'
+        onChange={onChangeColor}
         trackColor={`linear-gradient(to right,
                     hsl(0,100%,50%) 0%,
                     hsl(60,100%,50%) 17%,
@@ -113,7 +107,8 @@ const Sketch = props => {
         minValue={0}
         maxValue={100}
         actualValue={sat}
-        onChange={onChangeSat}
+        onChange={onChangeColor}
+        name='sat'
         thumbStyles={() => thumbStyles(sat, 100)}
         trackColor={`linear-gradient(to right,
                     hsl(${hue},0%,50%) 0%,
@@ -129,7 +124,8 @@ const Sketch = props => {
         minValue={0}
         maxValue={100}
         actualValue={light}
-        onChange={onChangeLight}
+        name='light'
+        onChange={onChangeColor}
         thumbStyles={() => thumbStyles(light, 100)}
         trackColor={`linear-gradient(to right,
                     hsl(${hue},100%,0%) 0%,
@@ -143,12 +139,14 @@ const Sketch = props => {
 
       {/*Para la opacidad */}
       <h5>OPACIDAD</h5>
-      <TransparencySquare>
+      <OpacityContainer>
+        {/*<TransparencySquare />*/}
         <Range
           minValue={0}
           maxValue={100}
           actualValue={alpha * 100}
-          onChange={onChangeAlpha}
+          onChange={onChangeColor}
+          name='alpha'
           thumbStyles={() => thumbStyles(alpha * 100, 100)}
           trackColor={`linear-gradient(to right,
                     hsla(${hue},100%,50%,0) 0%,
@@ -157,7 +155,7 @@ const Sketch = props => {
           thumbColorHover={() => getHSLStringColor(hue, 100, 50)}
           {...commonProps}
         />
-      </TransparencySquare>
+      </OpacityContainer>
 
       <Container>
         <Sample color={color} name='Selecciondo' light={light} />
@@ -167,9 +165,10 @@ const Sketch = props => {
   )
 }
 
-const TransparencySquare = styled.div`
-  
-`
+const OpacityContainer = styled.div`
+  background-image: url(${transparency});
+`;
+
 const SampleStyled = styled.div`
   position: relative;
   height: 150px;
@@ -179,7 +178,7 @@ const SampleStyled = styled.div`
   width: 250px;
   border-radius: 20px;
   p{
-    color: ${props => props.light < 50 ? 'white' : 'black'};
+    color: ${props => props.light >= 50 ? 'black' : 'white'};
     margin: 0;
     &:first-child{
       font-weight: bold;
@@ -191,6 +190,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: 20px;
   ${SampleStyled}:first-child{
     margin-right: 20px;
   }
