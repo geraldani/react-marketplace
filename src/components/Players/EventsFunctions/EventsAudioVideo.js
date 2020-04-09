@@ -52,8 +52,15 @@ export const useEventHandlers = (autoplay) => {
     }
   }
 
+  // se actualiza el estado cuando se pause
+  const onPaused = () => changeInfo({ playing: !element.paused })
+
   //pausa o reproduce
   const onPlayPause = () => {
+    document.querySelectorAll('audio').forEach(audio => {
+      if (!audio.paused && element !== audio) audio.pause()
+    })
+
     element.paused ? element.play() : element.pause()
     changeInfo({ playing: !element.paused })
   }
@@ -97,5 +104,6 @@ export const useEventHandlers = (autoplay) => {
     onLessVolume,
     onMoreVolume,
     onChangeVolume,
+    onPaused,
   })
 }

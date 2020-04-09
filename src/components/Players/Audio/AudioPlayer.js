@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useEventHandlers, formateTime } from '../EventsFunctions'
+import { useEventHandlers, formateTime } from '../EventsFunctions/EventsAudioVideo'
 
 const AudioPlayer = ({ url, autoplay, children, type }) => {
   const {
@@ -14,6 +14,7 @@ const AudioPlayer = ({ url, autoplay, children, type }) => {
     setMuted,
     onLessVolume,
     onMoreVolume,
+    onPaused,
     onChangeVolume} = useEventHandlers(autoplay)
 
   return (
@@ -27,6 +28,7 @@ const AudioPlayer = ({ url, autoplay, children, type }) => {
         onLoadedMetadata={loadDuration}
         controls={false}
         onEnded={() => setTimeout(onStopPlaying, 1000)}
+        onPause={onPaused}
       />
       {
         children({
