@@ -21,6 +21,7 @@ import {
 import styled, { css } from 'styled-components'
 import { useCopyContent } from '../CopyContentButton/CopyContentButton'
 import Sketch from './Sketch'
+import ColourWheel from './ColorWheel'
 
 const ColorPicker = props => {
   const colorPrimary = '#ed9b8a'
@@ -102,13 +103,14 @@ const ColorPicker = props => {
   return (
     <div style={{ padding: '20px' }}>
       <Sketch />
-      <h3
+      <ColourWheel callback={(color) => {}} />
+     {/* <h3
         style={{ textAlign: 'center' }}>Base: <strong>{colorPrimary.toUpperCase()} - {HexToRGB(colorPrimary)} - {HexToHSL(colorPrimary)}</strong>
       </h3>
       <h3 style={{ textAlign: 'center' }}>Variacion: <strong>{variation}</strong></h3>
 
       <Sample color={colorPrimary} >Original <br/> {colorPrimary} <br/>{HexToHSL(colorPrimary)} <br/>{HexToRGB(colorPrimary)}</Sample>
-      <Sample color={colorComplement}>Complemento <br/> {colorComplement} <br/> {RGBToHSL(colorComplement)} <br/> {RGBToHex(colorComplement)} </Sample>
+      <Sample color={colorComplement}>Complemento <br/> {colorComplement} <br/> {RGBToHSL(colorComplement)} <br/> {RGBToHex(colorComplement)} </Sample>*/}
       {/*    <Container length={vecHSL.length}>
         {
           vecHSL.map((color, i) => {
@@ -128,7 +130,7 @@ const ColorPicker = props => {
      // </Container>
         }
 
-      <h3>Lightness Scale</h3>
+   {/*   <h3>Lightness Scale</h3>
 
       <Container length={lightnessScale.length}>
         {lightnessScale.map((color, i) => <Scale color={color} nro={i + 1} key={i} />)}
@@ -137,7 +139,7 @@ const ColorPicker = props => {
       <h3>Saturation Scale</h3>
       <Container length={saturationsScale.length}>
         {saturationsScale.map((color, i) => <Scale color={color} nro={i + 1} />)}
-      </Container>
+      </Container>*/}
 
 
       {/* <div>

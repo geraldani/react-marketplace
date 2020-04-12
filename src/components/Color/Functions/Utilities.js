@@ -31,7 +31,7 @@ const validateHexColor = color => {
 
 const isValidRGB = color => {
   const channels = extractChannelsFromString(color)
-  const isAlpha = defineTypeColor(color) === TYPE_COLORS.RGBA
+  const isAlpha = channels.length === 4;
   let valid = !channels.some(c => c < 0 || c > 255)
   if (valid) {
     if (isAlpha) {
@@ -46,7 +46,7 @@ const isValidRGB = color => {
 
 const isValidHSL = color => {
   const channels = extractChannelsFromString(color)
-  const isAlpha = defineTypeColor(color) === TYPE_COLORS.HSLA
+  const isAlpha = channels.length === 4
   let valid = true
   const h = channels[0], s = channels[1], l = channels[2]
   if (h < 0 || h > 360 || s < 0 || s > 100 || l < 0 || l > 100) valid = false

@@ -35,7 +35,7 @@ const App = () => {
       />*/}
       {/*<Spiners />*/}
       {/*<Mansory />*/}
-      <VideoAudioPlayer/>
+      {/*<VideoAudioPlayer/>*/}
       {/*
       <CopiarContenido />
       <div style={{ height: '50px', width: '100px', background: 'hotpink' }}><EllipsisLoader color='black' /></div>

@@ -140,18 +140,27 @@ const HSLToRGB = (color, obj) => {
   const chanel = extractChannelsFromString(color)
   let colorConverted = ''
   const hasAlpha = chanel.length === 4
-  const chanelVec = ['hue', 'sat', 'light', 'alpha']
-  if (isValidHSL(color)) {
-    const hslVec = {}
-    chanelVec.forEach((col, i) => hslVec[col] = chanel[i])
+  if (chanel.length >= 3) {
+    const hslVec = {
+      hue: chanel[0],
+      sat: chanel[1],
+      light: chanel[2],
+    }
     const rgb = fromHslToRgb(hslVec)
+    let stringRGB = `${rgb.r},${rgb.g},${rgb.b}`
+    let stringEnd = `rgb(${stringRGB})`
+    if (hasAlpha) {
+      rgb.a = chanel[3]
+      stringEnd = `rgba(${stringRGB},${chanel[3]})`
+    }
     if (obj) {
       colorConverted = rgb
-      if (hasAlpha) colorConverted.a = hslVec.alpha
-    } else {
-      const stringRGB = `${rgb.r},${rgb.g},${rgb.b}`
-      if (hasAlpha) colorConverted = `rgba(${stringRGB},${hslVec.alpha})`
-      else colorConverted = `rgb(${stringRGB})`
+      if (obj === 2) {
+        colorConverted = {
+          string: stringEnd,
+          split: rgb
+        }
+      }
     }
   }
   return colorConverted

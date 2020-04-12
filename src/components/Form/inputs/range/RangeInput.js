@@ -46,7 +46,7 @@ Range.defaultProps = {
   showProgress: true,
 
   thumbColor: '#d4d4d4',
-  thumbColorHover: '#acacac',
+  thumbColorHover: '',
   thumbRadius: '0',
   thumbHeight: '16px',
   thumbWidth: '16px',

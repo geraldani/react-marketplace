@@ -55,6 +55,7 @@ const styles = ({
     height: ${trackHeight};
     transition: all .2s ease;
     width: ${trackWidth};
+    box-sizing: content-box;
     ${trackStyles};
   `
 
@@ -62,7 +63,7 @@ const styles = ({
     box-shadow: ${shadow(thumbShadowSize, thumbShadowBlur, thumbShadowColor, thumbShadow)};  
     background: ${thumbColor};
     border: ${thumbBorderWidth} solid ${thumbBorderColor};
-    box-sizing: border-box;
+    box-sizing: content-box;
     cursor: pointer;
     //transition: 400ms all;
     border-radius: ${thumbRadius};
@@ -123,7 +124,8 @@ const styles = ({
         z-index: 50;
         position: relative;
         appearance: none;
-        margin-top: calc((-${trackBorderWidth} * 2 + ${trackHeight}) / 2 - ${thumbHeight} / 2);
+         //margin-top: calc((-${trackBorderWidth} * 2 + ${trackHeight}) / 2 - ${thumbHeight} / 2);
+         margin-top: calc((${trackHeight} / 2) - (${thumbHeight} / 2) - ${thumbBorderWidth});
       }
       
       //Para mozilla
