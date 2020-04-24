@@ -16,6 +16,7 @@ import PlayPauseButton from './Button/PlayPauseButton'
 import ColorPicker from './Color/ColorPicker'
 import TransparencyRectangle from './TransparencyRectangle/Transparency'
 import Animations from '../CursoAnimacione'
+import TableView from '../views/table'
 const App = () => {
   /*const nombre = 'set livin.jojojo.sdsdsd.kakaka.xls'
   const nameSplitted = nombre.split('.');
@@ -25,8 +26,9 @@ const App = () => {
   return (
     <>
       <GlobalStyles />
-      <Animations />
+      {/*<Animations />*/}
       {/*<OwnModal />*/}
+      <TableView />
       {/*<ColorPicker />*/}
       {/*  <TransparencyRectangle
         height={500}

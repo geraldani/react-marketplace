@@ -31,8 +31,12 @@ const extractExtension = (fileName) => {
   return (match ? match[0].substring(1) : 'FILE');
 };
 
+// Genera una key ramdom para mapear componentes
+const generateKey = () => `${Math.random() * 1000}_${new Date().getTime()}`;
+
 export {
   sortArray,
   getRandomNumber,
   extractExtension,
+  generateKey
 }
