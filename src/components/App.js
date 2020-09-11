@@ -17,18 +17,20 @@ import ColorPicker from './Color/ColorPicker'
 import TransparencyRectangle from './TransparencyRectangle/Transparency'
 import Animations from '../CursoAnimacione'
 import TableView from '../views/table'
+import CaculateColor from './Color/Functions/clean'
 const App = () => {
   /*const nombre = 'set livin.jojojo.sdsdsd.kakaka.xls'
   const nameSplitted = nombre.split('.');
   console.log('nombreee ', nameSplitted)
   const extension = nameSplitted.length > 1 ? nameSplitted[nameSplitted.length-1] : '';
   console.log('la real extension ', extension.toUpperCase())*/
+  // const color
   return (
     <>
       <GlobalStyles />
       {/*<Animations />*/}
       {/*<OwnModal />*/}
-      <TableView />
+      {/*<TableView />*/}
       {/*<ColorPicker />*/}
       {/*  <TransparencyRectangle
         height={500}
@@ -49,6 +51,11 @@ const App = () => {
       <Check />
       <Forms />
       */}
+
+      <div>
+        Este es un ejemplo para usar colores
+      </div>
+      <CaculateColor colorBase='#df47a19c' />
     </>
   )
 }

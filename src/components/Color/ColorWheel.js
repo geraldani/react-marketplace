@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import image from './assets/wheel-3-rgb.png'
+// import image from './assets/wheel-3-rgb.png'
 
 const ColourWheelCanvas = (props) => {
   const [dragging, setDragging] = React.useState(false)
