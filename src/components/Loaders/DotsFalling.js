@@ -29,9 +29,9 @@ const Balls = styled.div`
     border-radius: 50%;
     background-color: ${props => props.color};
     //transform: translateY(-100%);
-    animation: ${wave} 450ms ease-in-out alternate infinite;
+    animation: ${wave} 300ms ease-in-out alternate infinite;
     &:nth-of-type(1) {
-      animation-delay: -300ms;
+      animation-delay: -200ms;
     }
     &:nth-of-type(2) {
       animation-delay: -100ms;

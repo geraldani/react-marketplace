@@ -16,7 +16,7 @@ const Circle = styled.div`
   border-radius: 50%;
   width: ${props => props.size};
   height: ${props => props.size};
-  animation: ${spin} 1s linear infinite;
+  animation: ${spin} 1.2s ${props => props.type} infinite;
   `
 
 CircleClassic.defaultProps = {
@@ -24,6 +24,7 @@ CircleClassic.defaultProps = {
   width: '3px',
   colorCircle: COLOR_PRIMARY,
   colorSpiner: COLOR_SECONDARY,
+  type: 'linear'
 }
 
 CircleClassic.propTypes = {
@@ -31,6 +32,7 @@ CircleClassic.propTypes = {
   width: PropTypes.string,
   colorCircle: PropTypes.string,
   colorSpiner: PropTypes.string,
+  type: PropTypes.string,
 }
 
 export default CircleClassic

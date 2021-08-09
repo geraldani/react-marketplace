@@ -11,7 +11,7 @@ import EllipsisLoader from './Loaders/Ellipsis'
 import CopiarContenido from '../views/copiarContenido'
 import Spiners from '../views/spiners'
 import VideoAudioPlayer from '../views/VideoAudioPlayer'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import PlayPauseButton from './Button/PlayPauseButton'
 import ColorPicker from './Color/ColorPicker'
 import TransparencyRectangle from './TransparencyRectangle/Transparency'
@@ -39,7 +39,7 @@ const App = () => {
         color1='#1abc9c'
         color2='#bc1a3a'
       />*/}
-      {/*<Spiners />*/}
+      <Spiners />
       {/*<Mansory />*/}
       {/*<VideoAudioPlayer/>*/}
       {/*
@@ -50,15 +50,17 @@ const App = () => {
       <Radio />
       <Check />
       <Forms />
-      */}
+
 
       <div>
         Este es un ejemplo para usar colores
       </div>
       <CaculateColor colorBase='#df47a19c' />
+      */}
     </>
   )
 }
+
 
 
 export default App

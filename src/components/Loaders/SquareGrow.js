@@ -20,8 +20,6 @@ const grow = keyframes`
 }
 `
 
-
-
 const SquareGrowStyled = styled.div`
   width: fit-content;
   height: fit-content;
@@ -36,11 +34,13 @@ const SquareGrowStyled = styled.div`
     height: ${pros => pros.sizeHeight};
     background-color: ${pros => pros.color}; 
     animation: ${grow} ${props=> props.duration} ease-in-out infinite;
-    ${props => [...Array(props.number)].map((e, i, a) => css`
+    ${props => [...Array(props.number)].map((e, i, a) => {
+  console.log(`milisegundos ${i+1}`, -(150 * (a.length - i - 1)))
+      return css`
       &:nth-of-type(${i+1}){
         animation-delay: -${150 * (a.length - i - 1)}ms
       }
-    `)};
+    `})};
   }
 `
 

@@ -4,6 +4,7 @@
 
 import React  from 'react'
 import styled from 'styled-components'
+import { hasAlpha, TYPE_COLORS } from './Utilities'
 
 // convierte de hex a entero
 const parseFromHexToInt = color => parseInt(color, 16)
@@ -120,23 +121,87 @@ const getHSL = (color, model = '') => {
 }
 
 //retorna blanco o negro dado el nivel de luminosidad de un color
-const getBlackOrWhite = color => getHSL(color, 'lum') >= 50 ? '#000000' : '#ffffff'
+const getBlackOrWhite = color => {
+  const {s, l} = getHSL(color);
+// >= 50 ? '#000000' : '#ffffff'}
+  if(l > 60){
+    return 'black'
+  }else{
+    return 'white'
+  }
+  /*
+  if(l > 50 && s < 50){
+    console.log('white')
+  }else if(l > 50 && s > 50){
+    console.log('black')
+    return 'black'
+  }else if (l < 50 && s > 50){
+    console.log('black')
+    return 'white'
+  }else{
+  }
+*/
+}
+
+const fromStringRGBtoObject = color => {
+  let hasAlpha = false;
+  if(color.substring(0, 4).toLowerCase() === 'rgba') hasAlpha = true; //veo las primeras letras de la cadena, para ver si tiene la a que indica que tiene opacidad
+  if(hasAlpha){
+    //aqui pregunto por el ultimo elemento, ya que el numero de la opacidad no es entero sino floar, asi que por eso esa validacion
+    const converted = color.substring(5, color.length - 1).split(',').map((e, i, a) => i === a.length - 1 ? parseFloat(e) : parseInt(e));
+    //construyo el objeto
+    return  ({r: converted[0], g: converted[1], b: converted[2], a: converted[3]});
+  }else{
+    const converted = color.substring(4, color.length - 1).split(',').map(e => parseInt(e))
+    return  ({r: converted[0], g: converted[1], b: converted[2]});
+  }
+}
+
 
 
 const CaculateColor = ({colorBase}) => {
-  const colorConverted = getBlackOrWhite(colorBase);
+  const baseColors = [
+    '#54ac74',
+    '#c9c2ca',
+    '#0a091d',
+    '#b30a3d',
+    '#e4e2d4',
+    '#0f2804',
+    '#ff0505',
+    '#9e9a9a'
+  ];
+  //se usa useMemo para que no se calcule esto cada vez que se actualiza el estado.
+  const blackOrWhite = React.useMemo(() => baseColors.map(color => getBlackOrWhite(color)), []);
+
+  const colorRGB = 'rgba(100,87,44,1)';
+  const colorRGBOBJ = fromStringRGBtoObject(colorRGB);
+
+
+  console.log('la cadena ', colorRGB);
+  console.log('el objeto ', colorRGBOBJ);
+  console.log('convertido ', RGBToHSL(colorRGBOBJ))
+  const hsls = baseColors.map(color => {
+    const {h,s,l} = HexToHSL(color);
+    return `h: ${h}, s: ${s}, l: ${l}`
+  });
   return(
-    <Container color={colorBase} colorFont={colorConverted}>
-      <p>Este es mi container y yo deberia estar en negro o blanco dependiendo de mi color base que es {colorBase}</p>
-    </Container>
+    <>
+      {
+        baseColors.map((color, i) => (
+          <Container baseColor={color} key={color} colorFont={blackOrWhite[i]}>
+            <p>Deberia estar en negro o blanco dependiendo de mi fondo que es <strong>{hsls[i]}</strong> retorno {blackOrWhite[i]}</p>
+          </Container>
+        ))
+      }
+    </>
   )
 }
 
 
 const Container = styled.div`
-  background: ${props => props.color};
+  background: ${props => props.baseColor};
   width: 500px;
-  margin: auto;
+  margin: 0 auto 10px auto;
   padding: 10px;
   border-radius: 12px;
   p{
